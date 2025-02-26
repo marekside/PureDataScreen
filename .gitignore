@@ -5,3 +5,6 @@ bin/MyFirstDataScreen.prg
 bin/MyFirstDataScreen.prg.debug.xml
 bin/gen/006-B3843-00/source/Rez.mcgen
 bin/internal-mir/Rez.mir
+bin/MyFirstDataScreen.prg
+bin/MyFirstDataScreen.prg.debug.xml
+bin/internal-mir/Rez.mir

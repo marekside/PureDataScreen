@@ -10,7 +10,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
     hidden var mPower3s as String;
     hidden var mDistance as String;
     hidden var mElapsedTime as String;
-    hidden var mTimeOfTheDay as String;
+    hidden var mCurrentCadence as String;
     hidden var mCalories as String;
     
     
@@ -21,7 +21,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         mPower3s = "n/a";
         mDistance = "n/a";
         mElapsedTime = "n/a";
-        mTimeOfTheDay = "n/a";
+        mCurrentCadence = "n/a";
         mCalories = "n/a";
     }   
 
@@ -31,23 +31,12 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         View.setLayout(Rez.Layouts.WahooLayout(dc));
         initializeField(WatchUi.loadResource(Rez.Strings.KPH));
         initializeField(WatchUi.loadResource(Rez.Strings.HR));
+        initializeField(WatchUi.loadResource(Rez.Strings.PWR));
+        initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
+        initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
+        initializeField(WatchUi.loadResource(Rez.Strings.CADENCE));
+        initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
         
-        // var labelView = View.findDrawableById("KPH") as Text;
-        // labelView.locY = labelView.locY - 16;
-        // var valueView = View.findDrawableById("KPH_value") as Text;
-        // valueView.locY = valueView.locY + 7;
-    
-        // (View.findDrawableById("KPH") as Text).setText("KPH");
-    }
-    
-    hidden function initializeField(label as String) as Void {
-        var labelView = View.findDrawableById(label) as Text;
-        labelView.locY = labelView.locY - 16;
-        var valueView = View.findDrawableById(label + "_value") as Text;
-        valueView.locY = valueView.locY - 5;
-    
-        (View.findDrawableById(label) as Text).setText(label);
-        (View.findDrawableById(label + "_value") as Text).setText("N/A");
     }
 
     // The given info object contains all the current workout information.
@@ -82,27 +71,28 @@ class MyFirstDataScreenView extends WatchUi.DataField {
             }
         }
 
-        if(info has :distance){
-            if(info != null){
-                mDistance = info.distance.toString();
+        if(info has :elapsedDistance){
+            if(info.elapsedDistance != null){
+                var distanceKm = info.elapsedDistance / 1000; // Convert meters to kilometers
+                mDistance = distanceKm.format("%0.2f");
             } else {
                 mDistance = "n/a";
             }
         }
 
-        if(info has :elapsedTime){
-            if(info.elapsedTime != null){
-                mElapsedTime = info.elapsedTime.toString();
+        if(info has :timerTime){
+            if(info.timerTime != null){
+                mElapsedTime = (info.timerTime/1000).toString();
             } else {
                 mElapsedTime = "n/a";
             }
         }
 
-        if(info has :timeOfTheDay){
-            if(info.timeOfTheDay != null){
-                mTimeOfTheDay = info.timeOfTheDay.toString();
+        if(info has :currentCadence ){
+            if(info.currentCadence  != null){
+                mCurrentCadence = info.currentCadence .toString();
             } else {
-                mTimeOfTheDay = "n/a";
+                mCurrentCadence = "n/a";
             }
         }
 
@@ -121,17 +111,36 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         // Set the background color
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
 
+        setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), mCurrentSpeed);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.HR), mHeartRate);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), mPower3s);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), mDistance);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), mElapsedTime);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), mCurrentCadence);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), mCalories);
+
+        // Call parent's onUpdate(dc) to redraw the layout
+        View.onUpdate(dc);
+    }
+
+    hidden function initializeField(label as String) as Void {
+        var labelView = View.findDrawableById(label) as Text;
+        labelView.locY = labelView.locY - 16;
+        var valueView = View.findDrawableById(label + "_value") as Text;
+        valueView.locY = valueView.locY - 5;
+    
+        (View.findDrawableById(label) as Text).setText(label);
+        (View.findDrawableById(label + "_value") as Text).setText("N/A");
+    }
+
+    hidden function setFieldValue(label as String, labelValue as String) as Void {
         // Set the foreground color and value
-        var value = View.findDrawableById("KPH_value") as Text;
+        var value = View.findDrawableById(label + "_value") as Text;
         if (getBackgroundColor() == Graphics.COLOR_BLACK) {
             value.setColor(Graphics.COLOR_WHITE);
         } else {
             value.setColor(Graphics.COLOR_BLACK);
         }
-        value.setText(mCurrentSpeed);
-        
-        // Call parent's onUpdate(dc) to redraw the layout
-        View.onUpdate(dc);
+        value.setText(labelValue);
     }
-
 }

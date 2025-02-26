@@ -1,6 +1,6 @@
 <drawables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
-    <drawable-list id="Smiley">
+    <drawable-list id="Grid">
         <shape type="polygon" points="[[1%, 40%],[50%, 40%],[99%, 40%]]" color="Gfx.COLOR_BLACK" />
         <shape type="polygon" points="[[1%, 60%],[50%, 60%],[99%, 60%]]" color="Gfx.COLOR_BLACK" />
         <shape type="polygon" points="[[1%, 80%],[50%, 80%],[99%, 80%]]" color="Gfx.COLOR_BLACK" />

@@ -2,5 +2,9 @@
     <string id="AppName">MyFirstDataScreen</string>
     <string id="KPH">KPH</string>
     <string id="HR">HR</string>
-    
+    <string id="PWR">PWR</string>
+    <string id="DISTANCE">DISTANCE</string>
+    <string id="TOTTIME">TOTTIME</string>
+    <string id="CADENCE">CADENCE</string>
+    <string id="CALORIES">CALORIES</string>
 </strings>

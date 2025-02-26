@@ -2,14 +2,33 @@
     <!-- Layouts used for the for the four quadrants. -->
     <layout id="WahooLayout">
         <drawable class="Background" />
-        <drawable id="Smiley" />
-        <!-- Big number quadrant -->
+        <drawable id="Grid" />
+        <!-- Big quadrant -->
         <label id="KPH" x="98%" y="5%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         <label id="KPH_value" x="98%" y="5%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
 
-        <!-- Small number quadrant -->
+        <!-- 1st Small number quadrant -->
         <label id="HR" x="48%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
         <label id="HR_value" x="48%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
 
+        <!-- 2nd Small number quadrant -->
+        <label id="PWR" x="98%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="PWR_value" x="98%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+
+        <!-- 3rd Small number quadrant -->
+        <label id="DISTANCE" x="48%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="DISTANCE_value" x="48%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+
+        <!-- 4th Small number quadrant -->
+        <label id="TOTTIME" x="98%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="TOTTIME_value" x="98%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+
+        <!-- 3rd Small number quadrant -->
+        <label id="CADENCE" x="48%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="CADENCE_value" x="48%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+
+        <!-- 4th Small number quadrant -->
+        <label id="CALORIES" x="98%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="CALORIES_value" x="98%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
     </layout>
 </layouts>

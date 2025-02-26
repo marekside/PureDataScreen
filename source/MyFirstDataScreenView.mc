@@ -82,7 +82,16 @@ class MyFirstDataScreenView extends WatchUi.DataField {
 
         if(info has :timerTime){
             if(info.timerTime != null){
-                mElapsedTime = (info.timerTime/1000).toString();
+                var totalSeconds = (info.timerTime/1000);
+
+                var hours = (totalSeconds / 3600).toNumber(); // Calculate hours
+                var minutes = ((totalSeconds % 3600) / 60).toNumber(); // Calculate minutes
+                var seconds = (totalSeconds % 60).toNumber(); // Calculate seconds
+                if (hours == 0) {
+                    mElapsedTime = Lang.format("$1$:$2$", [minutes.format("%02d"), seconds.format("%02d")]);
+                } else {
+                    mElapsedTime = Lang.format("$1$:$2$", [hours.format("%02d"), minutes.format("%02d")]);
+                }
             } else {
                 mElapsedTime = "n/a";
             }

@@ -9,6 +9,10 @@ class MyFirstDataScreenView extends WatchUi.DataField {
     hidden var mHeartRate as String;
     hidden var mPower3s as String;
     hidden var mDistance as String;
+    hidden var mElapsedTime as String;
+    hidden var mTimeOfTheDay as String;
+    hidden var mCalories as String;
+    
     
     function initialize() {
         DataField.initialize();
@@ -16,7 +20,10 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         mHeartRate = "n/a";
         mPower3s = "n/a";
         mDistance = "n/a";
-    }
+        mElapsedTime = "n/a";
+        mTimeOfTheDay = "n/a";
+        mCalories = "n/a";
+    }   
 
     // Set your layout here. Anytime the size of obscurity of
     // the draw context is changed this will be called.
@@ -56,6 +63,54 @@ class MyFirstDataScreenView extends WatchUi.DataField {
                 mCurrentSpeed = roundedSpeedKmh.toString();
             } else {
                 mCurrentSpeed = "n/a";
+            }
+        }
+
+        if(info has :currentHeartRate ){
+            if(info.currentHeartRate != null){
+                mHeartRate = info.currentHeartRate.toString();
+            } else {
+                mHeartRate = "n/a";
+            }
+        }
+
+        if(info has :currentPower ){
+            if(info.currentPower != null){
+                mPower3s = info.currentPower.toString();
+            } else {
+                mPower3s = "n/a";
+            }
+        }
+
+        if(info has :distance){
+            if(info != null){
+                mDistance = info.distance.toString();
+            } else {
+                mDistance = "n/a";
+            }
+        }
+
+        if(info has :elapsedTime){
+            if(info.elapsedTime != null){
+                mElapsedTime = info.elapsedTime.toString();
+            } else {
+                mElapsedTime = "n/a";
+            }
+        }
+
+        if(info has :timeOfTheDay){
+            if(info.timeOfTheDay != null){
+                mTimeOfTheDay = info.timeOfTheDay.toString();
+            } else {
+                mTimeOfTheDay = "n/a";
+            }
+        }
+
+        if(info has :calories){
+            if(info.calories != null){
+                mCalories = info.calories.toString();
+            } else {
+                mCalories = "n/a";
             }
         }
     }

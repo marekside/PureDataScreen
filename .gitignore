@@ -1,2 +1,3 @@
 bin/*.*
+bin/
 bin/mir/source/MyFirstDataScreenView.mir

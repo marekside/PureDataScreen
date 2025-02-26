@@ -6,7 +6,10 @@
         <!-- Big quadrant -->
         <label id="KPH" x="98%" y="5%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         <label id="KPH_value" x="98%" y="5%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
-
+        
+        <label id="KPHAVG" x="59%" y="9%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_20" />
+        <label id="KPHAVG_value" x="60%" y="1%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_LEFT" font="@Fonts.Bebas_40" />
+        
         <!-- 1st Small number quadrant -->
         <label id="HR" x="48%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
         <label id="HR_value" x="48%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />

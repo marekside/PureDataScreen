@@ -53,6 +53,7 @@ module Rez {
             var local_Rez_Fonts_Bebas_60 = (WatchUi.loadResource($.Rez.Fonts.Bebas_60) as Graphics.FontReference);
             var local_Rez_Fonts_Bebas_150 = (WatchUi.loadResource($.Rez.Fonts.Bebas_150) as Graphics.FontReference);
             var local_Rez_Fonts_Bebas_30 = (WatchUi.loadResource($.Rez.Fonts.Bebas_30) as Graphics.FontReference);
+            var local_Rez_Fonts_Bebas_20 = (WatchUi.loadResource($.Rez.Fonts.Bebas_20) as Graphics.FontReference);
             var local_Rez_Fonts_Bebas_40 = (WatchUi.loadResource($.Rez.Fonts.Bebas_40) as Graphics.FontReference);
             var rez_cmp_local_var_dc_getHeight = dc.getHeight();
 
@@ -68,6 +69,10 @@ module Rez {
             var rez_cmp_local_text_KPH = new WatchUi.Text({:identifier=>"KPH", :color=>Graphics.COLOR_LT_GRAY, :locX=>(rez_cmp_local_var_dc_getWidth * (98 / 100.0)), :locY=>(rez_cmp_local_var_dc_getHeight * (5 / 100.0)), :justification=>Graphics.TEXT_JUSTIFY_RIGHT, :font=>local_Rez_Fonts_Bebas_40});
 
             var rez_cmp_local_text_KPH_value = new WatchUi.Text({:identifier=>"KPH_value", :color=>Graphics.COLOR_BLACK, :locX=>(rez_cmp_local_var_dc_getWidth * (98 / 100.0)), :locY=>(rez_cmp_local_var_dc_getHeight * (5 / 100.0)), :justification=>Graphics.TEXT_JUSTIFY_RIGHT, :font=>local_Rez_Fonts_Bebas_150});
+
+            var rez_cmp_local_text_KPHAVG = new WatchUi.Text({:identifier=>"KPHAVG", :color=>Graphics.COLOR_LT_GRAY, :locX=>(rez_cmp_local_var_dc_getWidth * (59 / 100.0)), :locY=>(rez_cmp_local_var_dc_getHeight * (9 / 100.0)), :justification=>Graphics.TEXT_JUSTIFY_RIGHT, :font=>local_Rez_Fonts_Bebas_20});
+
+            var rez_cmp_local_text_KPHAVG_value = new WatchUi.Text({:identifier=>"KPHAVG_value", :color=>Graphics.COLOR_LT_GRAY, :locX=>(rez_cmp_local_var_dc_getWidth * (60 / 100.0)), :locY=>(rez_cmp_local_var_dc_getHeight * (1 / 100.0)), :justification=>Graphics.TEXT_JUSTIFY_LEFT, :font=>local_Rez_Fonts_Bebas_40});
 
             var rez_cmp_local_text_HR = new WatchUi.Text({:identifier=>"HR", :color=>Graphics.COLOR_LT_GRAY, :locX=>(rez_cmp_local_var_dc_getWidth * (48 / 100.0)), :locY=>(rez_cmp_local_var_dc_getHeight * (45 / 100.0)), :justification=>Graphics.TEXT_JUSTIFY_RIGHT, :font=>local_Rez_Fonts_Bebas_30});
 
@@ -93,7 +98,7 @@ module Rez {
 
             var rez_cmp_local_text_CALORIES_value = new WatchUi.Text({:identifier=>"CALORIES_value", :color=>Graphics.COLOR_BLACK, :locX=>(rez_cmp_local_var_dc_getWidth * (98 / 100.0)), :locY=>(rez_cmp_local_var_dc_getHeight * (86 / 100.0)), :justification=>Graphics.TEXT_JUSTIFY_RIGHT, :font=>local_Rez_Fonts_Bebas_60});
 
-            return [rez_cmp_local_custom_drawable_11939594661139614796, rez_cmp_local_custom_drawable_Grid, rez_cmp_local_text_KPH, rez_cmp_local_text_KPH_value, rez_cmp_local_text_HR, rez_cmp_local_text_HR_value, rez_cmp_local_text_PWR, rez_cmp_local_text_PWR_value, rez_cmp_local_text_DISTANCE, rez_cmp_local_text_DISTANCE_value, rez_cmp_local_text_TOTTIME, rez_cmp_local_text_TOTTIME_value, rez_cmp_local_text_CADENCE, rez_cmp_local_text_CADENCE_value, rez_cmp_local_text_CALORIES, rez_cmp_local_text_CALORIES_value] as Array<WatchUi.Drawable>;
+            return [rez_cmp_local_custom_drawable_11939594661139614796, rez_cmp_local_custom_drawable_Grid, rez_cmp_local_text_KPH, rez_cmp_local_text_KPH_value, rez_cmp_local_text_KPHAVG, rez_cmp_local_text_KPHAVG_value, rez_cmp_local_text_HR, rez_cmp_local_text_HR_value, rez_cmp_local_text_PWR, rez_cmp_local_text_PWR_value, rez_cmp_local_text_DISTANCE, rez_cmp_local_text_DISTANCE_value, rez_cmp_local_text_TOTTIME, rez_cmp_local_text_TOTTIME_value, rez_cmp_local_text_CADENCE, rez_cmp_local_text_CADENCE_value, rez_cmp_local_text_CALORIES, rez_cmp_local_text_CALORIES_value] as Array<WatchUi.Drawable>;
         }
     } // Layouts
 
@@ -105,6 +110,7 @@ module Rez {
         (:initialized) var HR as ResourceId;
         (:initialized) var PWR as ResourceId;
         (:initialized) var CADENCE as ResourceId;
+        (:initialized) var KPHAVG as ResourceId;
         (:initialized) var AppName as ResourceId;
     } // Strings
 

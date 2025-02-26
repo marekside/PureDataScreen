@@ -6,6 +6,7 @@ import Toybox.WatchUi;
 class MyFirstDataScreenView extends WatchUi.DataField {
 
     hidden var mCurrentSpeed as String;
+    hidden var mCurrentSpeedAvg as String;
     hidden var mHeartRate as String;
     hidden var mPower3s as String;
     hidden var mDistance as String;
@@ -23,6 +24,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         mElapsedTime = "n/a";
         mCurrentCadence = "n/a";
         mCalories = "n/a";
+        mCurrentSpeedAvg = "n/a";
     }   
 
     // Set your layout here. Anytime the size of obscurity of
@@ -30,6 +32,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
     function onLayout(dc as Dc) as Void {
         View.setLayout(Rez.Layouts.WahooLayout(dc));
         initializeField(WatchUi.loadResource(Rez.Strings.KPH));
+        initializeField(WatchUi.loadResource(Rez.Strings.KPHAVG));
         initializeField(WatchUi.loadResource(Rez.Strings.HR));
         initializeField(WatchUi.loadResource(Rez.Strings.PWR));
         initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
@@ -112,6 +115,16 @@ class MyFirstDataScreenView extends WatchUi.DataField {
                 mCalories = "n/a";
             }
         }
+
+        if(info has :averageSpeed ){
+            if(info.averageSpeed  != null){
+                var speedKmh = info.averageSpeed * 3.6; // Convert m/s to km/h
+                var roundedSpeedKmh = Math.round(speedKmh).toNumber(); // Round to the nearest integer
+                mCurrentSpeedAvg = roundedSpeedKmh.toString();
+            } else {
+                mCurrentSpeedAvg = "n/a";
+            }
+        }
     }
 
     // Display the value you computed here. This will be called
@@ -121,6 +134,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
 
         setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), mCurrentSpeed);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.KPHAVG), mCurrentSpeedAvg);
         setFieldValue(WatchUi.loadResource(Rez.Strings.HR), mHeartRate);
         setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), mPower3s);
         setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), mDistance);
@@ -135,11 +149,15 @@ class MyFirstDataScreenView extends WatchUi.DataField {
     hidden function initializeField(label as String) as Void {
         var labelView = View.findDrawableById(label) as Text;
         labelView.locY = labelView.locY - 16;
-        var valueView = View.findDrawableById(label + "_value") as Text;
-        valueView.locY = valueView.locY - 5;
-    
-        (View.findDrawableById(label) as Text).setText(label);
-        (View.findDrawableById(label + "_value") as Text).setText("N/A");
+        labelView.setText(label);
+
+        var valueView = View.findDrawableById(label + "_value");
+        var valueViewText;
+        if (valueView != null) {
+            valueViewText = valueView as Text;
+            valueViewText.locY = valueViewText.locY - 5;
+            valueViewText.setText("N/A"); 
+        }
     }
 
     hidden function setFieldValue(label as String, labelValue as String) as Void {

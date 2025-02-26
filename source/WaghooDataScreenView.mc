@@ -32,7 +32,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
     function onLayout(dc as Dc) as Void {
         View.setLayout(Rez.Layouts.WahooLayout(dc));
         initializeField(WatchUi.loadResource(Rez.Strings.KPH));
-        initializeField(WatchUi.loadResource(Rez.Strings.KPHAVG));
+        //initializeField(WatchUi.loadResource(Rez.Strings.KPHAVG));
         initializeField(WatchUi.loadResource(Rez.Strings.HR));
         initializeField(WatchUi.loadResource(Rez.Strings.PWR));
         initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
@@ -134,7 +134,7 @@ class MyFirstDataScreenView extends WatchUi.DataField {
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
 
         setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), mCurrentSpeed);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.KPHAVG), mCurrentSpeedAvg);
+        //setFieldValue(WatchUi.loadResource(Rez.Strings.KPHAVG), mCurrentSpeedAvg);
         setFieldValue(WatchUi.loadResource(Rez.Strings.HR), mHeartRate);
         setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), mPower3s);
         setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), mDistance);

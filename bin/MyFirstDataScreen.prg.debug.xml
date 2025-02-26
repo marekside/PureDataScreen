@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+<manifest filename="D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\manifest.xml"/>
+<pcToLineNum>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="1" lineNum="26" parent="globals" pc="268435460" symbol="getApp"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="1" lineNum="27" parent="globals" pc="268435470" symbol="getApp"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="2" lineNum="6" parent="globals/MyFirstDataScreenView" pc="268435481" symbol="&lt;init&gt;"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="3" lineNum="5" parent="globals/MyFirstDataScreenApp" pc="268435493" symbol="&lt;init&gt;"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="4" lineNum="5" parent="globals/Background" pc="268435505" symbol="&lt;init&gt;"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="5" lineNum="7" parent="globals/Rez" pc="268435517" symbol="&lt;init&gt;"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="45" parent="globals/MyFirstDataScreenView" pc="268435537" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="47" parent="globals/MyFirstDataScreenView" pc="268435540" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="48" parent="globals/MyFirstDataScreenView" pc="268435551" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="49" parent="globals/MyFirstDataScreenView" pc="268435562" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="50" parent="globals/MyFirstDataScreenView" pc="268435577" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="51" parent="globals/MyFirstDataScreenView" pc="268435599" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="6" lineNum="53" parent="globals/MyFirstDataScreenView" pc="268435616" symbol="compute"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="7" lineNum="17" parent="globals/MyFirstDataScreenView" pc="268435632" symbol="onLayout"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="7" lineNum="18" parent="globals/MyFirstDataScreenView" pc="268435634" symbol="onLayout"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="7" lineNum="20" parent="globals/MyFirstDataScreenView" pc="268435676" symbol="onLayout"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="7" lineNum="21" parent="globals/MyFirstDataScreenView" pc="268435716" symbol="onLayout"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="31" parent="globals/MyFirstDataScreenView" pc="268435757" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="32" parent="globals/MyFirstDataScreenView" pc="268435760" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="33" parent="globals/MyFirstDataScreenView" pc="268435781" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="34" parent="globals/MyFirstDataScreenView" pc="268435798" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="35" parent="globals/MyFirstDataScreenView" pc="268435825" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="37" parent="globals/MyFirstDataScreenView" pc="268435842" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="8" lineNum="38" parent="globals/MyFirstDataScreenView" pc="268435872" symbol="initializeField"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="9" lineNum="10" parent="globals/MyFirstDataScreenView" pc="268435912" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="9" lineNum="11" parent="globals/MyFirstDataScreenView" pc="268435914" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="9" lineNum="12" parent="globals/MyFirstDataScreenView" pc="268435926" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="60" parent="globals/MyFirstDataScreenView" pc="268435939" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="62" parent="globals/MyFirstDataScreenView" pc="268435942" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="65" parent="globals/MyFirstDataScreenView" pc="268435979" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="66" parent="globals/MyFirstDataScreenView" pc="268436003" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="67" parent="globals/MyFirstDataScreenView" pc="268436014" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="69" parent="globals/MyFirstDataScreenView" pc="268436032" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="71" parent="globals/MyFirstDataScreenView" pc="268436043" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenView.mc" id="10" lineNum="74" parent="globals/MyFirstDataScreenView" pc="268436058" symbol="onUpdate"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="11" lineNum="12" parent="globals/MyFirstDataScreenApp" pc="268436079" symbol="onStart"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="12" lineNum="20" parent="globals/MyFirstDataScreenApp" pc="268436082" symbol="getInitialView"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="12" lineNum="21" parent="globals/MyFirstDataScreenApp" pc="268436084" symbol="getInitialView"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="13" lineNum="7" parent="globals/MyFirstDataScreenApp" pc="268436114" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="13" lineNum="8" parent="globals/MyFirstDataScreenApp" pc="268436116" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenApp.mc" id="14" lineNum="16" parent="globals/MyFirstDataScreenApp" pc="268436129" symbol="onStop"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="15" lineNum="19" parent="globals/Background" pc="268436132" symbol="setColor"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="15" lineNum="20" parent="globals/Background" pc="268436134" symbol="setColor"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="16" lineNum="9" parent="globals/Background" pc="268436144" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="16" lineNum="10" parent="globals/Background" pc="268436147" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="16" lineNum="14" parent="globals/Background" pc="268436165" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="16" lineNum="16" parent="globals/Background" pc="268436181" symbol="initialize"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="17" lineNum="23" parent="globals/Background" pc="268436194" symbol="draw"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="17" lineNum="24" parent="globals/Background" pc="268436196" symbol="draw"/>
+<entry filename="D:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\source\\MyFirstDataScreenBackground.mc" id="17" lineNum="25" parent="globals/Background" pc="268436213" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="18" lineNum="11" parent="globals/Rez/Drawables/Smiley" pc="268436222" symbol="&lt;init&gt;"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="52" parent="globals/Rez/Layouts" pc="268436234" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="53" parent="globals/Rez/Layouts" pc="268436245" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="54" parent="globals/Rez/Layouts" pc="268436278" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="55" parent="globals/Rez/Layouts" pc="268436311" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="56" parent="globals/Rez/Layouts" pc="268436344" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="57" parent="globals/Rez/Layouts" pc="268436377" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="59" parent="globals/Rez/Layouts" pc="268436386" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="61" parent="globals/Rez/Layouts" pc="268436395" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="63" parent="globals/Rez/Layouts" pc="268436419" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="64" parent="globals/Rez/Layouts" pc="268436453" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="65" parent="globals/Rez/Layouts" pc="268436463" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="68" parent="globals/Rez/Layouts" pc="268436479" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="70" parent="globals/Rez/Layouts" pc="268436573" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="72" parent="globals/Rez/Layouts" pc="268436663" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="74" parent="globals/Rez/Layouts" pc="268436757" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="19" lineNum="76" parent="globals/Rez/Layouts" pc="268436847" symbol="WahooLayout"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="20" lineNum="13" parent="globals/Rez/Drawables/Smiley" pc="268436882" symbol="initialize"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="20" lineNum="14" parent="globals/Rez/Drawables/Smiley" pc="268436884" symbol="initialize"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="17" parent="globals/Rez/Drawables/Smiley" pc="268436901" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="18" parent="globals/Rez/Drawables/Smiley" pc="268436904" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="19" parent="globals/Rez/Drawables/Smiley" pc="268436914" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="20" parent="globals/Rez/Drawables/Smiley" pc="268436923" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="24" parent="globals/Rez/Drawables/Smiley" pc="268436930" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="26" parent="globals/Rez/Drawables/Smiley" pc="268436939" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="29" parent="globals/Rez/Drawables/Smiley" pc="268436948" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="30" parent="globals/Rez/Drawables/Smiley" pc="268436961" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="31" parent="globals/Rez/Drawables/Smiley" pc="268437086" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="32" parent="globals/Rez/Drawables/Smiley" pc="268437099" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="33" parent="globals/Rez/Drawables/Smiley" pc="268437224" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="34" parent="globals/Rez/Drawables/Smiley" pc="268437237" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="35" parent="globals/Rez/Drawables/Smiley" pc="268437362" symbol="draw"/>
+<entry filename="d:\\Learning\\Garmin\\DataScreen\\FirstDataScreen\\MyFirstDataScreen\\bin\\gen\\006-B4061-00\\source\\Rez.mcgen" id="21" lineNum="36" parent="globals/Rez/Drawables/Smiley" pc="268437375" symbol="draw"/>
+</pcToLineNum>
+<symbolTable>
+<entry id="8388639" module="true" symbol="Graphics"/>
+<entry id="8388632" method="true" symbol="&lt;init&gt;"/>
+<entry field="true" id="21" symbol="Bebas_80"/>
+<entry field="true" id="20" symbol="Bebas_60"/>
+<entry field="true" id="19" symbol="Bebas_40"/>
+<entry field="true" id="18" symbol="Bebas_30"/>
+<entry field="true" id="17" symbol="Bebas_20"/>
+<entry field="true" id="8388611" module="true" symbol="Toybox"/>
+<entry id="9" method="true" symbol="initializeField"/>
+<entry field="true" id="10" symbol="mCurrentSpeed"/>
+<entry field="true" id="22" symbol="AppName"/>
+<entry id="6" module="true" symbol="globals/Rez/Strings"/>
+<entry id="8388772" module="true" object="true" symbol="Fonts"/>
+<entry id="8388631" module="true" symbol="Activity"/>
+<entry id="8388648" module="true" symbol="WatchUi"/>
+<entry id="2" module="true" symbol="globals/Rez"/>
+<entry id="8389124" method="true" symbol="onUpdate"/>
+<entry field="true" id="8389065" symbol="locY"/>
+<entry field="true" id="8389064" symbol="locX"/>
+<entry id="8388771" module="true" object="true" symbol="Drawables"/>
+<entry id="8389348" symbol="font"/>
+<entry id="13" object="true" symbol="Smiley"/>
+<entry id="8389275" method="true" symbol="getApp"/>
+<entry id="5" module="true" symbol="globals/Rez/Layouts"/>
+<entry field="true" id="8391300" method="true" symbol="isVisible"/>
+<entry id="14" method="true" symbol="WahooLayout"/>
+<entry id="8389122" method="true" symbol="onLayout"/>
+<entry field="true" id="8388738" symbol="currentSpeed"/>
+<entry id="7" object="true" symbol="MyFirstDataScreenApp"/>
+<entry field="true" id="8389063" symbol="identifier"/>
+<entry id="8389349" symbol="justification"/>
+<entry id="8389137" method="true" symbol="compute"/>
+<entry id="8389131" method="true" symbol="setColor"/>
+<entry id="3" module="true" symbol="globals/Rez/Drawables"/>
+<entry id="8" object="true" symbol="MyFirstDataScreenView"/>
+<entry field="true" id="23" symbol="HR"/>
+<entry field="true" id="16" symbol="Bebas_150"/>
+<entry id="8388769" module="true" object="true" symbol="Rez"/>
+<entry field="true" id="15" symbol="Bebas_110"/>
+<entry id="8388640" module="true" symbol="Lang"/>
+<entry field="true" id="8389130" symbol="mColor"/>
+<entry id="8389068" method="true" symbol="draw"/>
+<entry field="true" id="12" symbol="LauncherIcon"/>
+<entry id="8388610" symbol="statics"/>
+<entry id="8389350" module="true" symbol="globals"/>
+<entry id="8388770" module="true" object="true" symbol="Strings"/>
+<entry id="8390146" module="true" object="true" symbol="Background"/>
+<entry id="8388702" method="true" symbol="initialize"/>
+<entry id="8389279" method="true" symbol="onStart"/>
+<entry id="8389280" method="true" symbol="getInitialView"/>
+<entry id="8389281" method="true" symbol="onStop"/>
+<entry field="true" id="8389347" symbol="color"/>
+<entry field="true" id="24" symbol="KPH"/>
+<entry id="11" module="true" symbol="Layouts"/>
+<entry id="4" module="true" symbol="globals/Rez/Fonts"/>
+<entry id="8388635" module="true" symbol="Application"/>
+</symbolTable>
+<localVars>
+<entry arg="true" endPc="268435631" name="info" stackId="1" startPc="268435537"/>
+<entry endPc="268435612" name="speedKmh" stackId="2" startPc="268435562"/>
+<entry endPc="268435612" name="roundedSpeedKmh" stackId="3" startPc="268435562"/>
+<entry arg="true" endPc="268435756" name="dc" stackId="1" startPc="268435632"/>
+<entry arg="true" endPc="268435911" name="label" stackId="1" startPc="268435757"/>
+<entry endPc="268435910" name="labelView" stackId="2" startPc="268435760"/>
+<entry endPc="268435910" name="valueView" stackId="3" startPc="268435760"/>
+<entry arg="true" endPc="268436078" name="dc" stackId="1" startPc="268435939"/>
+<entry endPc="268436077" name="value" stackId="2" startPc="268435942"/>
+<entry arg="true" endPc="268436143" name="color" stackId="1" startPc="268436132"/>
+<entry endPc="268436192" name="dictionary" stackId="1" startPc="268436147"/>
+<entry arg="true" endPc="268436221" name="dc" stackId="1" startPc="268436194"/>
+<entry arg="true" endPc="268436881" name="dc" stackId="1" startPc="268436234"/>
+<entry endPc="268436881" name="local_Rez_Fonts_Bebas_60" stackId="2" startPc="268436245"/>
+<entry endPc="268436881" name="local_Rez_Fonts_Bebas_150" stackId="3" startPc="268436245"/>
+<entry endPc="268436881" name="local_Rez_Fonts_Bebas_30" stackId="4" startPc="268436245"/>
+<entry endPc="268436881" name="local_Rez_Fonts_Bebas_40" stackId="5" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_var_dc_getHeight" stackId="6" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_var_dc_getWidth" stackId="7" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_custom_drawable_11939594661139614796" stackId="8" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_custom_drawable_Smiley" stackId="9" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_text_KPH" stackId="10" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_text_KPH_value" stackId="11" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_text_HR" stackId="12" startPc="268436245"/>
+<entry endPc="268436881" name="rez_cmp_local_text_HR_value" stackId="13" startPc="268436245"/>
+<entry arg="true" endPc="268437500" name="dc" stackId="1" startPc="268436901"/>
+<entry endPc="268437499" name="rez_cmp_local_var_dc_getHeight" stackId="2" startPc="268436904"/>
+<entry endPc="268437499" name="rez_cmp_local_var_dc_getWidth" stackId="3" startPc="268436904"/>
+</localVars>
+<deviceInfo deviceVersion="85752c82f0edc7cb314aaadc3429577cfaad3234" partNumber="006-B4061-00"/>
+<annotations>
+<annotationEntry annotation="initialized" class="Drawables" module="globals/Rez" symbol="LauncherIcon"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_30"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_150"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_20"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_40"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="AppName"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_110"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_60"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="KPH"/>
+<annotationEntry annotation="initialized" class="Strings" module="globals/Rez" symbol="HR"/>
+<annotationEntry annotation="initialized" class="Fonts" module="globals/Rez" symbol="Bebas_80"/>
+</annotations>
+<dataEntryOffsetMappings>
+<dataEntry label="globals" offset="67" parentId="" symbolId="globals" type="module"/>
+<dataEntry label="globals/MyFirstDataScreenView" offset="143" parentId="globals" symbolId="MyFirstDataScreenView" type="class"/>
+<dataEntry label="globals/MyFirstDataScreenApp" offset="232" parentId="globals" symbolId="MyFirstDataScreenApp" type="class"/>
+<dataEntry label="globals/Background" offset="303" parentId="globals" symbolId="Background" type="class"/>
+<dataEntry label="globals/Rez" offset="374" parentId="globals" symbolId="Rez" type="module"/>
+<dataEntry label="globals/Rez/Drawables" offset="436" parentId="Rez" symbolId="Drawables" type="module"/>
+<dataEntry label="globals/Rez/Layouts" offset="480" parentId="Rez" symbolId="Layouts" type="module"/>
+<dataEntry label="globals/Rez/Fonts" offset="515" parentId="Rez" symbolId="Fonts" type="module"/>
+<dataEntry label="globals/Rez/Strings" offset="604" parentId="Rez" symbolId="Strings" type="module"/>
+<dataEntry label="globals/Rez/Drawables/Smiley" offset="657" parentId="Drawables" symbolId="Smiley" type="class"/>
+</dataEntryOffsetMappings>
+<functions>
+<functionEntry accessMode="public" endPc="268435480" name="getApp" startPc="268435460">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435492" name="&lt;init&gt;" parent="MyFirstDataScreenView" startPc="268435481">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435504" name="&lt;init&gt;" parent="MyFirstDataScreenApp" startPc="268435493">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435516" name="&lt;init&gt;" parent="Background" startPc="268435505">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435536" name="&lt;init&gt;" parent="Rez" startPc="268435517">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435631" name="compute" parent="MyFirstDataScreenView" startPc="268435537">
+<param id="info"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435756" name="onLayout" parent="MyFirstDataScreenView" startPc="268435632">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="protected" endPc="268435911" name="initializeField" parent="MyFirstDataScreenView" startPc="268435757">
+<param id="label"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268435938" name="initialize" parent="MyFirstDataScreenView" startPc="268435912">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436078" name="onUpdate" parent="MyFirstDataScreenView" startPc="268435939">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436081" name="onStart" parent="MyFirstDataScreenApp" startPc="268436079">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436113" name="getInitialView" parent="MyFirstDataScreenApp" startPc="268436082">
+<documentation><![CDATA[<div class="description"> Return the initial view of your application here<br/></div>]]></documentation>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436128" name="initialize" parent="MyFirstDataScreenApp" startPc="268436114">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436131" name="onStop" parent="MyFirstDataScreenApp" startPc="268436129">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436143" name="setColor" parent="Background" startPc="268436132">
+<param id="color"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436193" name="initialize" parent="Background" startPc="268436144">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436221" name="draw" parent="Background" startPc="268436194">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Drawables">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Layouts">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Fonts">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="&lt;init&gt;" parent="Strings">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436233" name="&lt;init&gt;" parent="Smiley" startPc="268436222">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436881" name="WahooLayout" parent="Layouts" startPc="268436234">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268436900" name="initialize" parent="Smiley" startPc="268436882">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" endPc="268437500" name="draw" parent="Smiley" startPc="268436901">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+</functions>
+</debugInfo>

@@ -1,0 +1,370 @@
+[ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Activity,1,14,22]; ]
+import Toybox.Activity;
+[ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Graphics,2,14,22]; ]
+import Toybox.Graphics;
+[ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Lang,3,14,18]; ]
+import Toybox.Lang;
+[ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [WatchUi,4,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 6; @symbol_classdef = [MyFirstDataScreenView,6,6,27]; @symbol_extends<0> = [WatchUi,6,36,43]; @symbol_extends<1> = [DataField,6,44,53]; ]
+class MyFirstDataScreenView extends WatchUi.DataField {
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 6; ]
+    <init> {
+    }
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 6; ]
+    static
+    <init> {
+    }
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 8; @position = 15; @symbol_vardef = [mCurrentSpeed,8,15,28]; @symbol_type<0> = [String,8,32,38]; ]
+    protected
+    var mCurrentSpeed as String;
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 9; @position = 15; @symbol_vardef = [mHeartRate,9,15,25]; @symbol_type<0> = [String,9,29,35]; ]
+    protected
+    var mHeartRate as String;
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 10; @position = 15; @symbol_vardef = [mPower3s,10,15,23]; @symbol_type<0> = [String,10,27,33]; ]
+    protected
+    var mPower3s as String;
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 11; @position = 15; @symbol_vardef = [mDistance,11,15,24]; @symbol_type<0> = [String,11,28,34]; ]
+    protected
+    var mDistance as String;
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 13; @symbol_functiondef = [initialize,13,13,23]; ]
+    function initialize() as Void {
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_13_26_19_4_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 14 8 ]
+        symbol [ DataField %tmp.2 14 8 17 ];
+        %tmp.2 = getv ? :DataField;
+        symbol [ initialize %tmp.3 14 18 28 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 15 8 ]
+        %tmp.4 = "n/a";
+        symbol [ mCurrentSpeed ? 15 8 21 ];
+        putv self :mCurrentSpeed %tmp.4;
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 16 8 ]
+        %tmp.5 = "n/a";
+        symbol [ mHeartRate ? 16 8 18 ];
+        putv self :mHeartRate %tmp.5;
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 17 8 ]
+        %tmp.6 = "n/a";
+        symbol [ mPower3s ? 17 8 16 ];
+        putv self :mPower3s %tmp.6;
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 18 8 ]
+        %tmp.7 = "n/a";
+        symbol [ mDistance ? 18 8 17 ];
+        putv self :mDistance %tmp.7;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_13_26_19_4_stop:
+    }
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 23; @symbol_functiondef = [onLayout,23,13,21]; @symbol_param<0> = [dc,23,22,24]; @symbol_param<0>_type<0> = [Dc,23,28,30]; ]
+    function onLayout(dc as Dc) as Void {
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_23_40_34_4_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 24 8 ]
+        symbol [ View %tmp.2 24 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ setLayout %tmp.3 24 13 22 ];
+        %tmp.3 = getv function %tmp.2 :setLayout;
+        symbol [ Rez %tmp.5 24 23 26 ];
+        %tmp.5 = getv ? :Rez;
+        symbol [ Layouts %tmp.6 24 27 34 ];
+        %tmp.6 = getv %tmp.5 :Layouts;
+        symbol [ WahooLayout %tmp.7 24 35 46 ];
+        %tmp.7 = getv function %tmp.6 :WahooLayout;
+        %tmp.8 = lgetv %dc;
+        symbol [ dc %tmp.8 24 47 49 ];
+        %tmp.9 = invoke %tmp.6 %tmp.7(%tmp.8);
+        invoke %tmp.2 %tmp.3(%tmp.9);
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 25 8 ]
+        %tmp.10 = self;
+        symbol [ initializeField %tmp.11 25 8 23 ];
+        %tmp.11 = getv function %tmp.10 :initializeField;
+        symbol [ WatchUi %tmp.12 25 24 31 ];
+        %tmp.12 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.13 25 32 44 ];
+        %tmp.13 = getv function %tmp.12 :loadResource;
+        symbol [ Rez %tmp.15 25 45 48 ];
+        %tmp.15 = getv ? :Rez;
+        symbol [ Strings %tmp.16 25 49 56 ];
+        %tmp.16 = getv %tmp.15 :Strings;
+        symbol [ KPH %tmp.17 25 57 60 ];
+        %tmp.17 = getv %tmp.16 :KPH;
+        %tmp.18 = invoke %tmp.12 %tmp.13(%tmp.17);
+        invoke %tmp.10 %tmp.11(%tmp.18);
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 26 8 ]
+        %tmp.19 = self;
+        symbol [ initializeField %tmp.20 26 8 23 ];
+        %tmp.20 = getv function %tmp.19 :initializeField;
+        symbol [ WatchUi %tmp.21 26 24 31 ];
+        %tmp.21 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.22 26 32 44 ];
+        %tmp.22 = getv function %tmp.21 :loadResource;
+        symbol [ Rez %tmp.24 26 45 48 ];
+        %tmp.24 = getv ? :Rez;
+        symbol [ Strings %tmp.25 26 49 56 ];
+        %tmp.25 = getv %tmp.24 :Strings;
+        symbol [ HR %tmp.26 26 57 59 ];
+        %tmp.26 = getv %tmp.25 :HR;
+        %tmp.27 = invoke %tmp.21 %tmp.22(%tmp.26);
+        invoke %tmp.19 %tmp.20(%tmp.27);
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_23_40_34_4_stop:
+    }
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 36; @symbol_functiondef = [initializeField,36,20,35]; @symbol_param<0> = [label,36,36,41]; @symbol_param<0>_type<0> = [String,36,45,51]; ]
+    protected
+    function initializeField(label as String) as Void {
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_36_61_44_4_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 37 8 ]
+        [ "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_36_61_44_4_start" "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_36_61_44_4_stop" ]
+        %labelView.1 = local;
+        symbol [ labelView %labelView.1 37 12 21 ];
+        symbol [ View %tmp.2 37 24 28 ];
+        %tmp.2 = getv ? :View;
+        symbol [ findDrawableById %tmp.3 37 29 45 ];
+        %tmp.3 = getv function %tmp.2 :findDrawableById;
+        %tmp.4 = lgetv %label;
+        symbol [ label %tmp.4 37 46 51 ];
+        %tmp.5 = invoke %tmp.2 %tmp.3(%tmp.4);
+        %tmp.6 = as %tmp.5 Text;
+        symbol [ Text %tmp.6 37 56 60 ];
+        lputv %labelView.1 %tmp.6;
+        symbol [ labelView %labelView.1 37 12 21 ];
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 38 8 ]
+        %tmp.7 = lgetv %labelView.1;
+        symbol [ labelView %tmp.7 38 8 17 ];
+        %tmp.8 = lgetv %labelView.1;
+        symbol [ labelView %tmp.8 38 25 34 ];
+        symbol [ locY %tmp.9 38 35 39 ];
+        %tmp.9 = getv %tmp.8 :locY;
+        %tmp.10 = 16;
+        %tmp.11 = sub %tmp.9 %tmp.10;
+        symbol [ locY ? 38 18 22 ];
+        putv %tmp.7 :locY %tmp.11;
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 39 8 ]
+        [ "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_36_61_44_4_start" "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_36_61_44_4_stop" ]
+        %valueView.2 = local;
+        symbol [ valueView %valueView.2 39 12 21 ];
+        symbol [ View %tmp.13 39 24 28 ];
+        %tmp.13 = getv ? :View;
+        symbol [ findDrawableById %tmp.14 39 29 45 ];
+        %tmp.14 = getv function %tmp.13 :findDrawableById;
+        %tmp.15 = lgetv %label;
+        symbol [ label %tmp.15 39 46 51 ];
+        %tmp.16 = "_value";
+        %tmp.17 = add %tmp.15 %tmp.16;
+        %tmp.18 = invoke %tmp.13 %tmp.14(%tmp.17);
+        %tmp.19 = as %tmp.18 Text;
+        symbol [ Text %tmp.19 39 67 71 ];
+        lputv %valueView.2 %tmp.19;
+        symbol [ valueView %valueView.2 39 12 21 ];
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 40 8 ]
+        %tmp.20 = lgetv %valueView.2;
+        symbol [ valueView %tmp.20 40 8 17 ];
+        %tmp.21 = lgetv %valueView.2;
+        symbol [ valueView %tmp.21 40 25 34 ];
+        symbol [ locY %tmp.22 40 35 39 ];
+        %tmp.22 = getv %tmp.21 :locY;
+        %tmp.23 = 5;
+        %tmp.24 = sub %tmp.22 %tmp.23;
+        symbol [ locY ? 40 18 22 ];
+        putv %tmp.20 :locY %tmp.24;
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 42 8 ]
+        symbol [ View %tmp.26 42 9 13 ];
+        %tmp.26 = getv ? :View;
+        symbol [ findDrawableById %tmp.27 42 14 30 ];
+        %tmp.27 = getv function %tmp.26 :findDrawableById;
+        %tmp.28 = lgetv %label;
+        symbol [ label %tmp.28 42 31 36 ];
+        %tmp.29 = invoke %tmp.26 %tmp.27(%tmp.28);
+        %tmp.30 = as %tmp.29 Text;
+        symbol [ Text %tmp.30 42 41 45 ];
+        symbol [ setText %tmp.31 42 47 54 ];
+        %tmp.31 = getv function %tmp.30 :setText;
+        %tmp.32 = lgetv %label;
+        symbol [ label %tmp.32 42 55 60 ];
+        invoke %tmp.30 %tmp.31(%tmp.32);
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 43 8 ]
+        symbol [ View %tmp.34 43 9 13 ];
+        %tmp.34 = getv ? :View;
+        symbol [ findDrawableById %tmp.35 43 14 30 ];
+        %tmp.35 = getv function %tmp.34 :findDrawableById;
+        %tmp.36 = lgetv %label;
+        symbol [ label %tmp.36 43 31 36 ];
+        %tmp.37 = "_value";
+        %tmp.38 = add %tmp.36 %tmp.37;
+        %tmp.39 = invoke %tmp.34 %tmp.35(%tmp.38);
+        %tmp.40 = as %tmp.39 Text;
+        symbol [ Text %tmp.40 43 52 56 ];
+        symbol [ setText %tmp.41 43 58 65 ];
+        %tmp.41 = getv function %tmp.40 :setText;
+        %tmp.42 = "N/A";
+        invoke %tmp.40 %tmp.41(%tmp.42);
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_36_61_44_4_stop:
+    }
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 50; @symbol_functiondef = [compute,50,13,20]; @symbol_param<0> = [info,50,21,25]; @symbol_param<0>_type<0> = [Activity,50,29,37]; @symbol_param<0>_type<1> = [Info,50,38,42]; ]
+    function compute(info as Activity.Info) as Void {
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_50_52_61_4_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 52 8 ]
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_8_60_8_if_stmt:
+        %tmp.1 = lgetv %info;
+        symbol [ info %tmp.1 52 11 15 ];
+        %tmp.3 = const :currentSpeed;
+        %tmp.4 = canhazplz %tmp.1 %tmp.3;
+        bf %tmp.4 @D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_8_60_8_if_end;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_8_60_8_if_true:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_34_60_8_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 53 12 ]
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_12_59_12_if_stmt:
+        %tmp.5 = lgetv %info;
+        symbol [ info %tmp.5 53 15 19 ];
+        %tmp.6 = as %tmp.5 { (interface { var currentSpeed; }) };
+        symbol [ currentSpeed %tmp.7 53 20 32 ];
+        %tmp.7 = getv %tmp.6 :currentSpeed;
+        %tmp.8 = null;
+        %tmp.9 = ne %tmp.7 %tmp.8;
+        bf %tmp.9 @D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_12_59_12_if_else_false;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_12_59_12_if_true:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_41_57_12_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 54 16 ]
+        [ "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_41_57_12_start" "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_41_57_12_stop" ]
+        %speedKmh.1 = local;
+        symbol [ speedKmh %speedKmh.1 54 20 28 ];
+        %tmp.10 = lgetv %info;
+        symbol [ info %tmp.10 54 31 35 ];
+        %tmp.11 = as %tmp.10 { (interface { var currentSpeed; }) };
+        symbol [ currentSpeed %tmp.12 54 36 48 ];
+        %tmp.12 = getv %tmp.11 :currentSpeed;
+        %tmp.13 = 3.6;
+        %tmp.14 = mul %tmp.12 %tmp.13;
+        lputv %speedKmh.1 %tmp.14;
+        symbol [ speedKmh %speedKmh.1 54 20 28 ];
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 55 16 ]
+        [ "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_41_57_12_start" "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_41_57_12_stop" ]
+        %roundedSpeedKmh.2 = local;
+        symbol [ roundedSpeedKmh %roundedSpeedKmh.2 55 20 35 ];
+        symbol [ Math %tmp.16 55 38 42 ];
+        %tmp.16 = getv ? :Math;
+        symbol [ round %tmp.17 55 43 48 ];
+        %tmp.17 = getv function %tmp.16 :round;
+        %tmp.18 = lgetv %speedKmh.1;
+        symbol [ speedKmh %tmp.18 55 49 57 ];
+        %tmp.19 = invoke %tmp.16 %tmp.17(%tmp.18);
+        symbol [ toNumber %tmp.20 55 59 67 ];
+        %tmp.20 = getv function %tmp.19 :toNumber;
+        %tmp.21 = invoke %tmp.19 %tmp.20();
+        lputv %roundedSpeedKmh.2 %tmp.21;
+        symbol [ roundedSpeedKmh %roundedSpeedKmh.2 55 20 35 ];
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 56 16 ]
+        %tmp.22 = lgetv %roundedSpeedKmh.2;
+        symbol [ roundedSpeedKmh %tmp.22 56 32 47 ];
+        symbol [ toString %tmp.23 56 48 56 ];
+        %tmp.23 = getv function %tmp.22 :toString;
+        %tmp.24 = invoke %tmp.22 %tmp.23();
+        symbol [ mCurrentSpeed ? 56 16 29 ];
+        putv self :mCurrentSpeed %tmp.24;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_41_57_12_stop:
+        goto @D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_12_59_12_if_end;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_12_59_12_if_else_false:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_57_19_59_12_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 58 16 ]
+        %tmp.25 = "n/a";
+        symbol [ mCurrentSpeed ? 58 16 29 ];
+        putv self :mCurrentSpeed %tmp.25;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_57_19_59_12_stop:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_53_12_59_12_if_end:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_34_60_8_stop:
+        goto @D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_8_60_8_if_end;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_52_8_60_8_if_end:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_50_52_61_4_stop:
+    }
+    [ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 65; @symbol_functiondef = [onUpdate,65,13,21]; @symbol_param<0> = [dc,65,22,24]; @symbol_param<0>_type<0> = [Dc,65,28,30]; ]
+    function onUpdate(dc as Dc) as Void {
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_65_40_80_4_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 67 8 ]
+        symbol [ View %tmp.2 67 9 13 ];
+        %tmp.2 = getv ? :View;
+        symbol [ findDrawableById %tmp.3 67 14 30 ];
+        %tmp.3 = getv function %tmp.2 :findDrawableById;
+        %tmp.4 = "Background";
+        %tmp.5 = invoke %tmp.2 %tmp.3(%tmp.4);
+        %tmp.6 = as %tmp.5 Text;
+        symbol [ Text %tmp.6 67 48 52 ];
+        symbol [ setColor %tmp.7 67 54 62 ];
+        %tmp.7 = getv function %tmp.6 :setColor;
+        %tmp.8 = self;
+        symbol [ getBackgroundColor %tmp.9 67 63 81 ];
+        %tmp.9 = getv function %tmp.8 :getBackgroundColor;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        invoke %tmp.6 %tmp.7(%tmp.10);
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 70 8 ]
+        [ "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_65_40_80_4_start" "D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_65_40_80_4_stop" ]
+        %value.1 = local;
+        symbol [ value %value.1 70 12 17 ];
+        symbol [ View %tmp.12 70 20 24 ];
+        %tmp.12 = getv ? :View;
+        symbol [ findDrawableById %tmp.13 70 25 41 ];
+        %tmp.13 = getv function %tmp.12 :findDrawableById;
+        %tmp.14 = "KPH_value";
+        %tmp.15 = invoke %tmp.12 %tmp.13(%tmp.14);
+        %tmp.16 = as %tmp.15 Text;
+        symbol [ Text %tmp.16 70 58 62 ];
+        lputv %value.1 %tmp.16;
+        symbol [ value %value.1 70 12 17 ];
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 71 8 ]
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_8_75_8_if_stmt:
+        %tmp.17 = self;
+        symbol [ getBackgroundColor %tmp.18 71 12 30 ];
+        %tmp.18 = getv function %tmp.17 :getBackgroundColor;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        symbol [ Graphics %tmp.20 71 36 44 ];
+        %tmp.20 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.21 71 45 56 ];
+        %tmp.21 = getv %tmp.20 :COLOR_BLACK;
+        %tmp.22 = eq %tmp.19 %tmp.21;
+        bf %tmp.22 @D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_8_75_8_if_else_false;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_8_75_8_if_true:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_58_73_8_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 72 12 ]
+        %tmp.23 = lgetv %value.1;
+        symbol [ value %tmp.23 72 12 17 ];
+        symbol [ setColor %tmp.24 72 18 26 ];
+        %tmp.24 = getv function %tmp.23 :setColor;
+        symbol [ Graphics %tmp.25 72 27 35 ];
+        %tmp.25 = getm $.Toybox.Graphics;
+        symbol [ COLOR_WHITE %tmp.26 72 36 47 ];
+        %tmp.26 = getv %tmp.25 :COLOR_WHITE;
+        invoke %tmp.23 %tmp.24(%tmp.26);
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_58_73_8_stop:
+        goto @D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_8_75_8_if_end;
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_8_75_8_if_else_false:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_73_15_75_8_start:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 74 12 ]
+        %tmp.27 = lgetv %value.1;
+        symbol [ value %tmp.27 74 12 17 ];
+        symbol [ setColor %tmp.28 74 18 26 ];
+        %tmp.28 = getv function %tmp.27 :setColor;
+        symbol [ Graphics %tmp.29 74 27 35 ];
+        %tmp.29 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.30 74 36 47 ];
+        %tmp.30 = getv %tmp.29 :COLOR_BLACK;
+        invoke %tmp.27 %tmp.28(%tmp.30);
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_73_15_75_8_stop:
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_71_8_75_8_if_end:
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 76 8 ]
+        %tmp.31 = lgetv %value.1;
+        symbol [ value %tmp.31 76 8 13 ];
+        symbol [ setText %tmp.32 76 14 21 ];
+        %tmp.32 = getv function %tmp.31 :setText;
+        symbol [ mCurrentSpeed %tmp.34 76 22 35 ];
+        %tmp.34 = getv ? :mCurrentSpeed;
+        invoke %tmp.31 %tmp.32(%tmp.34);
+[ "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc" 79 8 ]
+        symbol [ View %tmp.36 79 8 12 ];
+        %tmp.36 = getv ? :View;
+        symbol [ onUpdate %tmp.37 79 13 21 ];
+        %tmp.37 = getv function %tmp.36 :onUpdate;
+        %tmp.38 = lgetv %dc;
+        symbol [ dc %tmp.38 79 22 24 ];
+        invoke %tmp.36 %tmp.37(%tmp.38);
+D_Learning_Garmin_DataScreen_FirstDataScreen_MyFirstDataScreen_source_MyFirstDataScreenView_mc_65_40_80_4_stop:
+    }
+}
+[ @file = "D:\Learning\Garmin\DataScreen\FirstDataScreen\MyFirstDataScreen\source\MyFirstDataScreenView.mc"; @line = 1; ]
+<init> {
+}

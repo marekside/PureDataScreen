@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "../../WaghooDataScreen"
+			"path": "../../PureDataScreen"
 		},
 		{
-			"name": "WaghooDataScreen",
+			"name": "PureDataScreen",
 			"path": ".."
 		}
 	],

@@ -2,7 +2,7 @@ import Toybox.Application;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class MyFirstDataScreenApp extends Application.AppBase {
+class WaghooDataScreenApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
@@ -18,11 +18,11 @@ class MyFirstDataScreenApp extends Application.AppBase {
 
     //! Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new MyFirstDataScreenView() ];
+        return [ new PureDataScreenView() ];
     }
 
 }
 
-function getApp() as MyFirstDataScreenApp {
-    return Application.getApp() as MyFirstDataScreenApp;
+function getApp() as PureDataScreenApp {
+    return Application.getApp() as PureDataScreenApp;
 }

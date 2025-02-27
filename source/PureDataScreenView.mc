@@ -3,7 +3,7 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
 
-class MyFirstDataScreenView extends WatchUi.DataField {
+class PureDataScreenView extends WatchUi.DataField {
 
     hidden var mCurrentSpeed as String;
     hidden var mCurrentSpeedAvg as String;

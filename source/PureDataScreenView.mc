@@ -6,7 +6,7 @@ import Toybox.WatchUi;
 class PureDataScreenView extends WatchUi.DataField {
 
     hidden var mCurrentSpeed as String;
-    hidden var mCurrentSpeedAvg as String;
+    hidden var mCurrentSpeedDecimal as String;
     hidden var mHeartRate as String;
     hidden var mPower3s as String;
     hidden var mDistance as String;
@@ -24,22 +24,23 @@ class PureDataScreenView extends WatchUi.DataField {
         mElapsedTime = "n/a";
         mCurrentCadence = "n/a";
         mCalories = "n/a";
-        mCurrentSpeedAvg = "n/a";
+        mCurrentSpeedDecimal = "n/a";
     }   
 
     // Set your layout here. Anytime the size of obscurity of
     // the draw context is changed this will be called.
     function onLayout(dc as Dc) as Void {
+        System.println(dc.getWidth());
+        System.println(dc.getHeight());
+
         View.setLayout(Rez.Layouts.WahooLayout(dc));
         initializeField(WatchUi.loadResource(Rez.Strings.KPH));
-        //initializeField(WatchUi.loadResource(Rez.Strings.KPHAVG));
         initializeField(WatchUi.loadResource(Rez.Strings.HR));
         initializeField(WatchUi.loadResource(Rez.Strings.PWR));
         initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
         initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
         initializeField(WatchUi.loadResource(Rez.Strings.CADENCE));
         initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
-        
     }
 
     // The given info object contains all the current workout information.
@@ -51,8 +52,9 @@ class PureDataScreenView extends WatchUi.DataField {
         if(info has :currentSpeed){
             if(info.currentSpeed != null){
                 var speedKmh = info.currentSpeed * 3.6; // Convert m/s to km/h
-                var roundedSpeedKmh = Math.round(speedKmh).toNumber(); // Round to the nearest integer
-                mCurrentSpeed = roundedSpeedKmh.toString();
+                var roundedDecimalNumber = (Math.round(speedKmh * 10) / 10).format("%0.1f"); // Round to one decimal place
+                mCurrentSpeed = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
+                mCurrentSpeedDecimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
             } else {
                 mCurrentSpeed = "n/a";
             }
@@ -115,16 +117,6 @@ class PureDataScreenView extends WatchUi.DataField {
                 mCalories = "n/a";
             }
         }
-
-        if(info has :averageSpeed ){
-            if(info.averageSpeed  != null){
-                var speedKmh = info.averageSpeed * 3.6; // Convert m/s to km/h
-                var roundedSpeedKmh = Math.round(speedKmh).toNumber(); // Round to the nearest integer
-                mCurrentSpeedAvg = roundedSpeedKmh.toString();
-            } else {
-                mCurrentSpeedAvg = "n/a";
-            }
-        }
     }
 
     // Display the value you computed here. This will be called
@@ -133,14 +125,14 @@ class PureDataScreenView extends WatchUi.DataField {
         // Set the background color
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
 
-        setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), mCurrentSpeed);
-        //setFieldValue(WatchUi.loadResource(Rez.Strings.KPHAVG), mCurrentSpeedAvg);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.HR), mHeartRate);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), mPower3s);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), mDistance);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), mElapsedTime);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), mCurrentCadence);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), mCalories);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "decimal", mCurrentSpeedDecimal);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.HR), "value", mHeartRate);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), "value", mPower3s);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), "value", mDistance);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), "value", mElapsedTime);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), "value", mCurrentCadence);
+        setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), "value", mCalories);
 
         // Call parent's onUpdate(dc) to redraw the layout
         View.onUpdate(dc);
@@ -158,11 +150,18 @@ class PureDataScreenView extends WatchUi.DataField {
             valueViewText.locY = valueViewText.locY - 5;
             valueViewText.setText("N/A"); 
         }
+
+        var decimalView = View.findDrawableById(label + "_decimal");
+        var decimalViewText;
+        if (decimalView != null) {
+            decimalViewText = decimalView as Text;
+            decimalViewText.locY = decimalViewText.locY - 5;
+            decimalViewText.setText("0"); 
+        }
     }
 
-    hidden function setFieldValue(label as String, labelValue as String) as Void {
-        // Set the foreground color and value
-        var value = View.findDrawableById(label + "_value") as Text;
+    hidden function setFieldValue(label as String, labelValueType as String, labelValue as String) as Void {
+        var value = View.findDrawableById(label + "_" + labelValueType) as Text;
         if (getBackgroundColor() == Graphics.COLOR_BLACK) {
             value.setColor(Graphics.COLOR_WHITE);
         } else {

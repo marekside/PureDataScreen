@@ -26,22 +26,13 @@ class PureDataScreenView extends WatchUi.DataField {
         mCurrentCadence = "n/a";
         mCalories = "n/a";
         mCurrentSpeedDecimal = "n/a";
-        mActiveLayoutConfiguration = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
+        mActiveLayoutConfiguration = 1;
+        readSettings();
     }   
 
     // Set your layout here. Anytime the size of obscurity of
     // the draw context is changed this will be called.
     function onLayout(dc as Dc) as Void {
-
-                // View.setLayout(Rez.Layouts.WahooLayout16(dc));
-                // initializeField(WatchUi.loadResource(Rez.Strings.KPH));
-                // initializeField(WatchUi.loadResource(Rez.Strings.HR));
-                // initializeField(WatchUi.loadResource(Rez.Strings.PWR));
-                // initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
-                // initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
-                // initializeField(WatchUi.loadResource(Rez.Strings.CADENCE));
-                // initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
-
         switch (mActiveLayoutConfiguration) {
             case  1: 
                 View.setLayout(Rez.Layouts.WahooLayout16(dc));
@@ -145,18 +136,13 @@ class PureDataScreenView extends WatchUi.DataField {
     // Display the value you computed here. This will be called
     // once a second when the data field is visible.
     function onUpdate(dc as Dc) as Void {
-        // Set the background color
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
         
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "decimal", mCurrentSpeedDecimal);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.HR), "value", mHeartRate);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), "value", mPower3s);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), "value", mDistance);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), "value", mElapsedTime);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), "value", mCurrentCadence);
-        // setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), "value", mCalories);
-        
+        if (isSettingsChanged()) {
+            readSettings();
+            onLayout(dc);
+        }
+
         switch (mActiveLayoutConfiguration) {
             case  1: 
                 setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
@@ -214,5 +200,14 @@ class PureDataScreenView extends WatchUi.DataField {
             value.setColor(Graphics.COLOR_BLACK);
         }
         value.setText(labelValue);
+    }
+
+    hidden function readSettings() as Void {
+        mActiveLayoutConfiguration = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
+    }
+
+    hidden function isSettingsChanged() as Boolean {
+        var newLayoutConfiguration = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
+        return newLayoutConfiguration != mActiveLayoutConfiguration;
     }
 }

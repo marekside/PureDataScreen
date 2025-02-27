@@ -5,7 +5,7 @@
         Use "Monkey C: Edit Application" from the Visual Studio Code command palette
         to update the application attributes.
     -->
-    <iq:application id="4ab4d456-5b0d-4869-8c95-af92f3ad53e8" type="datafield" name="@Strings.AppName" entry="PureDataScreenApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="1.2.0">
+    <iq:application id="4ab4d456-5b0d-4869-8c95-af92f3ad53e8" type="datafield" name="@Strings.AppName" entry="PureDataScreenApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="3.0.0">
         <!--
             Use the following from the Visual Studio Code comand palette to edit
             the build targets:
@@ -21,16 +21,16 @@
             <iq:product id="edge1050"/>
             <iq:product id="edge530"/>
             <iq:product id="edge540"/>
-            <iq:product id="edge830"/>
             <iq:product id="edge840"/>
-            <iq:product id="edgeexplore"/>
             <iq:product id="edgeexplore2"/>
         </iq:products>
         <!--
             Use "Monkey C: Edit Permissions" from the Visual Studio Code command
             palette to update permissions.
         -->
-        <iq:permissions/>
+        <iq:permissions>
+            <iq:uses-permission id="UserProfile"/>
+        </iq:permissions>
         <!--
             Use "Monkey C: Edit Languages" from the Visual Studio Code command
             palette to edit your compatible language list.

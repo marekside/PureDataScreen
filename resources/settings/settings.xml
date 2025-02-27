@@ -1,0 +1,8 @@
+<settings>
+    <setting propertyKey="@Properties.layoutSelector" title="@Strings.LAYOUT_SELECTOR" prompt="@Strings.LAYOUT_SELECTOR">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.SETTING_16LAYOUT</listEntry>
+            <listEntry value="2">@Strings.SETTING_14LAYOUT</listEntry>
+        </settingConfig>
+    </setting>
+</settings>

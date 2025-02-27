@@ -8,4 +8,9 @@
     <string id="TOTTIME">TOTTIME</string>
     <string id="CADENCE">CADENCE</string>
     <string id="CALORIES">CALORIES</string>
+
+    <string id="LAYOUT_SELECTOR">Layout selector</string>
+    <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>
+    <string id="SETTING_16LAYOUT">1+6 Layout</string>
+    <string id="SETTING_14LAYOUT">1+4 Layout</string>
 </strings>

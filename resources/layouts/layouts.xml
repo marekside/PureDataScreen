@@ -1,10 +1,10 @@
 <layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <!-- Layouts used for the for the four quadrants. -->
-    <layout id="WahooLayout">
+    <layout id="WahooLayout16">
         <drawable class="Background" />
-        <drawable id="Grid" />
+        <drawable id="Grid16" />
         <!-- Big quadrant -->
-        <label id="KPH" x="98%" y="5%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="KPH" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         <label id="KPH_value" x="90%" y="5%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
         <label id="KPH_decimal" x="98%" y="10%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
         
@@ -24,12 +24,37 @@
         <label id="TOTTIME" x="98%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
         <label id="TOTTIME_value" x="98%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
 
-        <!-- 3rd Small number quadrant -->
+        <!-- 5th Small number quadrant -->
         <label id="CADENCE" x="48%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
         <label id="CADENCE_value" x="48%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
 
-        <!-- 4th Small number quadrant -->
+        <!-- 6th Small number quadrant -->
         <label id="CALORIES" x="98%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
         <label id="CALORIES_value" x="98%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+    </layout>
+
+    <layout id="WahooLayout14">
+        <drawable class="Background" />
+        <drawable id="Grid14" />
+        <!-- Big quadrant -->
+        <label id="KPH" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="KPH_value" x="88%" y="7%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_180" />
+        <label id="KPH_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        
+        <!-- 1st Small number quadrant -->
+        <label id="HR" x="48%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="HR_value" x="48%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+
+        <!-- 2nd Small number quadrant -->
+        <label id="DISTANCE" x="98%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="DISTANCE_value" x="98%" y="59%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+
+        <!-- 3rd Small number quadrant -->
+        <label id="TOTTIME" x="48%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="TOTTIME_value" x="48%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        
+        <!-- 4th Small number quadrant -->
+        <label id="CALORIES" x="98%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="CALORIES_value" x="98%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
     </layout>
 </layouts>

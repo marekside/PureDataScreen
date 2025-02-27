@@ -21,6 +21,10 @@ class PureDataScreenApp extends Application.AppBase {
         return [ new PureDataScreenView() ];
     }
 
+    function onSettingsChanged() {
+        WatchUi.requestUpdate();
+    }
+
 }
 
 function getApp() as PureDataScreenApp {

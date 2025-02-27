@@ -13,6 +13,7 @@ class PureDataScreenView extends WatchUi.DataField {
     hidden var mElapsedTime as String;
     hidden var mCurrentCadence as String;
     hidden var mCalories as String;
+    hidden var mActiveLayoutConfiguration as Number;
     
     
     function initialize() {
@@ -25,22 +26,44 @@ class PureDataScreenView extends WatchUi.DataField {
         mCurrentCadence = "n/a";
         mCalories = "n/a";
         mCurrentSpeedDecimal = "n/a";
+        mActiveLayoutConfiguration = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
     }   
 
     // Set your layout here. Anytime the size of obscurity of
     // the draw context is changed this will be called.
     function onLayout(dc as Dc) as Void {
-        System.println(dc.getWidth());
-        System.println(dc.getHeight());
 
-        View.setLayout(Rez.Layouts.WahooLayout(dc));
-        initializeField(WatchUi.loadResource(Rez.Strings.KPH));
-        initializeField(WatchUi.loadResource(Rez.Strings.HR));
-        initializeField(WatchUi.loadResource(Rez.Strings.PWR));
-        initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
-        initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
-        initializeField(WatchUi.loadResource(Rez.Strings.CADENCE));
-        initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
+                // View.setLayout(Rez.Layouts.WahooLayout16(dc));
+                // initializeField(WatchUi.loadResource(Rez.Strings.KPH));
+                // initializeField(WatchUi.loadResource(Rez.Strings.HR));
+                // initializeField(WatchUi.loadResource(Rez.Strings.PWR));
+                // initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
+                // initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
+                // initializeField(WatchUi.loadResource(Rez.Strings.CADENCE));
+                // initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
+
+        switch (mActiveLayoutConfiguration) {
+            case  1: 
+                View.setLayout(Rez.Layouts.WahooLayout16(dc));
+                initializeField(WatchUi.loadResource(Rez.Strings.KPH));
+                initializeField(WatchUi.loadResource(Rez.Strings.HR));
+                initializeField(WatchUi.loadResource(Rez.Strings.PWR));
+                initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
+                initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
+                initializeField(WatchUi.loadResource(Rez.Strings.CADENCE));
+                initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
+                break;
+            case  2:
+                View.setLayout(Rez.Layouts.WahooLayout14(dc));
+                initializeField(WatchUi.loadResource(Rez.Strings.KPH));
+                initializeField(WatchUi.loadResource(Rez.Strings.HR));
+                initializeField(WatchUi.loadResource(Rez.Strings.DISTANCE));
+                initializeField(WatchUi.loadResource(Rez.Strings.TOTTIME));
+                initializeField(WatchUi.loadResource(Rez.Strings.CALORIES));
+                break;
+            default:
+                break;
+        }
     }
 
     // The given info object contains all the current workout information.
@@ -124,15 +147,38 @@ class PureDataScreenView extends WatchUi.DataField {
     function onUpdate(dc as Dc) as Void {
         // Set the background color
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
-
-        setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "decimal", mCurrentSpeedDecimal);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.HR), "value", mHeartRate);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), "value", mPower3s);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), "value", mDistance);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), "value", mElapsedTime);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), "value", mCurrentCadence);
-        setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), "value", mCalories);
+        
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "decimal", mCurrentSpeedDecimal);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.HR), "value", mHeartRate);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), "value", mPower3s);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), "value", mDistance);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), "value", mElapsedTime);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), "value", mCurrentCadence);
+        // setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), "value", mCalories);
+        
+        switch (mActiveLayoutConfiguration) {
+            case  1: 
+                setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "decimal", mCurrentSpeedDecimal);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.HR), "value", mHeartRate);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.PWR), "value", mPower3s);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), "value", mDistance);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), "value", mElapsedTime);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.CADENCE), "value", mCurrentCadence);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), "value", mCalories);
+                break;
+            case  2:
+                setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "value", mCurrentSpeed);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.KPH), "decimal", mCurrentSpeedDecimal);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.HR), "value", mHeartRate);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.DISTANCE), "value", mDistance);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.TOTTIME), "value", mElapsedTime);
+                setFieldValue(WatchUi.loadResource(Rez.Strings.CALORIES), "value", mCalories);
+                break;
+            default:
+                break;
+        }
 
         // Call parent's onUpdate(dc) to redraw the layout
         View.onUpdate(dc);

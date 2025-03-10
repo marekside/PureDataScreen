@@ -50,7 +50,6 @@ class FieldsController {
             }
             layoutResource.setText(myFieldToValueMapping.get(keys[i]));
         }
-        
     }
 
     hidden function storeFieldValue(layoutResourceName as String, value as String) as Void {

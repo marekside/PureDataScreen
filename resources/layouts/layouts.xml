@@ -43,24 +43,29 @@
         <drawable class="Background" />
         <drawable id="Grid14" />
         <!-- Big quadrant -->
-        <label id="KPH" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-        <label id="KPH_value" x="88%" y="7%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_180" />
-        <label id="KPH_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD1" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD1_value" x="88%" y="7%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_180" />
+        <label id="FIELD1_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
         
         <!-- 1st Small number quadrant -->
-        <label id="HR" x="48%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="HR_value" x="48%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
-
+        <label id="FIELD2" x="48%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="FIELD2_value" x="48%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD2_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        
         <!-- 2nd Small number quadrant -->
-        <label id="DISTANCE" x="98%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="DISTANCE_value" x="98%" y="59%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-
+        <label id="FIELD3" x="98%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="FIELD3_value" x="98%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD3_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        
         <!-- 3rd Small number quadrant -->
-        <label id="TOTTIME" x="48%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="TOTTIME_value" x="48%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD4" x="48%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="FIELD4_value" x="48%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD4_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
         
         <!-- 4th Small number quadrant -->
-        <label id="CALORIES" x="98%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="CALORIES_value" x="98%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD5" x="98%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="FIELD5_value" x="98%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD5_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        
     </layout>
 </layouts>

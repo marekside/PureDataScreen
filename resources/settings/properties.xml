@@ -1,3 +1,10 @@
 <properties>
     <property id="layoutSelector" type="number">1</property>
+    <property id="field1" type="number">1</property>
+    <property id="field2" type="number">2</property>
+    <property id="field3" type="number">3</property>
+    <property id="field4" type="number">4</property>
+    <property id="field5" type="number">5</property>
+    <property id="field6" type="number">6</property>
+    <property id="field7" type="number">7</property>
 </properties>

@@ -5,4 +5,88 @@
             <listEntry value="2">@Strings.SETTING_14LAYOUT</listEntry>
         </settingConfig>
     </setting>
+    <setting propertyKey="@Properties.field1" title="@Strings.FIELD1" prompt="@Strings.FIELD1">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.field2" title="@Strings.FIELD2" prompt="@Strings.FIELD2">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.field3" title="@Strings.FIELD3" prompt="@Strings.FIELD3">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.field4" title="@Strings.FIELD4" prompt="@Strings.FIELD4">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.field5" title="@Strings.FIELD5" prompt="@Strings.FIELD5">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.field6" title="@Strings.FIELD6" prompt="@Strings.FIELD6">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.field7" title="@Strings.FIELD7" prompt="@Strings.FIELD7">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.KPH</listEntry>
+            <listEntry value="2">@Strings.HR</listEntry>
+            <listEntry value="3">@Strings.PWR</listEntry>
+            <listEntry value="4">@Strings.DISTANCE</listEntry>
+            <listEntry value="5">@Strings.KPHAVG</listEntry>
+            <listEntry value="6">@Strings.TOTTIME</listEntry>
+            <listEntry value="7">@Strings.CADENCE</listEntry>
+            <listEntry value="8">@Strings.CALORIES</listEntry>
+        </settingConfig>    
+    </setting>
 </settings>

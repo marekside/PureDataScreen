@@ -15,4 +15,22 @@
     <string id="SETTING_16LAYOUT_TYPE">1</string>
     <string id="SETTING_14LAYOUT">1+4 Layout</string>
     <string id="SETTING_14LAYOUT_TYPE">2</string>
+
+    <string id="FIELD1">FIELD1</string>
+    <string id="FIELD2">FIELD2</string>
+    <string id="FIELD3">FIELD3</string>
+    <string id="FIELD4">FIELD4</string>
+    <string id="FIELD5">FIELD5</string>
+    <string id="FIELD6">FIELD6</string>
+    <string id="FIELD7">FIELD7</string>
+    <string id="FIELD1_SELECTOR_PROPERTY">field1</string>
+    <string id="FIELD2_SELECTOR_PROPERTY">field2</string>
+    <string id="FIELD3_SELECTOR_PROPERTY">field3</string>
+    <string id="FIELD4_SELECTOR_PROPERTY">field4</string>
+    <string id="FIELD5_SELECTOR_PROPERTY">field5</string>
+    <string id="FIELD6_SELECTOR_PROPERTY">field6</string>
+    <string id="FIELD7_SELECTOR_PROPERTY">field7</string>
+
+    <string id="FIELD_VALUE_POSTFIX">_value</string>
+    <string id="FIELD_DECIMAL_POSTFIX">_decimal</string>
 </strings>

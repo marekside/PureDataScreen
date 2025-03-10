@@ -4,33 +4,39 @@
         <drawable class="Background" />
         <drawable id="Grid16" />
         <!-- Big quadrant -->
-        <label id="KPH" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="KPH_value" x="90%" y="5%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
-        <label id="KPH_decimal" x="98%" y="10%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD1" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
+        <label id="FIELD1_value" x="90%" y="5%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD1_decimal" x="98%" y="10%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
         
         <!-- 1st Small number quadrant -->
-        <label id="HR" x="48%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
-        <label id="HR_value" x="48%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-
+        <label id="FIELD2" x="48%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="FIELD2_value" x="44%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD2_decimal" x="48%" y="48%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        
         <!-- 2nd Small number quadrant -->
-        <label id="PWR" x="98%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
-        <label id="PWR_value" x="98%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-
+        <label id="FIELD3" x="98%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="FIELD3_value" x="94%" y="46%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD3_decimal" x="98%" y="48%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        
         <!-- 3rd Small number quadrant -->
-        <label id="DISTANCE" x="48%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
-        <label id="DISTANCE_value" x="48%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-
+        <label id="FIELD4" x="48%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="FIELD4_value" x="44%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD4_decimal" x="48%" y="68%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        
         <!-- 4th Small number quadrant -->
-        <label id="TOTTIME" x="98%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
-        <label id="TOTTIME_value" x="98%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-
+        <label id="FIELD5" x="98%" y="65%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="FIELD5_value" x="94%" y="66%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD5_decimal" x="98%" y="68%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        
         <!-- 5th Small number quadrant -->
-        <label id="CADENCE" x="48%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
-        <label id="CADENCE_value" x="48%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
-
+        <label id="FIELD6" x="48%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="FIELD6_value" x="44%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD6_decimal" x="48%" y="88%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        
         <!-- 6th Small number quadrant -->
-        <label id="CALORIES" x="98%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
-        <label id="CALORIES_value" x="98%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD7" x="98%" y="85%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
+        <label id="FIELD7_value" x="94%" y="86%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD7_decimal" x="98%" y="88%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
     </layout>
 
     <layout id="WahooLayout14">

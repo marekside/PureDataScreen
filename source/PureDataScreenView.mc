@@ -6,7 +6,6 @@ import Toybox.WatchUi;
 class PureDataScreenView extends WatchUi.DataField {
 
     hidden var myFieldController = null;
-    hidden var myCurrentLayout = 0;
     
     function initialize() {
         DataField.initialize();
@@ -16,7 +15,7 @@ class PureDataScreenView extends WatchUi.DataField {
     // Set your layout here. Anytime the size of obscurity of
     // the draw context is changed this will be called.
     function onLayout(dc as Dc) as Void {
-        myFieldController.initialize(self);
+        //myFieldController.initialize(self);
         switch (Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY))) {
             case  1:
                 View.setLayout(Rez.Layouts.WahooLayout16(dc));

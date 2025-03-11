@@ -35,7 +35,7 @@ class FieldsController {
         if (decimalView != null) {
             decimalViewText = decimalView as Text;
             decimalViewText.locY = decimalViewText.locY - 5;
-            decimalViewText.setText("0"); 
+            decimalViewText.setText(""); 
         }
     }
 
@@ -48,7 +48,7 @@ class FieldsController {
 
             if (field != null) {
                 if (field.Decimal.equals("")) {
-                    layoutResourceValue.locX = layoutResourceDecimal.locX + 3;
+                    layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
                 }
 
                 redrawField(layoutResourceValue, field.Value);

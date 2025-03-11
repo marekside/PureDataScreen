@@ -5,8 +5,8 @@
         <drawable id="Grid16" />
         <!-- Big quadrant -->
         <label id="FIELD1" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="FIELD1_value" x="90%" y="5%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
-        <label id="FIELD1_decimal" x="98%" y="10%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD1_value" x="90%" y="4%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD1_decimal" x="98%" y="9%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
         
         <!-- 1st Small number quadrant -->
         <label id="FIELD2" x="48%" y="45%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_30" />
@@ -45,27 +45,27 @@
         <!-- Big quadrant -->
         <label id="FIELD1" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
         <label id="FIELD1_value" x="88%" y="7%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_180" />
-        <label id="FIELD1_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD1_decimal" x="98%" y="13%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
         
         <!-- 1st Small number quadrant -->
         <label id="FIELD2" x="48%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="FIELD2_value" x="48%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
-        <label id="FIELD2_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD2_value" x="43%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD2_decimal" x="48%" y="60%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         
         <!-- 2nd Small number quadrant -->
         <label id="FIELD3" x="98%" y="54%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="FIELD3_value" x="98%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
-        <label id="FIELD3_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD3_value" x="93%" y="57%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD3_decimal" x="98%" y="60%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         
         <!-- 3rd Small number quadrant -->
         <label id="FIELD4" x="48%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="FIELD4_value" x="48%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
-        <label id="FIELD4_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD4_value" x="43%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD4_decimal" x="48%" y="85%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         
         <!-- 4th Small number quadrant -->
         <label id="FIELD5" x="98%" y="79%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
-        <label id="FIELD5_value" x="98%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
-        <label id="FIELD5_decimal" x="98%" y="12%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD5_value" x="93%" y="82%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_80" />
+        <label id="FIELD5_decimal" x="98%" y="85%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
         
     </layout>
 </layouts>

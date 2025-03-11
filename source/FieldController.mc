@@ -35,24 +35,39 @@ class FieldsController {
         if (decimalView != null) {
             decimalViewText = decimalView as Text;
             decimalViewText.locY = decimalViewText.locY - 5;
-            decimalViewText.setText(""); 
+            decimalViewText.setText("0"); 
         }
     }
 
     public function redrawFieldValue() as Void {
         var keys = myFieldToValueMapping.keys();
         for (var i = 0; i < keys.size(); i++) {
-            var layoutResource = myDataField.findDrawableById(keys[i]) as Text;
-            if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
-                    layoutResource.setColor(Graphics.COLOR_WHITE);
-            } else {
-                layoutResource.setColor(Graphics.COLOR_BLACK);
+            var layoutResourceValue = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
+            var layoutResourceDecimal = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
+            var field = myFieldToValueMapping.get(keys[i]);
+
+            if (field != null) {
+                if (field.Decimal.equals("")) {
+                    layoutResourceValue.locX = layoutResourceDecimal.locX + 3;
+                }
+
+                redrawField(layoutResourceValue, field.Value);
+                redrawField(layoutResourceDecimal, field.Decimal);
             }
-            layoutResource.setText(myFieldToValueMapping.get(keys[i]));
         }
     }
 
-    hidden function storeFieldValue(layoutResourceName as String, value as String) as Void {
+    hidden function redrawField(resource as Text, value as String) as Void {
+        if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
+            resource.setColor(Graphics.COLOR_WHITE);
+        } else {
+            resource.setColor(Graphics.COLOR_BLACK);
+        }
+
+        resource.setText(value);
+    }
+
+    hidden function storeFieldValue(layoutResourceName as String, value as Field) as Void {
         myFieldToValueMapping.put(layoutResourceName, value);
     }
 
@@ -61,8 +76,7 @@ class FieldsController {
         for (var i = 0; i < layoutKeys.size(); i++) {
             var layoutResourceNameForValue = layoutKeys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX);
             var layoutResourceNameForDecimal = layoutKeys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX);
-            var value = "0";
-            var decimal = "";
+            var fieldToStore = null;
 
             var assignedFieldType = myFieldTolayoutMapping.get(layoutKeys[i]);
             switch (assignedFieldType) {
@@ -70,34 +84,39 @@ class FieldsController {
                     if(info has :currentSpeed && info.currentSpeed != null) {
                         var speedKmh = info.currentSpeed * 3.6; // Convert m/s to km/h
                         var roundedDecimalNumber = (Math.round(speedKmh * 10) / 10).format("%0.1f"); // Round to one decimal place
-                        value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
-                        decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
+                        var value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
+                        var decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
+                        fieldToStore = new Field(layoutKeys[i], value, decimal);
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_HEART_RATE:
                     if(info has :currentHeartRate && info.currentHeartRate != null){
-                        value = info.currentHeartRate.toString();
+                        var value = info.currentHeartRate.toString();
+                        fieldToStore = new Field(layoutKeys[i], value, "");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_POWER:
                     if(info has :currentPower && info.currentPower != null){
-                        value = info.currentPower.toString();
+                        var value = info.currentPower.toString();
+                        fieldToStore = new Field(layoutKeys[i], value, "");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_DISTANCE:
                     if(info has :elapsedDistance && info.elapsedDistance != null){
                         var distanceKm = info.elapsedDistance / 1000; // Convert meters to kilometers
                         var roundedDecimalNumber = distanceKm.format("%0.1f");
-                        value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
-                        decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
+                        var value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
+                        var decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
+                        fieldToStore = new Field(layoutKeys[i], value, decimal);
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_AVERAGESPEED:
                     if (info has :averageSpeed && info.averageSpeed != null) {
                         var averageSpeedKmh = info.averageSpeed * 3.6; // Convert m/s to km/h
                         var roundedDecimalNumber = (Math.round(averageSpeedKmh * 10) / 10).format("%0.1f"); // Round to one decimal place
-                        value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
-                        decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
+                        var value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
+                        var decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
+                        fieldToStore = new Field(layoutKeys[i], value, decimal);
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_TOTALTIME:
@@ -107,27 +126,31 @@ class FieldsController {
                         var minutes = ((totalSeconds % 3600) / 60).toNumber(); // Calculate minutes
                         var seconds = (totalSeconds % 60).toNumber(); // Calculate seconds
                         if (hours == 0) {
-                            value = Lang.format("$1$:$2$", [minutes.format("%02d"), seconds.format("%02d")]);
+                            var value = Lang.format("$1$:$2$", [minutes.format("%02d"), seconds.format("%02d")]);
+                            fieldToStore = new Field(layoutKeys[i], value, "");
                         } else {
-                            value = Lang.format("$1$:$2$", [hours.format("%02d"), minutes.format("%02d")]);
+                            var value = Lang.format("$1$:$2$", [hours.format("%02d"), minutes.format("%02d")]);
+                            fieldToStore = new Field(layoutKeys[i], value, "");
                         }
                     }   
                     break;
                 case FieldTypes.FIELD_TYPE_CADENCE:
                     if(info has :currentCadence && info.currentCadence  != null){
-                        value = info.currentCadence .toString();
+                        var value = info.currentCadence .toString();
+                        fieldToStore = new Field(layoutKeys[i], value, "");
                     }   
                     break;
                 case FieldTypes.FIELD_TYPE_CALORIES:
                     if(info has :calories && info.calories != null){
-                        value = info.calories.toString();
+                        var value = info.calories.toString();
+                        fieldToStore = new Field(layoutKeys[i], value, "");
                     }
                     break;
                 default:
                     break;
             }
-            storeFieldValue(layoutResourceNameForValue, value);
-            storeFieldValue(layoutResourceNameForDecimal, decimal);
+
+            storeFieldValue(layoutKeys[i], fieldToStore);
         }
     }
 }

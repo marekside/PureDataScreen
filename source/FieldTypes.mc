@@ -13,16 +13,8 @@ public class FieldTypes {
         FIELD_TYPE_TOTALTIME = 6,
         FIELD_TYPE_CADENCE = 7,
         FIELD_TYPE_CALORIES = 8,
+        FIELD_TYPE_GEARS = 9,
     }
-
-    // <string id="KPH">KPH</string>
-    // <string id="KPHAVG">KPHAVG</string>
-    // <string id="HR">HR</string>
-    // <string id="PWR">PWR</string>
-    // <string id="DISTANCE">DISTANCE</string>
-    // <string id="TOTTIME">TOTTIME</string>
-    // <string id="CADENCE">CADENCE</string>
-    // <string id="CALORIES">CALORIES</string>
 
     public static function getFieldByType(fieldType as String) as String {
         switch (fieldType) {
@@ -42,6 +34,8 @@ public class FieldTypes {
                 return WatchUi.loadResource(Rez.Strings.CADENCE);
             case FIELD_TYPE_CALORIES:
                 return WatchUi.loadResource(Rez.Strings.CALORIES);
+            case FIELD_TYPE_GEARS:
+                return WatchUi.loadResource(Rez.Strings.GEARS);
             default:
                 return "";
         }

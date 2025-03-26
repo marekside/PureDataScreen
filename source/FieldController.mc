@@ -2,6 +2,8 @@ import Toybox.Activity;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
+import Toybox.AntPlus;
+
 
 class FieldsController { 
     var myFieldTolayoutMapping = {} as Dictionary;
@@ -87,18 +89,24 @@ class FieldsController {
                         var value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
                         var decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
                         fieldToStore = new Field(layoutKeys[i], value, decimal);
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "0");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_HEART_RATE:
                     if(info has :currentHeartRate && info.currentHeartRate != null){
                         var value = info.currentHeartRate.toString();
                         fieldToStore = new Field(layoutKeys[i], value, "");
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_POWER:
                     if(info has :currentPower && info.currentPower != null){
                         var value = info.currentPower.toString();
                         fieldToStore = new Field(layoutKeys[i], value, "");
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_DISTANCE:
@@ -108,6 +116,8 @@ class FieldsController {
                         var value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
                         var decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
                         fieldToStore = new Field(layoutKeys[i], value, decimal);
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "0");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_AVERAGESPEED:
@@ -117,6 +127,8 @@ class FieldsController {
                         var value = roundedDecimalNumber.substring(0, roundedDecimalNumber.find("."));
                         var decimal = roundedDecimalNumber.substring(roundedDecimalNumber.find(".")+1, roundedDecimalNumber.length());
                         fieldToStore = new Field(layoutKeys[i], value, decimal);
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "0");
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_TOTALTIME:
@@ -138,13 +150,34 @@ class FieldsController {
                     if(info has :currentCadence && info.currentCadence  != null){
                         var value = info.currentCadence .toString();
                         fieldToStore = new Field(layoutKeys[i], value, "");
-                    }   
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "");
+                    }  
                     break;
                 case FieldTypes.FIELD_TYPE_CALORIES:
                     if(info has :calories && info.calories != null){
                         var value = info.calories.toString();
                         fieldToStore = new Field(layoutKeys[i], value, "");
+                    } else {
+                        fieldToStore = new Field(layoutKeys[i], "0", "");
                     }
+                    break;
+                case FieldTypes.FIELD_TYPE_GEARS:
+                    var frontDerailleur = "";
+                    var rearDerailleur = "";
+                    if(info has :frontDerailleurIndex  && info.frontDerailleurIndex  != null){
+                        frontDerailleur = info.frontDerailleurIndex.toString();
+                    } 
+                    if(info has :rearDerailleurIndex  && info.rearDerailleurIndex  != null){
+                        rearDerailleur = info.rearDerailleurIndex.toString();
+                    } 
+                    
+                    var value = Lang.format("f$1$:r$2$", [frontDerailleur, rearDerailleur]);
+                    if (frontDerailleur.equals("") && rearDerailleur.equals("")) {
+                        value = "f0:r0";
+                    }
+
+                    fieldToStore = new Field(layoutKeys[i], value, ""); 
                     break;
                 default:
                     break;
@@ -152,5 +185,18 @@ class FieldsController {
 
             storeFieldValue(layoutKeys[i], fieldToStore);
         }
+    }
+
+    public function isSourceChanged() as Boolean {
+        for (var i = 1; i <= 7; i++) {
+            var propertyName = "field" + i;
+            var fieldToValuePropertyName = "FIELD" + i;
+            var valueForProperty = Application.Properties.getValue(propertyName);
+            var currentValueForProperty = myFieldTolayoutMapping.get(fieldToValuePropertyName);
+            if (currentValueForProperty!= null && !valueForProperty.equals(currentValueForProperty)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

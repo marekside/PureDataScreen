@@ -16,7 +16,6 @@ class PureDataScreenView extends WatchUi.DataField {
     // Set your layout here. Anytime the size of obscurity of
     // the draw context is changed this will be called.
     function onLayout(dc as Dc) as Void {
-        handleLayoutChange();
         switch (Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY))) {
             case  1:
                 View.setLayout(Rez.Layouts.WahooLayout16(dc));
@@ -40,27 +39,31 @@ class PureDataScreenView extends WatchUi.DataField {
     // Note that compute() and onUpdate() are asynchronous, and there is no
     // guarantee that compute() will be called before onUpdate().
     function compute(info as Activity.Info) as Void {
-        // See Activity.Info in the documentation for available information
         myFieldController.compute(info);
     }
 
     // Display the value you computed here. This will be called
     // once a second when the data field is visible.
     function onUpdate(dc as Dc) as Void {
+        handleLayoutChange(dc);
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
-        onLayout(dc);
-        
         myFieldController.redrawFieldValue();
 
         // Call parent's onUpdate(dc) to redraw the layout
         View.onUpdate(dc);
     }
 
-    function handleLayoutChange() {
+    hidden function handleLayoutChange(dc as Dc) {
         var currentLayout = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
         if (currentLayout != myCurrentLayout) {
             myCurrentLayout = currentLayout;
             myFieldController.initialize(self);
+            onLayout(dc);
         }
+
+        if (myFieldController.isSourceChanged()) {
+            myFieldController.initialize(self);
+            onLayout(dc);
+        }        
     }
 }

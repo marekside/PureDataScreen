@@ -8,6 +8,7 @@
     <string id="TOTTIME">TOTTIME</string>
     <string id="CADENCE">CADENCE</string>
     <string id="CALORIES">CALORIES</string>
+    <string id="GEARS">GEARS</string>
 
     <string id="LAYOUT_SELECTOR">Layout selector</string>
     <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>
@@ -16,6 +17,7 @@
     <string id="SETTING_14LAYOUT">1+4 Layout</string>
     <string id="SETTING_14LAYOUT_TYPE">2</string>
 
+    <string id="FIELD_PREFIX">FIELD1</string>
     <string id="FIELD1">FIELD1</string>
     <string id="FIELD2">FIELD2</string>
     <string id="FIELD3">FIELD3</string>

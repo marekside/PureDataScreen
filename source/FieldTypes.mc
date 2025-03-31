@@ -15,6 +15,7 @@ public class FieldTypes {
         FIELD_TYPE_CALORIES = 8,
         FIELD_TYPE_GEARS = 9,
         FIELD_TYPE_CLOCK = 10,
+        FIELD_TYPE_GEARSIZE = 11,
     }
 
     public static function getFieldByType(fieldType as String) as String {
@@ -39,6 +40,8 @@ public class FieldTypes {
                 return WatchUi.loadResource(Rez.Strings.GEARS);
             case FIELD_TYPE_CLOCK:
                 return WatchUi.loadResource(Rez.Strings.CLOCK);
+            case FIELD_TYPE_GEARSIZE:
+                return WatchUi.loadResource(Rez.Strings.GEARSIZE);
             default:
                 return "";
         }

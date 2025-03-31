@@ -165,25 +165,25 @@ class FieldsController {
                     }
                     break;
                 case FieldTypes.FIELD_TYPE_GEARS:
-                    var frontDerailleur = "";
-                    var rearDerailleur = "";
+                    var frontDerailleurIndex = "";
+                    var rearDerailleurIndex = "";
                     if(info has :frontDerailleurIndex  && info.frontDerailleurIndex  != null){
-                        frontDerailleur = info.frontDerailleurIndex.toString();
+                        frontDerailleurIndex = info.frontDerailleurIndex.toString();
                     } 
                     if(info has :rearDerailleurIndex  && info.rearDerailleurIndex  != null){
-                        rearDerailleur = info.rearDerailleurIndex.toString();
+                        rearDerailleurIndex = info.rearDerailleurIndex.toString();
                     } 
                     
-                    var value = Lang.format("f$1$:r$2$", [frontDerailleur, rearDerailleur]);
-                    if (frontDerailleur.equals("") && rearDerailleur.equals("")) {
-                        value = "f0:r0";
+                    var deraillerIndexValue = Lang.format("f$1$:r$2$", [frontDerailleurIndex, rearDerailleurIndex]);
+                    if (frontDerailleurIndex.equals("") && rearDerailleurIndex.equals("")) {
+                        deraillerIndexValue = "f0:r0";
                     }
 
-                    fieldToStore = new Field(layoutKeys[i], value, ""); 
+                    fieldToStore = new Field(layoutKeys[i], deraillerIndexValue, ""); 
                     break;
                 case FieldTypes.FIELD_TYPE_CLOCK:
                     var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
-                    var dateTime = Lang.format(
+                    var dateTimeValue = Lang.format(
                         "$1$:$2$",
                         [
                             today.hour,
@@ -191,7 +191,24 @@ class FieldsController {
                         ]
                     );
 
-                    fieldToStore = new Field(layoutKeys[i], dateTime, ""); 
+                    fieldToStore = new Field(layoutKeys[i], dateTimeValue, ""); 
+                    break;
+                case FieldTypes.FIELD_TYPE_GEARSIZE:
+                    var frontDerailleurSize = "";
+                    var rearDerailleurSize = "";
+                    if(info has :frontDerailleurSize  && info.frontDerailleurSize  != null){
+                        frontDerailleurSize = info.frontDerailleurIndex.toString();
+                    } 
+                    if(info has :rearDerailleurSize  && info.rearDerailleurSize  != null){
+                        rearDerailleurSize = info.rearDerailleurIndex.toString();
+                    } 
+                    
+                    var derailleurSizeValue = Lang.format("f$1$:r$2$", [frontDerailleurSize, rearDerailleurSize]);
+                    if (frontDerailleurSize.equals("") && rearDerailleurSize.equals("")) {
+                        derailleurSizeValue = "f0:r0";
+                    }
+
+                    fieldToStore = new Field(layoutKeys[i], derailleurSizeValue, ""); 
                     break;
                 default:
                     break;

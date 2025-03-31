@@ -10,6 +10,7 @@
     <string id="CALORIES">CALORIES</string>
     <string id="GEARS">GEARS</string>
     <string id="CLOCK">CLOCK</string>
+    <string id="GEARSIZE">GEARSIZE</string>
 
     <string id="LAYOUT_SELECTOR">Layout selector</string>
     <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>

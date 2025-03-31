@@ -3,7 +3,9 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.AntPlus;
-
+using Toybox.System;
+using Toybox.Time;
+using Toybox.Time.Gregorian;
 
 class FieldsController { 
     var myFieldTolayoutMapping = {} as Dictionary;
@@ -178,6 +180,18 @@ class FieldsController {
                     }
 
                     fieldToStore = new Field(layoutKeys[i], value, ""); 
+                    break;
+                case FieldTypes.FIELD_TYPE_CLOCK:
+                    var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+                    var dateTime = Lang.format(
+                        "$1$:$2$",
+                        [
+                            today.hour,
+                            today.min
+                        ]
+                    );
+
+                    fieldToStore = new Field(layoutKeys[i], dateTime, ""); 
                     break;
                 default:
                     break;

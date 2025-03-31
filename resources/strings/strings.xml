@@ -9,6 +9,7 @@
     <string id="CADENCE">CADENCE</string>
     <string id="CALORIES">CALORIES</string>
     <string id="GEARS">GEARS</string>
+    <string id="CLOCK">CLOCK</string>
 
     <string id="LAYOUT_SELECTOR">Layout selector</string>
     <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>

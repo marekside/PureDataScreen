@@ -14,6 +14,7 @@ public class FieldTypes {
         FIELD_TYPE_CADENCE = 7,
         FIELD_TYPE_CALORIES = 8,
         FIELD_TYPE_GEARS = 9,
+        FIELD_TYPE_CLOCK = 10,
     }
 
     public static function getFieldByType(fieldType as String) as String {
@@ -36,6 +37,8 @@ public class FieldTypes {
                 return WatchUi.loadResource(Rez.Strings.CALORIES);
             case FIELD_TYPE_GEARS:
                 return WatchUi.loadResource(Rez.Strings.GEARS);
+            case FIELD_TYPE_CLOCK:
+                return WatchUi.loadResource(Rez.Strings.CLOCK);
             default:
                 return "";
         }

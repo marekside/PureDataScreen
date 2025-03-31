@@ -197,10 +197,10 @@ class FieldsController {
                     var frontDerailleurSize = "";
                     var rearDerailleurSize = "";
                     if(info has :frontDerailleurSize  && info.frontDerailleurSize  != null){
-                        frontDerailleurSize = info.frontDerailleurIndex.toString();
+                        frontDerailleurSize = info.frontDerailleurSize.toString();
                     } 
                     if(info has :rearDerailleurSize  && info.rearDerailleurSize  != null){
-                        rearDerailleurSize = info.rearDerailleurIndex.toString();
+                        rearDerailleurSize = info.frontDerailleurSize.toString();
                     } 
                     
                     var derailleurSizeValue = Lang.format("f$1$:r$2$", [frontDerailleurSize, rearDerailleurSize]);

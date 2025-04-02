@@ -200,7 +200,7 @@ class FieldsController {
                         frontDerailleurSize = info.frontDerailleurSize.toString();
                     } 
                     if(info has :rearDerailleurSize  && info.rearDerailleurSize  != null){
-                        rearDerailleurSize = info.frontDerailleurSize.toString();
+                        rearDerailleurSize = info.rearDerailleurSize.toString();
                     } 
                     
                     var derailleurSizeValue = Lang.format("f$1$:r$2$", [frontDerailleurSize, rearDerailleurSize]);

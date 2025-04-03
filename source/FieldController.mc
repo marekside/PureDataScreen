@@ -174,9 +174,9 @@ class FieldsController {
                         rearDerailleurIndex = info.rearDerailleurIndex.toString();
                     } 
                     
-                    var deraillerIndexValue = Lang.format("f$1$:r$2$", [frontDerailleurIndex, rearDerailleurIndex]);
+                    var deraillerIndexValue = Lang.format("$1$:$2$", [frontDerailleurIndex, rearDerailleurIndex]);
                     if (frontDerailleurIndex.equals("") && rearDerailleurIndex.equals("")) {
-                        deraillerIndexValue = "f0:r0";
+                        deraillerIndexValue = "0:0";
                     }
 
                     fieldToStore = new Field(layoutKeys[i], deraillerIndexValue, ""); 
@@ -203,9 +203,9 @@ class FieldsController {
                         rearDerailleurSize = info.rearDerailleurSize.toString();
                     } 
                     
-                    var derailleurSizeValue = Lang.format("f$1$:r$2$", [frontDerailleurSize, rearDerailleurSize]);
+                    var derailleurSizeValue = Lang.format("$1$:$2$", [frontDerailleurSize, rearDerailleurSize]);
                     if (frontDerailleurSize.equals("") && rearDerailleurSize.equals("")) {
-                        derailleurSizeValue = "f0:r0";
+                        derailleurSizeValue = "0:0";
                     }
 
                     fieldToStore = new Field(layoutKeys[i], derailleurSizeValue, ""); 

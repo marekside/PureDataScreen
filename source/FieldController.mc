@@ -186,8 +186,8 @@ class FieldsController {
                     var dateTimeValue = Lang.format(
                         "$1$:$2$",
                         [
-                            today.hour,
-                            today.min
+                            today.hour.format("%02d"),
+                            today.min.format("%02d")
                         ]
                     );
 

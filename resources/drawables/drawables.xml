@@ -12,4 +12,12 @@
         <shape type="polygon" points="[[1%, 75%],[50%, 75%],[99%, 75%]]" color="Graphics.COLOR_LT_GRAY" />
         <shape type="polygon" points="[[50%, 50%],[50%, 70%],[50%, 99%]]" color="Graphics.COLOR_LT_GRAY" />
     </drawable-list>
+
+    <drawable-list id="averageUp">
+        <shape type="polygon" points="[[25%, 15%],[15%, 30%],[35%, 30%]]" color="Graphics.COLOR_LT_GRAY" />
+    </drawable-list>
+    <drawable-list id="averageDown">
+        <shape type="polygon" points="[[25%, 30%],[15%, 15%],[35%, 15%]]" color="Graphics.COLOR_LT_GRAY" />
+    </drawable-list>
+
 </drawables>

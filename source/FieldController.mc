@@ -182,7 +182,7 @@ class FieldsController {
                     fieldToStore = new Field(layoutKeys[i], deraillerIndexValue, ""); 
                     break;
                 case FieldTypes.FIELD_TYPE_CLOCK:
-                    var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+                    var today = System.getClockTime();
                     var dateTimeValue = Lang.format(
                         "$1$:$2$",
                         [

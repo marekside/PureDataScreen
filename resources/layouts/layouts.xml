@@ -3,8 +3,8 @@
     <layout id="WahooLayout16">
         <drawable class="Background" />
         <drawable id="Grid16" />
-        <!-- <drawable id="averageUp" />
-        <drawable id="averageDown" /> -->
+        <drawable id="averageUp" />
+        <drawable id="averageDown" />
         
         <!-- Big quadrant -->
         <label id="FIELD1" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_40" />
@@ -45,8 +45,8 @@
     <layout id="WahooLayout14">
         <drawable class="Background" />
         <drawable id="Grid14" />
-        <!-- <drawable id="averageUp" />
-        <drawable id="averageDown" /> -->
+        <drawable id="averageUp" />
+        <drawable id="averageDown" />
 
         <!-- Big quadrant -->
         <label id="FIELD1" x="98%" y="3%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />

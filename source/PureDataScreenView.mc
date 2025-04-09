@@ -54,6 +54,9 @@ class PureDataScreenView extends WatchUi.DataField {
     }
 
     hidden function handleLayoutChange(dc as Dc) {
+        View.findDrawableById("averageUp").setVisible(false);
+        View.findDrawableById("averageDown").setVisible(false);
+        
         var currentLayout = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
         if (currentLayout != myCurrentLayout) {
             myCurrentLayout = currentLayout;

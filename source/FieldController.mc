@@ -99,7 +99,7 @@ class FieldsController {
 
             var fieldToStore;
             if (strategy != null) {
-                fieldToStore = strategy.computeField(info, layoutKey);
+                fieldToStore = strategy.computeField(info, layoutKey, myDataField);
             } else {
                 fieldToStore = new Field(layoutKey, "0", "0"); // Default fallback
             }

@@ -1,8 +1,9 @@
 import Toybox.Lang;
 import Toybox.Activity;
+import Toybox.WatchUi;
 
 class GearsIndexField extends BaseField {
-    public function computeField(info as Activity.Info, layoutKey as String) as Field {
+    public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         var frontDerailleurIndex = "";
         var rearDerailleurIndex = "";
         if(info has :frontDerailleurIndex  && info.frontDerailleurIndex  != null){

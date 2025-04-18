@@ -54,8 +54,10 @@ class PureDataScreenView extends WatchUi.DataField {
     }
 
     hidden function handleLayoutChange(dc as Dc) {
-        View.findDrawableById("averageUp").setVisible(false);
-        View.findDrawableById("averageDown").setVisible(false);
+        if (!Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.AVERAGE_INDICATOR_PROPERTY))) {
+            View.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_UP_INDICATOR)).setVisible(false);
+            View.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_DOWN_INDICATOR)).setVisible(false);
+        }
         
         var currentLayout = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
         if (currentLayout != myCurrentLayout) {

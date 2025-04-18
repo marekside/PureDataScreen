@@ -1,5 +1,6 @@
 <properties>
     <property id="layoutSelector" type="number">1</property>
+    <property id="averageIndicator" type="boolean">false</property>
     <property id="field1" type="number">1</property>
     <property id="field2" type="number">2</property>
     <property id="field3" type="number">3</property>

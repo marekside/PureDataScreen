@@ -5,6 +5,9 @@
             <listEntry value="2">@Strings.SETTING_14LAYOUT</listEntry>
         </settingConfig>
     </setting>
+    <setting propertyKey="@Properties.averageIndicator" title="@Strings.AVERAGE_INDICATOR_PROPERTY" prompt="@Strings.AVERAGE_INDICATOR_PROPERTY">
+        <settingConfig type="boolean" />
+    </setting>
     <setting propertyKey="@Properties.field1" title="@Strings.FIELD1" prompt="@Strings.FIELD1">
         <settingConfig type="list">
             <listEntry value="1">@Strings.KPH</listEntry>

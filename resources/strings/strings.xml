@@ -14,6 +14,7 @@
 
     <string id="LAYOUT_SELECTOR">Layout selector</string>
     <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>
+    <string id="AVERAGE_INDICATOR_PROPERTY">averageIndicator</string>
     <string id="SETTING_16LAYOUT">1+6 Layout</string>
     <string id="SETTING_16LAYOUT_TYPE">1</string>
     <string id="SETTING_14LAYOUT">1+4 Layout</string>
@@ -37,4 +38,10 @@
 
     <string id="FIELD_VALUE_POSTFIX">_value</string>
     <string id="FIELD_DECIMAL_POSTFIX">_decimal</string>
+
+    <string id="YES">Yes</string>
+    <string id="NO">No</string>
+
+    <string id="AVERAGE_UP_INDICATOR">averageUp</string>
+    <string id="AVERAGE_DOWN_INDICATOR">averageDown</string>
 </strings>

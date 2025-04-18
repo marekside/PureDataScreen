@@ -1,8 +1,9 @@
 import Toybox.Lang;
 import Toybox.Activity;
+import Toybox.WatchUi;
 
 class TotalTimeField extends BaseField {
-    public function computeField(info as Activity.Info, layoutKey as String) as Field {
+    public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         if(info has :timerTime && info.timerTime != null){
             var totalSeconds = (info.timerTime/1000);
             var hours = (totalSeconds / 3600).toNumber(); // Calculate hours

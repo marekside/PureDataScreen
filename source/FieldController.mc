@@ -26,6 +26,7 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_GEARSIZE => new GearsSizeField(),
         FieldTypes.FIELD_TYPE_PWRAVG => new AveragePowerField(),
         FieldTypes.FIELD_TYPE_HRAVG => new AverageHeartRateField(),
+        FieldTypes.FIELD_TYPE_BATTERY => new BatteryField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 

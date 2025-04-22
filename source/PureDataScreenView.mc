@@ -19,12 +19,14 @@ class PureDataScreenView extends WatchUi.DataField {
         switch (Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY))) {
             case  1:
                 View.setLayout(Rez.Layouts.WahooLayout16(dc));
+                removeIndicators();
                 for (var i = 1; i <= 7; i++) {
                     myFieldController.initializeField("FIELD" + i, Application.Properties.getValue("field" + i));
                 }
                 break;
             case  2:
                 View.setLayout(Rez.Layouts.WahooLayout14(dc));
+                removeIndicators();
                 for (var i = 1; i <= 5; i++) {
                     myFieldController.initializeField("FIELD" + i, Application.Properties.getValue("field" + i));
                 }
@@ -55,8 +57,7 @@ class PureDataScreenView extends WatchUi.DataField {
 
     hidden function handleLayoutChange(dc as Dc) {
         if (!Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.AVERAGE_INDICATOR_PROPERTY))) {
-            View.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_UP_INDICATOR)).setVisible(false);
-            View.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_DOWN_INDICATOR)).setVisible(false);
+            removeIndicators();
         }
         
         var currentLayout = Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.LAYOUT_SELECTOR_PROPERTY));
@@ -68,7 +69,13 @@ class PureDataScreenView extends WatchUi.DataField {
 
         if (myFieldController.isSourceChanged()) {
             myFieldController.initialize(self);
+            removeIndicators();
             onLayout(dc);
         }        
+    }
+
+    hidden function removeIndicators() {
+        View.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_UP_INDICATOR)).setVisible(false);
+        View.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_DOWN_INDICATOR)).setVisible(false);
     }
 }

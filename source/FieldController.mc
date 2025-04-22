@@ -24,6 +24,8 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_GEARS => new GearsIndexField(),
         FieldTypes.FIELD_TYPE_CLOCK => new ClockField(),
         FieldTypes.FIELD_TYPE_GEARSIZE => new GearsSizeField(),
+        FieldTypes.FIELD_TYPE_PWRAVG => new AveragePowerField(),
+        FieldTypes.FIELD_TYPE_HRAVG => new AverageHeartRateField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 

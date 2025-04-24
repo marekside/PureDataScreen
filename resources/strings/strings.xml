@@ -14,7 +14,8 @@
     <string id="PWRAVG">PWRAVG</string>
     <string id="HRAVG">HRAVG</string>
     <string id="BATTERY">BATTERY</string>
-    <string id="RADAR">RADAR(BETA)</string>
+    <string id="RADAR">RADAR(KPH)</string>
+    <string id="CLIMB">CLIMB(M)</string>
 
     <string id="LAYOUT_SELECTOR">Layout selector</string>
     <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>

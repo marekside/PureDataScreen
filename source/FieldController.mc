@@ -28,6 +28,7 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_HRAVG => new AverageHeartRateField(),
         FieldTypes.FIELD_TYPE_BATTERY => new BatteryField(),
         FieldTypes.FIELD_TYPE_RADAR => new BikeRadarField(),
+        FieldTypes.FIELD_TYPE_CLIMB => new TotalAscentField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 

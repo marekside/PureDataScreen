@@ -12,16 +12,20 @@ class BikeRadarField extends BaseField {
         if (targets != null && targets.size() > 0) {
             var target = targets[0]; // Get the first target
             var speedKmh = target.speed * 3.6; // Convert m/s to kmh
-            var value = (Math.round(speedKmh * 10) / 10).format("%d");
+            var value = (Math.round(speedKmh * 10) / 10);
 
-            if (target.threatSide == AntPlus.THREAT_SIDE_LEFT) {
-                value = "<-" + value;
-            } else if (target.threatSide == AntPlus.THREAT_SIDE_RIGHT) {
-                value = "->" + value;
+            if (value == 0) {
+                return new Field(layoutKey, "Free" , "");
+            }
+
+            if (info has :currentSpeed && info.currentSpeed != null) {
+                var mySpeedKmh = info.currentSpeed * 3.6; // Convert m/s to km/h
+                var myRoundedDecimalNumber = (Math.round(speedKmh * 10) / 10);
+                value = value + myRoundedDecimalNumber;
             }
 
             bikeRadar = null;
-            return new Field(layoutKey, value , "");
+            return new Field(layoutKey, value.format("%d") , "");
         } else {
             bikeRadar = null;
             return new Field(layoutKey, "N/A", "");

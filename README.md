@@ -1,5 +1,7 @@
 # PureDataScreen
 
+![PureDataScreen Project Logo](resources/drawables/HeroImage.png "PureDataScreen Project Logo")
+
 ## About PureDataScreen
 
 A clean data field for Wahoo nostalgic ;)

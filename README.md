@@ -35,8 +35,6 @@ To contribute to PureDataScreen, you'll need:
     git clone https://github.com/marekside/PureDataScreen.git
     ```
 
-### Usage
-
 ## Contributing
 
 We welcome contributions to PureDataScreen! If you'd like to contribute, please follow these steps:

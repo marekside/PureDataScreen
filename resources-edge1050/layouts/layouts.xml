@@ -1,0 +1,76 @@
+<layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <!-- Layouts used for the for the four quadrants. -->
+    <layout id="WahooLayout16">
+        <drawable class="Background" />
+        <drawable id="Grid16" />
+        <drawable id="averageUp" />
+        <drawable id="averageDown" />
+        
+        <!-- Big quadrant -->
+        <label id="FIELD1" x="98%" y="2%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD1_value" x="90%" y="1%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_400" />
+        <label id="FIELD1_decimal" x="98%" y="8%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_100" />
+        
+        <!-- 1st Small number quadrant -->
+        <label id="FIELD2" x="48%" y="42%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD2_value" x="44%" y="45%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD2_decimal" x="48%" y="47%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 2nd Small number quadrant -->
+        <label id="FIELD3" x="98%" y="42%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD3_value" x="94%" y="45%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD3_decimal" x="98%" y="47%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 3rd Small number quadrant -->
+        <label id="FIELD4" x="48%" y="62%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD4_value" x="44%" y="65%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD4_decimal" x="48%" y="67%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 4th Small number quadrant -->
+        <label id="FIELD5" x="98%" y="62%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD5_value" x="94%" y="65%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD5_decimal" x="98%" y="67%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 5th Small number quadrant -->
+        <label id="FIELD6" x="48%" y="82%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD6_value" x="44%" y="85%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD6_decimal" x="48%" y="87%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 6th Small number quadrant -->
+        <label id="FIELD7" x="98%" y="82%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD7_value" x="94%" y="85%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD7_decimal" x="98%" y="87%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+    </layout>
+
+    <layout id="WahooLayout14">
+        <drawable class="Background" />
+        <drawable id="Grid14" />
+        <drawable id="averageUp" />
+        <drawable id="averageDown" />
+
+        <!-- Big quadrant -->
+        <label id="FIELD1" x="98%" y="2%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD1_value" x="88%" y="2%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_400" />
+        <label id="FIELD1_decimal" x="98%" y="10%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_100" />
+        
+        <!-- 1st Small number quadrant -->
+        <label id="FIELD2" x="48%" y="52%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD2_value" x="43%" y="56%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD2_decimal" x="48%" y="58%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 2nd Small number quadrant -->
+        <label id="FIELD3" x="98%" y="52%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD3_value" x="93%" y="56%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD3_decimal" x="98%" y="58%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 3rd Small number quadrant -->
+        <label id="FIELD4" x="48%" y="77%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD4_value" x="43%" y="81%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD4_decimal" x="48%" y="83%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        
+        <!-- 4th Small number quadrant -->
+        <label id="FIELD5" x="98%" y="77%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+        <label id="FIELD5_value" x="93%" y="81%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_150" />
+        <label id="FIELD5_decimal" x="98%" y="83%" color="Graphics.COLOR_BLACK" justification="Graphics.TEXT_JUSTIFY_RIGHT" font="@Fonts.Bebas_60" />
+    </layout>
+</layouts>

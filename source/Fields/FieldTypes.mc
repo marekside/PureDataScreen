@@ -21,6 +21,8 @@ public class FieldTypes {
         FIELD_TYPE_BATTERY = 14,
         FIELD_TYPE_RADAR = 15,
         FIELD_TYPE_CLIMB = 16,
+        FIELD_TYPE_NAVIGATION = 17,
+        FIELD_TYPE_GRADE = 18,
     }
 
     public static function getFieldByType(fieldType as String) as String {
@@ -57,6 +59,10 @@ public class FieldTypes {
                 return WatchUi.loadResource(Rez.Strings.RADAR);
             case FIELD_TYPE_CLIMB:
                 return WatchUi.loadResource(Rez.Strings.CLIMB);    
+            case FIELD_TYPE_NAVIGATION:
+                return WatchUi.loadResource(Rez.Strings.NAV);
+            case FIELD_TYPE_GRADE:
+                return WatchUi.loadResource(Rez.Strings.GRADE);
             default:
                 return "";
         }

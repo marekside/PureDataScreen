@@ -1,6 +1,7 @@
 import Toybox.Activity;
 import Toybox.Graphics;
 import Toybox.Lang;
+import Toybox.Math;
 import Toybox.WatchUi;
 import Toybox.AntPlus;
 using Toybox.System;
@@ -29,6 +30,8 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_BATTERY => new BatteryField(),
         FieldTypes.FIELD_TYPE_RADAR => new BikeRadarField(),
         FieldTypes.FIELD_TYPE_CLIMB => new TotalAscentField(),
+        FieldTypes.FIELD_TYPE_NAVIGATION => new NavigationField(),
+        FieldTypes.FIELD_TYPE_GRADE => new GradeField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 
@@ -71,7 +74,7 @@ class FieldsController {
             var field = myFieldToValueMapping.get(keys[i]);
 
             if (field != null) {
-                if (field.Decimal.equals("")) {
+                if (field.Angle == null && field.Decimal.equals("")) {
                     layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
                 }
 
@@ -79,6 +82,45 @@ class FieldsController {
                 redrawField(layoutResourceDecimal, field.Decimal);
             }
         }
+    }
+
+    // Must be called after View.onUpdate(dc), otherwise the background/layout draw would paint over the arrows.
+    public function drawNavigationArrows(dc as Dc) as Void {
+        var keys = myFieldToValueMapping.keys();
+        for (var i = 0; i < keys.size(); i++) {
+            var field = myFieldToValueMapping.get(keys[i]);
+            if (field != null && field.Angle != null) {
+                var anchor = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
+                drawNavigationArrow(dc, anchor, field.Angle);
+            }
+        }
+    }
+
+    // Draws a small triangle at the given anchor's position, rotated to point at the relative bearing (0 = straight ahead).
+    hidden function drawNavigationArrow(dc as Dc, anchor as Text, angle as Float) as Void {
+        var cx = anchor.locX;
+        var cy = anchor.locY;
+        var size = 10;
+        var points = [
+            [0, -size],
+            [-size * 0.6, size * 0.6],
+            [size * 0.6, size * 0.6],
+        ];
+        var cosA = Math.cos(angle);
+        var sinA = Math.sin(angle);
+        var rotated = new [3];
+        for (var i = 0; i < 3; i++) {
+            var px = points[i][0];
+            var py = points[i][1];
+            rotated[i] = [cx + (px * cosA - py * sinA), cy + (px * sinA + py * cosA)];
+        }
+
+        if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        } else {
+            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
+        }
+        dc.fillPolygon(rotated);
     }
 
     hidden function redrawField(resource as Text, value as String) as Void {

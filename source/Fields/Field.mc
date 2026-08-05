@@ -9,6 +9,8 @@ class Field {
     public var Name = "";
     public var BackgroundColor = Graphics.COLOR_WHITE;
     public var TextColor = Graphics.COLOR_BLACK;
+    // Relative bearing in radians to draw a turn arrow; null when not applicable.
+    public var Angle = null;
 
     public function initialize(name as String, value as String, decimal as String) {
         Name = name;

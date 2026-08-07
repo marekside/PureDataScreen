@@ -17,7 +17,7 @@ class GradeField extends BaseField {
             if (myPreviousDistance != null) {
                 var deltaDistance = distance - myPreviousDistance;
                 // Only recompute once enough distance has accumulated, to avoid noisy spikes while nearly stationary.
-                if (deltaDistance >= 5.0) {
+                if (deltaDistance >= 30.0) {
                     myLastGrade = ((altitude - myPreviousAltitude) / deltaDistance) * 100.0;
                     myPreviousAltitude = altitude;
                     myPreviousDistance = distance;

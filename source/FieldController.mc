@@ -1,7 +1,6 @@
 import Toybox.Activity;
 import Toybox.Graphics;
 import Toybox.Lang;
-import Toybox.Math;
 import Toybox.WatchUi;
 import Toybox.AntPlus;
 using Toybox.System;
@@ -74,7 +73,7 @@ class FieldsController {
             var field = myFieldToValueMapping.get(keys[i]);
 
             if (field != null) {
-                if (field.Angle == null && field.Decimal.equals("")) {
+                if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
                     layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
                 }
 
@@ -84,43 +83,28 @@ class FieldsController {
         }
     }
 
-    // Must be called after View.onUpdate(dc), otherwise the background/layout draw would paint over the arrows.
-    public function drawNavigationArrows(dc as Dc) as Void {
+    // Must be called after View.onUpdate(dc), otherwise the background/layout draw would paint over any custom graphics.
+    public function drawFieldGraphics(dc as Dc) as Void {
+        var foregroundColor = myDataField.getBackgroundColor() == Graphics.COLOR_BLACK ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
+
         var keys = myFieldToValueMapping.keys();
         for (var i = 0; i < keys.size(); i++) {
             var field = myFieldToValueMapping.get(keys[i]);
-            if (field != null && field.Angle != null) {
-                var anchor = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
-                drawNavigationArrow(dc, anchor, field.Angle);
+            if (field != null && field.hasCustomDrawing()) {
+                var valueLabel = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
+                var fontResource = keys[i].equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
+                var font = WatchUi.loadResource(fontResource);
+
+                var textWidth = dc.getTextWidthInPixels(field.Value, font);
+                var fontHeight = dc.getFontHeight(font);
+
+                var size = keys[i].equals("FIELD1") ? 18 : 10;
+                var cx = valueLabel.locX - textWidth - size - 8;
+                var cy = valueLabel.locY + (fontHeight / 3);
+
+                field.draw(dc, cx, cy, size, foregroundColor);
             }
         }
-    }
-
-    // Draws a small triangle at the given anchor's position, rotated to point at the relative bearing (0 = straight ahead).
-    hidden function drawNavigationArrow(dc as Dc, anchor as Text, angle as Float) as Void {
-        var cx = anchor.locX;
-        var cy = anchor.locY;
-        var size = 10;
-        var points = [
-            [0, -size],
-            [-size * 0.6, size * 0.6],
-            [size * 0.6, size * 0.6],
-        ];
-        var cosA = Math.cos(angle);
-        var sinA = Math.sin(angle);
-        var rotated = new [3];
-        for (var i = 0; i < 3; i++) {
-            var px = points[i][0];
-            var py = points[i][1];
-            rotated[i] = [cx + (px * cosA - py * sinA), cy + (px * sinA + py * cosA)];
-        }
-
-        if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
-            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        } else {
-            dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_TRANSPARENT);
-        }
-        dc.fillPolygon(rotated);
     }
 
     hidden function redrawField(resource as Text, value as String) as Void {

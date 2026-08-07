@@ -27,7 +27,7 @@ class GradeField extends BaseField {
                 myPreviousDistance = distance;
             }
 
-            return new Field(layoutKey, myLastGrade.format("%.1f") + "%", "");
+            return new Field(layoutKey, myLastGrade.format("%.0f") + "%", "");
         }
         return new Field(layoutKey, "N/A", "");
     }

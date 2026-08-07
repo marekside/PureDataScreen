@@ -53,6 +53,9 @@ class PureDataScreenView extends WatchUi.DataField {
 
         // Call parent's onUpdate(dc) to redraw the layout
         View.onUpdate(dc);
+
+        // Drawn after the layout so the background/labels don't paint over any custom graphics.
+        myFieldController.drawFieldGraphics(dc);
     }
 
     hidden function handleLayoutChange(dc as Dc) {

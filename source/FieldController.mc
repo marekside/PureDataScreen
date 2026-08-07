@@ -29,6 +29,8 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_BATTERY => new BatteryField(),
         FieldTypes.FIELD_TYPE_RADAR => new BikeRadarField(),
         FieldTypes.FIELD_TYPE_CLIMB => new TotalAscentField(),
+        FieldTypes.FIELD_TYPE_NAVIGATION => new NavigationField(),
+        FieldTypes.FIELD_TYPE_GRADE => new GradeField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 
@@ -71,12 +73,36 @@ class FieldsController {
             var field = myFieldToValueMapping.get(keys[i]);
 
             if (field != null) {
-                if (field.Decimal.equals("")) {
+                if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
                     layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
                 }
 
                 redrawField(layoutResourceValue, field.Value);
                 redrawField(layoutResourceDecimal, field.Decimal);
+            }
+        }
+    }
+
+    // Must be called after View.onUpdate(dc), otherwise the background/layout draw would paint over any custom graphics.
+    public function drawFieldGraphics(dc as Dc) as Void {
+        var foregroundColor = myDataField.getBackgroundColor() == Graphics.COLOR_BLACK ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
+
+        var keys = myFieldToValueMapping.keys();
+        for (var i = 0; i < keys.size(); i++) {
+            var field = myFieldToValueMapping.get(keys[i]);
+            if (field != null && field.hasCustomDrawing()) {
+                var valueLabel = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
+                var fontResource = keys[i].equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
+                var font = WatchUi.loadResource(fontResource);
+
+                var textWidth = dc.getTextWidthInPixels(field.Value, font);
+                var fontHeight = dc.getFontHeight(font);
+
+                var size = keys[i].equals("FIELD1") ? 18 : 10;
+                var cx = valueLabel.locX - textWidth - size - 8;
+                var cy = valueLabel.locY + (fontHeight / 3);
+
+                field.draw(dc, cx, cy, size, foregroundColor);
             }
         }
     }

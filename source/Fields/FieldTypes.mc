@@ -23,6 +23,7 @@ public class FieldTypes {
         FIELD_TYPE_CLIMB = 16,
         FIELD_TYPE_NAVIGATION = 17,
         FIELD_TYPE_GRADE = 18,
+        FIELD_TYPE_STAMINA = 19,
     }
 
     public static function getFieldByType(fieldType as String) as String {
@@ -63,6 +64,8 @@ public class FieldTypes {
                 return WatchUi.loadResource(Rez.Strings.NAV);
             case FIELD_TYPE_GRADE:
                 return WatchUi.loadResource(Rez.Strings.GRADE);
+            case FIELD_TYPE_STAMINA:
+                return WatchUi.loadResource(Rez.Strings.STAMINA);
             default:
                 return "";
         }

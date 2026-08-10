@@ -31,6 +31,7 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_CLIMB => new TotalAscentField(),
         FieldTypes.FIELD_TYPE_NAVIGATION => new NavigationField(),
         FieldTypes.FIELD_TYPE_GRADE => new GradeField(),
+        FieldTypes.FIELD_TYPE_STAMINA => new StaminaField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 

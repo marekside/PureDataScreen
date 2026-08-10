@@ -72,7 +72,11 @@ Without `monkeydo`, the simulator window stays blank even though the .prg is loa
   `View.onUpdate(dc)` so the layout's full-screen `Background` drawable doesn't cover it.
 - **`FieldController.redrawField(...)`** — honors `field.TextColor` when not
   `COLOR_TRANSPARENT`; otherwise uses black/white based on the datafield bg color.
-- **HR zones** (HeartRateField): ≤130 green/black, 131-160 yellow/black, >160 red/white.
-- **BikeRadar zones** (BikeRadarField): closing speed > 60 km/h red/white, ≤60 yellow/black.
-- Avoid subclassing `Field` with a different constructor signature — it broke rendering at
-  runtime (plain `Field` + setters works fine).
+- **HR zones** (HeartRateField): pulled from `UserProfile.getHeartRateZones(getCurrentSport())` returning `[minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5]`. Five-color palette (Blue/Green/Yellow/Orange/Red), fallback to hardcoded 130/160 if zones unavailable.
+- **Power zones** (PowerField): same pattern via `UserProfile.getPowerZones(SPORT_CYCLING)`, fallback to 200/300 W thresholds.
+- **Stamina field** (StaminaField): rolling-window W'bal-lite via EWMA-smoothed ratio of effort (power preferred, HR fallback) vs threshold (FTP from `getFunctionalThresholdPower`, or LTHR from top of HR zone 4). Trend arrow via custom-draw hook. Color coding: >50 green, 20-50 yellow, <20 red. Empty state shows ASCII `-` (Bebas has no glyph for `—`). Trend arrows use ASCII `+`/`-` for the same reason.
+- **Drawables don't render Unicode glyphs** — Bebas_* fonts only ship ASCII + digits. Use `+`/`-` for up/down trends and `-` for empty values. `dc.drawText(x, y, font, text, justification)` is the correct 5-arg signature; `FONT_MEDIUM` doesn't guarantee arrow glyphs on Edge either, so ASCII is the safer choice.
+
+## Future ideas (not yet implemented)
+
+- **Body Battery clamp for Stamina**: `Toybox.SensorHistory.getBodyBatteryHistory({:period => 1})` returns a `SensorHistoryIterator` whose `sample.data` is the 0-100 value. Use as upper bound: `displayed = min(myComputedStamina, bodyBattery)`. Gate via `Toybox has :SensorHistory` and `Toybox.SensorHistory has :getBodyBatteryHistory` so older devices fail gracefully. Body Battery is supported on Edge 1040/850/1050 but not Edge 540/550/840.

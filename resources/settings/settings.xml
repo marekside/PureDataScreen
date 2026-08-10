@@ -28,6 +28,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>
     </setting>
     <setting propertyKey="@Properties.field2" title="@Strings.FIELD2" prompt="@Strings.FIELD2">
@@ -50,6 +51,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>
     </setting>
     <setting propertyKey="@Properties.field3" title="@Strings.FIELD3" prompt="@Strings.FIELD3">
@@ -72,6 +74,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>
     </setting>
     <setting propertyKey="@Properties.field4" title="@Strings.FIELD4" prompt="@Strings.FIELD4">
@@ -94,6 +97,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>
     </setting>
     <setting propertyKey="@Properties.field5" title="@Strings.FIELD5" prompt="@Strings.FIELD5">
@@ -116,6 +120,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>
     </setting>
     <setting propertyKey="@Properties.field6" title="@Strings.FIELD6" prompt="@Strings.FIELD6">
@@ -138,6 +143,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>
     </setting>
     <setting propertyKey="@Properties.field7" title="@Strings.FIELD7" prompt="@Strings.FIELD7">
@@ -160,6 +166,7 @@
             <listEntry value="16">@Strings.CLIMB</listEntry>
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
+            <listEntry value="19">@Strings.STAMINA</listEntry>
         </settingConfig>    
     </setting>
 </settings>

@@ -114,10 +114,17 @@ class PowerField extends BaseField {
     // Loads the 6 power zone thresholds from the user profile for cycling.
     // Returns null when zones are unavailable.
     hidden function loadZones() as Array? {
-        var zones = UserProfile.getPowerZones(Activity.SPORT_CYCLING);
-        if (zones == null || zones.size() < 6) {
+        try {
+            if (!(UserProfile has :getPowerZones)) {
+                return null;
+            }
+            var zones = UserProfile.getPowerZones(Activity.SPORT_CYCLING);
+            if (zones == null || zones.size() < 6) {
+                return null;
+            }
+            return zones;
+        } catch (ex) {
             return null;
         }
-        return zones;
     }
 }

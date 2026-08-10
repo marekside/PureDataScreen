@@ -116,9 +116,14 @@ class StaminaField extends BaseField {
     }
 
     hidden function getFtp() as Number {
-        var ftp = UserProfile.getFunctionalThresholdPower(Activity.SPORT_CYCLING);
-        if (ftp != null && ftp > 0) {
-            return ftp;
+        try {
+            if (UserProfile has :getFunctionalThresholdPower) {
+                var ftp = UserProfile.getFunctionalThresholdPower(Activity.SPORT_CYCLING);
+                if (ftp != null && ftp > 0) {
+                    return ftp;
+                }
+            }
+        } catch (ex) {
         }
         return 150;
     }
@@ -126,9 +131,18 @@ class StaminaField extends BaseField {
     // LTHR ≈ top of HR zone 4 (the maxZ4 threshold in the [minZ1, maxZ1..maxZ5] array).
     // Falls back to a sensible default if zones are unavailable.
     hidden function getLthr() as Number {
-        var zones = UserProfile.getHeartRateZones(UserProfile.getCurrentSport());
-        if (zones != null && zones.size() >= 5 && zones[4] != null && zones[4] > 0) {
-            return zones[4];
+        try {
+            if (UserProfile has :getHeartRateZones) {
+                var sport = null;
+                if (UserProfile has :getCurrentSport) {
+                    sport = UserProfile.getCurrentSport();
+                }
+                var zones = UserProfile.getHeartRateZones(sport);
+                if (zones != null && zones.size() >= 5 && zones[4] != null && zones[4] > 0) {
+                    return zones[4];
+                }
+            }
+        } catch (ex) {
         }
         return 170;
     }

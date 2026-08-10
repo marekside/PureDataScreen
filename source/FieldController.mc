@@ -69,17 +69,21 @@ class FieldsController {
     public function redrawFieldValue() as Void {
         var keys = myFieldToValueMapping.keys();
         for (var i = 0; i < keys.size(); i++) {
-            var layoutResourceValue = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
-            var layoutResourceDecimal = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
-            var field = myFieldToValueMapping.get(keys[i]);
+            try {
+                var layoutResourceValue = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
+                var layoutResourceDecimal = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
+                var field = myFieldToValueMapping.get(keys[i]);
 
-            if (field != null) {
-                if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
-                    layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
+                if (field != null) {
+                    if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
+                        layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
+                    }
+
+                    redrawField(layoutResourceValue, field.Value, field.TextColor);
+                    redrawField(layoutResourceDecimal, field.Decimal, field.TextColor);
                 }
-
-                redrawField(layoutResourceValue, field.Value, field.TextColor);
-                redrawField(layoutResourceDecimal, field.Decimal, field.TextColor);
+            } catch (ex) {
+                System.println("redrawFieldValue failed for " + keys[i] + ": " + ex.getErrorMessage());
             }
         }
     }
@@ -203,10 +207,15 @@ class FieldsController {
             var strategy = fieldStrategyMap.get(assignedFieldType);
 
             var fieldToStore;
-            if (strategy != null) {
-                fieldToStore = strategy.computeField(info, layoutKey, myDataField);
-            } else {
-                fieldToStore = new Field(layoutKey, "0", "0"); // Default fallback
+            try {
+                if (strategy != null) {
+                    fieldToStore = strategy.computeField(info, layoutKey, myDataField);
+                } else {
+                    fieldToStore = new Field(layoutKey, "0", "0"); // Default fallback
+                }
+            } catch (ex) {
+                System.println("Field '" + layoutKey + "' computeField failed: " + ex.getErrorMessage());
+                fieldToStore = new Field(layoutKey, "0", "");
             }
 
             storeFieldValue(layoutKey, fieldToStore);

@@ -114,11 +114,21 @@ class HeartRateField extends BaseField {
     // Loads the 6 HR zone thresholds from the user profile for the current sport.
     // Returns null when zones are unavailable.
     hidden function loadZones() as Array? {
-        var sport = UserProfile.getCurrentSport();
-        var zones = UserProfile.getHeartRateZones(sport);
-        if (zones == null || zones.size() < 6) {
+        try {
+            if (!(UserProfile has :getHeartRateZones)) {
+                return null;
+            }
+            var sport = null;
+            if (UserProfile has :getCurrentSport) {
+                sport = UserProfile.getCurrentSport();
+            }
+            var zones = UserProfile.getHeartRateZones(sport);
+            if (zones == null || zones.size() < 6) {
+                return null;
+            }
+            return zones;
+        } catch (ex) {
             return null;
         }
-        return zones;
     }
 }

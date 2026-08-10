@@ -51,8 +51,12 @@ class PureDataScreenView extends WatchUi.DataField {
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
         myFieldController.redrawFieldValue();
 
-        // Call parent's onUpdate(dc) to redraw the layout
+        // Call parent's onUpdate(dc) to redraw the layout (Background + grid + labels).
         View.onUpdate(dc);
+
+        // Painted AFTER the layout so the rect isn't covered by the layout's own Background.
+        // The controller re-draws each alert field's labels on top of its fill.
+        myFieldController.paintFieldBackgrounds(dc);
 
         // Drawn after the layout so the background/labels don't paint over any custom graphics.
         myFieldController.drawFieldGraphics(dc);

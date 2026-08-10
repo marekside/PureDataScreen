@@ -7,8 +7,8 @@ class Field {
     public var Value = "";
     public var Decimal = "";
     public var Name = "";
-    public var BackgroundColor = Graphics.COLOR_WHITE;
     public var TextColor = Graphics.COLOR_BLACK;
+    public var BackgroundColor = Graphics.COLOR_TRANSPARENT;
 
     public function initialize(name as String, value as String, decimal as String) {
         Name = name;
@@ -16,13 +16,26 @@ class Field {
         Decimal = decimal;
     }
 
-    // Override to reserve the decimal label's screen space for custom graphics instead of text.
+    public function setTextColor(color) as Void {
+        TextColor = color;
+    }
+
+    public function setBackgroundColor(color) as Void {
+        BackgroundColor = color;
+    }
+
     public function hasCustomDrawing() as Boolean {
         return false;
     }
 
-    // Override to draw custom graphics at (cx, cy); called after the layout/background has been drawn.
     public function draw(dc as Dc, cx as Numeric, cy as Numeric, size as Numeric, foregroundColor as ColorType) as Void {
-        // No-op by default.
+    }
+
+    public function hasCustomBackground() as Boolean {
+        return BackgroundColor != Graphics.COLOR_TRANSPARENT;
+    }
+
+    public function applyBackground(valueLabel as Text) as Void {
+        valueLabel.setBackgroundColor(BackgroundColor);
     }
 }

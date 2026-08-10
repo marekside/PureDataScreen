@@ -1,36 +1,46 @@
 import Toybox.Lang;
 import Toybox.Activity;
 import Toybox.Graphics;
-import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.AntPlus;
 
 class BikeRadarField extends BaseField {
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         var bikeRadar = new AntPlus.BikeRadar(null);
-        var targets = bikeRadar.getRadarInfo(); // Get the targets from the Bike Radar
+        var targets = bikeRadar.getRadarInfo();
         if (targets != null && targets.size() > 0) {
-            var target = targets[0]; // Get the first target
-            var carSpeedKmh = target.speed * 3.6; // Convert m/s to kmh
-            
+            var target = targets[0];
+            var carSpeedKmh = target.speed * 3.6;
+
             if (carSpeedKmh == 0 && target.threat == AntPlus.THREAT_LEVEL_NO_THREAT) {
-                return new Field(layoutKey, "Free" , "");
+                bikeRadar = null;
+                return new Field(layoutKey, "Free", "");
             }
 
             var value = carSpeedKmh;
             if (info has :currentSpeed && info.currentSpeed != null) {
-                var mySpeedKmh = info.currentSpeed * 3.6; // Convert m/s to km/h
+                var mySpeedKmh = info.currentSpeed * 3.6;
                 value = carSpeedKmh + mySpeedKmh;
             }
 
+            var label = value.format("%d");
             if (target.threat == AntPlus.THREAT_LEVEL_VEHICLE_APPROACHING) {
-                value = value.format("%d") + " >";
+                label = label + " >";
             } else if (target.threat == AntPlus.THREAT_LEVEL_VEHICLE_FAST_APPROACHING) {
-                value = value.format("%d") + " >>";
+                label = label + " >>";
+            }
+
+            var field = new Field(layoutKey, label, "");
+            if (value > 60) {
+                field.setBackgroundColor(Graphics.COLOR_RED);
+                field.setTextColor(Graphics.COLOR_WHITE);
+            } else {
+                field.setBackgroundColor(Graphics.COLOR_YELLOW);
+                field.setTextColor(Graphics.COLOR_BLACK);
             }
 
             bikeRadar = null;
-            return new Field(layoutKey, value , "");
+            return field;
         } else {
             bikeRadar = null;
             return new Field(layoutKey, "N/A", "");

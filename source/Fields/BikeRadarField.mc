@@ -24,19 +24,15 @@ class BikeRadarField extends BaseField {
             }
 
             var label = value.format("%d");
+            var field = new Field(layoutKey, label, "");
             if (target.threat == AntPlus.THREAT_LEVEL_VEHICLE_APPROACHING) {
                 label = label + " >";
-            } else if (target.threat == AntPlus.THREAT_LEVEL_VEHICLE_FAST_APPROACHING) {
-                label = label + " >>";
-            }
-
-            var field = new Field(layoutKey, label, "");
-            if (value > 60) {
-                field.setBackgroundColor(Graphics.COLOR_RED);
-                field.setTextColor(Graphics.COLOR_WHITE);
-            } else {
                 field.setBackgroundColor(Graphics.COLOR_YELLOW);
                 field.setTextColor(Graphics.COLOR_BLACK);
+            } else if (target.threat == AntPlus.THREAT_LEVEL_VEHICLE_FAST_APPROACHING) {
+                label = label + " >>";
+                field.setBackgroundColor(Graphics.COLOR_RED);
+                field.setTextColor(Graphics.COLOR_WHITE);
             }
 
             bikeRadar = null;

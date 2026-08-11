@@ -84,8 +84,8 @@ class FieldsController {
                         layoutResourceLabel.setColor(field.LabelColor);
                     }
 
-                    redrawField(layoutResourceValue, field.Value, field.TextColor);
-                    redrawField(layoutResourceDecimal, field.Decimal, field.TextColor);
+                    redrawField(layoutResourceValue, field.Value, field.TextColor, field.BackgroundColor);
+                    redrawField(layoutResourceDecimal, field.Decimal, field.TextColor, field.BackgroundColor);
                 }
             } catch (ex) {
                 System.println("redrawFieldValue failed for " + keys[i] + ": " + ex.getErrorMessage());
@@ -164,13 +164,21 @@ class FieldsController {
         }
     }
 
-    hidden function redrawField(resource as Text, value as String, textColor as ColorType) as Void {
+    hidden function redrawField(resource as Text, value as String, textColor as ColorType, backgroundColor as ColorType) as Void {
         if (textColor != null 
             && textColor != Graphics.COLOR_TRANSPARENT 
             && myDataField.getBackgroundColor() != Graphics.COLOR_BLACK) 
         {
             resource.setColor(textColor);
-        } else if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
+        }
+        else if (textColor != null 
+            && textColor != Graphics.COLOR_TRANSPARENT 
+            && myDataField.getBackgroundColor() == Graphics.COLOR_BLACK
+            && backgroundColor != Graphics.COLOR_TRANSPARENT) 
+        {
+            resource.setColor(textColor);
+        }
+        else if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
             resource.setColor(Graphics.COLOR_WHITE);
         } else {
             resource.setColor(Graphics.COLOR_BLACK);

@@ -95,12 +95,15 @@ class StaminaField extends BaseField {
         if (myStamina > 50.0) {
             field.setBackgroundColor(Graphics.COLOR_GREEN);
             field.setTextColor(Graphics.COLOR_BLACK);
+            field.setLabelColor(Graphics.COLOR_LT_GRAY);
         } else if (myStamina > 20.0) {
             field.setBackgroundColor(Graphics.COLOR_YELLOW);
             field.setTextColor(Graphics.COLOR_BLACK);
+            field.setLabelColor(Graphics.COLOR_LT_GRAY);
         } else {
             field.setBackgroundColor(Graphics.COLOR_RED);
             field.setTextColor(Graphics.COLOR_WHITE);
+            field.setLabelColor(Graphics.COLOR_WHITE);
         }
         return field;
     }

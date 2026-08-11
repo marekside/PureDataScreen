@@ -33,15 +33,17 @@ class HeartRateField extends BaseField {
 
             var hr = info.currentHeartRate;
             var colors = getColorsForHr(hr);
+            System.println("HeartRateField hr=" + hr + " colors=[" + colors[0] + "," + colors[1] + "," + colors[2] + "] zones=" + (myZones != null));
             var field = new Field(layoutKey, hr.toString(), "");
             field.setBackgroundColor(colors[0]);
             field.setTextColor(colors[1]);
+            field.setLabelColor(colors[2]);
             return field;
         }
         return new Field(layoutKey, "0", "");
     }
 
-    // Returns [bgColor, fgColor] for the given heart rate based on the user's
+    // Returns [bgColor, textColor, labelColor] for the given heart rate based on the user's
     // configured HR zones. Zones are loaded from UserProfile on first call.
     // Array layout: [minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5]
     // Zone N covers [maxZ(N-1), maxZN), with zone 1 starting at minZ1.
@@ -69,15 +71,17 @@ class HeartRateField extends BaseField {
         return fallbackColors(hr);
     }
 
-    // Returns the bg/fg colors for a zone index (0-based).
-    // Zone 1 (Easy/Recovery) -> Blue,    white text
-    // Zone 2 (Endurance)      -> Green,   black text
-    // Zone 3 (Tempo)          -> Yellow,  black text
-    // Zone 4 (Threshold)      -> Orange,  white text
-    // Zone 5 (Maximum)        -> Red,     white text
+    // Returns [bg, text, label] colors for a zone index (0-based).
+    // Zone 1 (Easy/Recovery) -> Blue,   white text, white label
+    // Zone 2 (Endurance)      -> Green,  black text, gray  label
+    // Zone 3 (Tempo)          -> Yellow, black text, gray  label
+    // Zone 4 (Threshold)      -> Orange, white text, white label
+    // Zone 5 (Maximum)        -> Red,    white text, white label
     hidden function zoneColors(zoneIndex as Number) as Array {
         var bg = zoneColor(zoneIndex);
-        return [bg, foregroundForBg(bg)];
+        var fg = foregroundForBg(bg);
+        var label = labelColorFor(bg);
+        return [bg, fg, label];
     }
 
     hidden function zoneColor(zoneIndex as Number) as ColorType {
@@ -88,27 +92,55 @@ class HeartRateField extends BaseField {
             Graphics.COLOR_ORANGE,
             Graphics.COLOR_RED,
         ];
+        System.println("zoneColor: BLUE=" + Graphics.COLOR_BLUE + " GREEN=" + Graphics.COLOR_GREEN + " YELLOW=" + Graphics.COLOR_YELLOW + " ORANGE=" + Graphics.COLOR_ORANGE + " RED=" + Graphics.COLOR_RED + " WHITE=" + Graphics.COLOR_WHITE);
         if (zoneIndex < 0 || zoneIndex >= palette.size()) {
             return Graphics.COLOR_GREEN;
         }
         return palette[zoneIndex];
     }
 
+// Returns WHITE if the bg color is "dark" (low luminance), BLACK if "light" (high luminance).
+    // Uses a luminance check rather than equality against named colors so it works even if
+    // the device's color encoding (e.g. RGB565 on AMOLED Edges) doesn't exactly match the
+    // standard 24-bit color constants.
     hidden function foregroundForBg(bg as ColorType) as ColorType {
-        if (bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_RED || bg == Graphics.COLOR_ORANGE) {
+        if (isDarkColor(bg)) {
             return Graphics.COLOR_WHITE;
         }
         return Graphics.COLOR_BLACK;
     }
 
+    hidden function labelColorFor(bg as ColorType) as ColorType {
+        // White title for the dark alert bgs (blue/orange/red/yellow); LIGHT_GRAY otherwise.
+        // Explicit color match — the luminance heuristic on HeartRateField is unreliable
+        // across devices whose color encoding (RGB565, AMOLED palette swaps) doesn't
+        // exactly match the 24-bit constants. COLOR_YELLOW (0xFFAA00) renders as a
+        // saturated orange-amber on Edge devices, so it needs the same white label.
+        if (bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_ORANGE || bg == Graphics.COLOR_RED || bg == Graphics.COLOR_YELLOW || bg == Graphics.COLOR_BLACK) {
+            return Graphics.COLOR_WHITE;
+        }
+        return Graphics.COLOR_LT_GRAY;
+    }
+
+    // Approximate luminance test: extract R, G, B from a 24-bit RGB value and
+    // check if the average is below 50%. Works regardless of color encoding.
+    hidden function isDarkColor(c as ColorType) as Boolean {
+        var r = (c >> 16) & 0xFF;
+        var g = (c >> 8) & 0xFF;
+        var b = c & 0xFF;
+        // Luminance using standard ITU-R weights
+        var lum = (r * 299 + g * 587 + b * 114) / 1000;
+        return lum < 128;
+    }
+
     // Used when zones are unavailable (older devices, missing permission).
     hidden function fallbackColors(hr as Number) as Array {
         if (hr > 160) {
-            return [Graphics.COLOR_RED, Graphics.COLOR_WHITE];
+            return [Graphics.COLOR_RED, Graphics.COLOR_WHITE, Graphics.COLOR_WHITE];
         } else if (hr > 130) {
-            return [Graphics.COLOR_YELLOW, Graphics.COLOR_BLACK];
+            return [Graphics.COLOR_YELLOW, Graphics.COLOR_BLACK, Graphics.COLOR_LT_GRAY];
         }
-        return [Graphics.COLOR_GREEN, Graphics.COLOR_BLACK];
+        return [Graphics.COLOR_GREEN, Graphics.COLOR_BLACK, Graphics.COLOR_LT_GRAY];
     }
 
     // Loads the 6 HR zone thresholds from the user profile for the current sport.

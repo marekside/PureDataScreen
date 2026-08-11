@@ -9,6 +9,7 @@ class Field {
     public var Name = "";
     public var TextColor = Graphics.COLOR_BLACK;
     public var BackgroundColor = Graphics.COLOR_TRANSPARENT;
+    public var LabelColor = Graphics.COLOR_LT_GRAY;
 
     public function initialize(name as String, value as String, decimal as String) {
         Name = name;
@@ -24,6 +25,10 @@ class Field {
         BackgroundColor = color;
     }
 
+    public function setLabelColor(color) as Void {
+        LabelColor = color;
+    }
+
     public function hasCustomDrawing() as Boolean {
         return false;
     }
@@ -33,9 +38,5 @@ class Field {
 
     public function hasCustomBackground() as Boolean {
         return BackgroundColor != Graphics.COLOR_TRANSPARENT;
-    }
-
-    public function applyBackground(valueLabel as Text) as Void {
-        valueLabel.setBackgroundColor(BackgroundColor);
     }
 }

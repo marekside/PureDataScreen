@@ -145,17 +145,40 @@ class FieldsController {
     }
 
     hidden function redrawFieldDrawables(fieldKey as String, dc as Dc) as Void {
-        var label = myDataField.findDrawableById(fieldKey);
-        if (label != null) {
-            label.draw(dc);
+        var field = myFieldToValueMapping.get(fieldKey);
+        var labelColor = field != null ? field.LabelColor : Graphics.COLOR_LT_GRAY;
+        var valueColor = field != null ? field.TextColor : Graphics.COLOR_TRANSPARENT;
+
+        // All three labels (title / value / decimal) are drawn manually with dc.drawText because
+        // Text drawable's setColor() isn't reliably honored by draw() across all targets / the simulator.
+        var fieldType = myFieldTolayoutMapping.get(fieldKey);
+        var labelText = FieldTypes.getFieldByType(fieldType);
+        var labelDrawable = myDataField.findDrawableById(fieldKey);
+        if (labelDrawable != null) {
+            // Font matches the layout XML: Bebas_60 for FIELD1, Bebas_40 for others.
+            var labelFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_60 : Rez.Fonts.Bebas_40;
+            var labelFont = WatchUi.loadResource(labelFontResource);
+            dc.setColor(labelColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(labelDrawable.locX, labelDrawable.locY, labelFont, labelText, Graphics.TEXT_JUSTIFY_RIGHT);
         }
-        var valueLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX));
+
+        var valueLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
         if (valueLabel != null) {
-            valueLabel.draw(dc);
+            // Font matches the layout XML: Bebas_300 for FIELD1, Bebas_100 for others.
+            var valueFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
+            var valueFont = WatchUi.loadResource(valueFontResource);
+            System.println("redrawFieldDrawables: " + fieldKey + " valueColor=" + valueColor + " value=\"" + field.Value + "\" font=" + valueFont + " locX=" + valueLabel.locX + " locY=" + valueLabel.locY);
+            dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(valueLabel.locX, valueLabel.locY, valueFont, field.Value, Graphics.TEXT_JUSTIFY_RIGHT);
         }
-        var decimalLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX));
+
+        var decimalLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
         if (decimalLabel != null) {
-            decimalLabel.draw(dc);
+            // Font matches the layout XML: Bebas_100 for FIELD1, Bebas_40 for others.
+            var decimalFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_100 : Rez.Fonts.Bebas_40;
+            var decimalFont = WatchUi.loadResource(decimalFontResource);
+            dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(decimalLabel.locX, decimalLabel.locY, decimalFont, field.Decimal, Graphics.TEXT_JUSTIFY_RIGHT);
         }
     }
 

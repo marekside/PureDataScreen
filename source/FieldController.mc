@@ -165,7 +165,10 @@ class FieldsController {
     }
 
     hidden function redrawField(resource as Text, value as String, textColor as ColorType) as Void {
-        if (textColor != null && textColor != Graphics.COLOR_TRANSPARENT) {
+        if (textColor != null 
+            && textColor != Graphics.COLOR_TRANSPARENT 
+            && myDataField.getBackgroundColor() != Graphics.COLOR_BLACK) 
+        {
             resource.setColor(textColor);
         } else if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
             resource.setColor(Graphics.COLOR_WHITE);

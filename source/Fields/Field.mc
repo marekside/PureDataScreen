@@ -29,13 +29,6 @@ class Field {
         LabelColor = color;
     }
 
-    public function hasCustomDrawing() as Boolean {
-        return false;
-    }
-
-    public function draw(dc as Dc, cx as Numeric, cy as Numeric, size as Numeric, foregroundColor as ColorType) as Void {
-    }
-
     public function hasCustomBackground() as Boolean {
         return BackgroundColor != Graphics.COLOR_TRANSPARENT;
     }

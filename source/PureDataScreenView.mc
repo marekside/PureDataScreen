@@ -57,9 +57,6 @@ class PureDataScreenView extends WatchUi.DataField {
         // Painted AFTER the layout so the rect isn't covered by the layout's own Background.
         // The controller re-draws each alert field's labels on top of its fill.
         myFieldController.paintFieldBackgrounds(dc);
-
-        // Drawn after the layout so the background/labels don't paint over any custom graphics.
-        myFieldController.drawFieldGraphics(dc);
     }
 
     hidden function handleLayoutChange(dc as Dc) {

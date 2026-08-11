@@ -70,13 +70,18 @@ class FieldsController {
         var keys = myFieldToValueMapping.keys();
         for (var i = 0; i < keys.size(); i++) {
             try {
+                var layoutResourceLabel = myDataField.findDrawableById(keys[i]) as Text;
                 var layoutResourceValue = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
                 var layoutResourceDecimal = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
                 var field = myFieldToValueMapping.get(keys[i]);
 
                 if (field != null) {
-                    if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
+                    if (field.Decimal.equals("")) {
                         layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
+                    }
+
+                    if (layoutResourceLabel != null && field.LabelColor != null && field.LabelColor != Graphics.COLOR_TRANSPARENT) {
+                        layoutResourceLabel.setColor(field.LabelColor);
                     }
 
                     redrawField(layoutResourceValue, field.Value, field.TextColor);
@@ -113,8 +118,10 @@ class FieldsController {
             dc.setColor(field.BackgroundColor, field.BackgroundColor);
             dc.fillRectangle(rect[0], rect[1], rect[2], rect[3]);
 
-            // Re-draw the field's labels on top of the alert bg fill.
-            redrawFieldDrawables(keys[i], dc);
+            // Re-draw the field's labels on top of the alert bg fill. The layout's Text drawables
+            // already carry the correct fonts (Bebas_150, Bebas_60, Bebas_30, etc.) and positions,
+            // and redrawFieldValue() has already pushed the right text and color to each one.
+            redrawFieldDrawablesOnTop(keys[i], dc);
         }
     }
 
@@ -144,64 +151,15 @@ class FieldsController {
         return [(p[0] * screenW).toNumber(), (p[1] * screenH).toNumber(), (p[2] * screenW).toNumber(), (p[3] * screenH).toNumber()];
     }
 
-    hidden function redrawFieldDrawables(fieldKey as String, dc as Dc) as Void {
-        var field = myFieldToValueMapping.get(fieldKey);
-        var labelColor = field != null ? field.LabelColor : Graphics.COLOR_LT_GRAY;
-        var valueColor = field != null ? field.TextColor : Graphics.COLOR_TRANSPARENT;
-
-        // All three labels (title / value / decimal) are drawn manually with dc.drawText because
-        // Text drawable's setColor() isn't reliably honored by draw() across all targets / the simulator.
-        var fieldType = myFieldTolayoutMapping.get(fieldKey);
-        var labelText = FieldTypes.getFieldByType(fieldType);
-        var labelDrawable = myDataField.findDrawableById(fieldKey);
-        if (labelDrawable != null) {
-            // Font matches the layout XML: Bebas_60 for FIELD1, Bebas_40 for others.
-            var labelFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_60 : Rez.Fonts.Bebas_40;
-            var labelFont = WatchUi.loadResource(labelFontResource);
-            dc.setColor(labelColor, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(labelDrawable.locX, labelDrawable.locY, labelFont, labelText, Graphics.TEXT_JUSTIFY_RIGHT);
-        }
-
-        var valueLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
-        if (valueLabel != null) {
-            // Font matches the layout XML: Bebas_300 for FIELD1, Bebas_100 for others.
-            var valueFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
-            var valueFont = WatchUi.loadResource(valueFontResource);
-            //System.println("redrawFieldDrawables: " + fieldKey + " valueColor=" + valueColor + " value=\"" + field.Value + "\" font=" + valueFont + " locX=" + valueLabel.locX + " locY=" + valueLabel.locY);
-            dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(valueLabel.locX, valueLabel.locY, valueFont, field.Value, Graphics.TEXT_JUSTIFY_RIGHT);
-        }
-
-        var decimalLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
-        if (decimalLabel != null) {
-            // Font matches the layout XML: Bebas_100 for FIELD1, Bebas_40 for others.
-            var decimalFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_100 : Rez.Fonts.Bebas_40;
-            var decimalFont = WatchUi.loadResource(decimalFontResource);
-            dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
-            dc.drawText(decimalLabel.locX, decimalLabel.locY, decimalFont, field.Decimal, Graphics.TEXT_JUSTIFY_RIGHT);
-        }
-    }
-
-    // Must be called after View.onUpdate(dc), otherwise the background/layout draw would paint over any custom graphics.
-    public function drawFieldGraphics(dc as Dc) as Void {
-        var foregroundColor = myDataField.getBackgroundColor() == Graphics.COLOR_BLACK ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK;
-
-        var keys = myFieldToValueMapping.keys();
-        for (var i = 0; i < keys.size(); i++) {
-            var field = myFieldToValueMapping.get(keys[i]);
-            if (field != null && field.hasCustomDrawing()) {
-                var valueLabel = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
-                var fontResource = keys[i].equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
-                var font = WatchUi.loadResource(fontResource);
-
-                var textWidth = dc.getTextWidthInPixels(field.Value, font);
-                var fontHeight = dc.getFontHeight(font);
-
-                var size = keys[i].equals("FIELD1") ? 18 : 10;
-                var cx = valueLabel.locX - textWidth - size - 8;
-                var cy = valueLabel.locY + (fontHeight / 3);
-
-                field.draw(dc, cx, cy, size, foregroundColor);
+    // Re-draws the layout's Text drawables for a single field on top of its alert background fill.
+    // The fonts and positions live in the layout XML — we never choose a font ourselves, so changes
+    // to the layout propagate automatically (no Bebas_* hardcoding here).
+    hidden function redrawFieldDrawablesOnTop(fieldKey as String, dc as Dc) as Void {
+        var labels = [fieldKey, fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX), fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)];
+        for (var j = 0; j < labels.size(); j++) {
+            var drawable = myDataField.findDrawableById(labels[j]);
+            if (drawable != null) {
+                drawable.draw(dc);
             }
         }
     }

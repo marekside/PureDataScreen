@@ -4,37 +4,6 @@ import Toybox.Graphics;
 import Toybox.UserProfile;
 import Toybox.WatchUi;
 
-// Field value that paints a trend arrow (↑/↓) to the left of the value label
-// via the standard hasCustomDrawing / draw hooks on Field.
-class StaminaFieldValue extends Field {
-    hidden var myTrend = 0; // -1 draining, 0 flat, +1 recovering
-
-    public function initialize(name as String, value as String, decimal as String) {
-        Field.initialize(name, value, decimal);
-    }
-
-    public function setTrend(trend as Number) as Void {
-        myTrend = trend;
-    }
-
-    public function hasCustomDrawing() as Boolean {
-        return true;
-    }
-
-    public function draw(dc as Dc, cx as Numeric, cy as Numeric, size as Numeric, foregroundColor as ColorType) as Void {
-        var arrow;
-        if (myTrend > 0) {
-            arrow = "+";
-        } else if (myTrend < 0) {
-            arrow = "-";
-        } else {
-            return;
-        }
-        dc.setColor(foregroundColor, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(cx, cy, Graphics.FONT_MEDIUM, arrow, Graphics.TEXT_JUSTIFY_LEFT);
-    }
-}
-
 // W'bal-lite stamina model.
 //
 // Threshold model:
@@ -108,8 +77,6 @@ class StaminaField extends BaseField {
         if (myStamina < 0.0) { myStamina = 0.0; }
         if (myStamina > 100.0) { myStamina = 100.0; }
 
-        //System.println("StaminaField: effort=" + effort + " aet=" + aet + " ant=" + ant + " intensity=" + intensity + " stamina=" + myStamina);
-
         var trend = 0;
         if (myStamina > myLastStamina + TREND_THRESHOLD) { trend = 1; }
         else if (myStamina < myLastStamina - TREND_THRESHOLD) { trend = -1; }
@@ -118,8 +85,15 @@ class StaminaField extends BaseField {
         myLastUpdateMs = nowMs;
         myHasHistory = true;
 
-        var field = new StaminaFieldValue(layoutKey, myStamina.format("%d"), "");
-        field.setTrend(trend);
+        // Trend sign baked into the value string so the layout font renders it (Bebas ships ASCII).
+        var staminaText = myStamina.format("%d");
+        if (trend > 0) {
+            staminaText = "+" + staminaText;
+        } else if (trend < 0) {
+            staminaText = "-" + staminaText;
+        }
+
+        var field = new Field(layoutKey, staminaText, "");
         if (myStamina > 50.0) {
             field.setBackgroundColor(Graphics.COLOR_GREEN);
             field.setTextColor(Graphics.COLOR_BLACK);

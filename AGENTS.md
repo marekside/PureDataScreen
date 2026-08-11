@@ -43,8 +43,11 @@ Without `monkeydo`, the simulator window stays blank even though the .prg is loa
   `source/FieldController.mc` (`fieldStrategyMap`). Add a label to
   `resources/strings/strings.xml` and a `<listEntry>` to each of the 7 `field1`…`field7`
   blocks in `resources/settings/settings.xml`.
-- Custom drawing: extend `Field`, override `hasCustomDrawing()` + `draw(dc, cx, cy, size, fg)`
-  (see the removed `NavigationFieldValue` for the prior pattern — to be reworked).
+- Custom drawing: NOT supported. Render into `Value`/`Decimal` strings (using ASCII glyphs only,
+  since Bebas_* fonts ship no Unicode). The controller never `dc.drawText`s for fields — labels
+  are repainted by re-using the layout's existing Text drawables
+  (`redrawFieldDrawablesOnTop` in `source/FieldController.mc`). Do not add hardcoded font names
+  or pixel sizes in `source/FieldController.mc` or `source/Fields/*Field.mc`.
 - State across `computeField` calls is preserved on the strategy instance (used by
   `GradeField`'s rolling alt/distance buffer). It resets on layout/setting change.
 

@@ -99,12 +99,13 @@ class HeartRateField extends BaseField {
         return palette[zoneIndex];
     }
 
-// Returns WHITE if the bg color is "dark" (low luminance), BLACK if "light" (high luminance).
-    // Uses a luminance check rather than equality against named colors so it works even if
-    // the device's color encoding (e.g. RGB565 on AMOLED Edges) doesn't exactly match the
-    // standard 24-bit color constants.
+// Returns WHITE for the dark alert bgs (blue/orange/red/yellow), BLACK otherwise.
+// Explicit color match — the luminance heuristic on HeartRateField is unreliable
+// across devices whose color encoding (RGB565, AMOLED palette swaps) doesn't
+// exactly match the 24-bit constants. COLOR_YELLOW (0xFFAA00) renders as a
+// saturated orange-amber on Edge devices, so it needs the same white text.
     hidden function foregroundForBg(bg as ColorType) as ColorType {
-        if (isDarkColor(bg)) {
+        if (bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_ORANGE || bg == Graphics.COLOR_RED || bg == Graphics.COLOR_YELLOW || bg == Graphics.COLOR_BLACK) {
             return Graphics.COLOR_WHITE;
         }
         return Graphics.COLOR_BLACK;

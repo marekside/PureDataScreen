@@ -98,7 +98,9 @@ class PowerField extends BaseField {
     }
 
     hidden function foregroundForBg(bg as ColorType) as ColorType {
-        if (bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_RED || bg == Graphics.COLOR_ORANGE) {
+        // White text on the dark alert bgs. COLOR_YELLOW (0xFFAA00) renders as a
+        // saturated orange-amber on Edge devices, so it needs the same white text.
+        if (bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_RED || bg == Graphics.COLOR_ORANGE || bg == Graphics.COLOR_YELLOW) {
             return Graphics.COLOR_WHITE;
         }
         return Graphics.COLOR_BLACK;

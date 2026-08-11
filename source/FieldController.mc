@@ -31,6 +31,7 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_CLIMB => new TotalAscentField(),
         FieldTypes.FIELD_TYPE_NAVIGATION => new NavigationField(),
         FieldTypes.FIELD_TYPE_GRADE => new GradeField(),
+        FieldTypes.FIELD_TYPE_STAMINA => new StaminaField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 
@@ -68,18 +69,116 @@ class FieldsController {
     public function redrawFieldValue() as Void {
         var keys = myFieldToValueMapping.keys();
         for (var i = 0; i < keys.size(); i++) {
-            var layoutResourceValue = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
-            var layoutResourceDecimal = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
-            var field = myFieldToValueMapping.get(keys[i]);
+            try {
+                var layoutResourceValue = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
+                var layoutResourceDecimal = myDataField.findDrawableById(keys[i] + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
+                var field = myFieldToValueMapping.get(keys[i]);
 
-            if (field != null) {
-                if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
-                    layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
+                if (field != null) {
+                    if (!field.hasCustomDrawing() && field.Decimal.equals("")) {
+                        layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
+                    }
+
+                    redrawField(layoutResourceValue, field.Value, field.TextColor);
+                    redrawField(layoutResourceDecimal, field.Decimal, field.TextColor);
                 }
-
-                redrawField(layoutResourceValue, field.Value);
-                redrawField(layoutResourceDecimal, field.Decimal);
+            } catch (ex) {
+                System.println("redrawFieldValue failed for " + keys[i] + ": " + ex.getErrorMessage());
             }
+        }
+    }
+
+    // Paints per-field alert backgrounds as full field-quadrant rectangles, derived from
+    // the same grid coordinates used in drawables.xml (WahooLayout16 divides the bottom
+    // half into 3 rows of 20% by 2 cols; WahooLayout14 divides it into 2 rows of 25%
+    // by 2 cols; FIELD1 always occupies the top half). Must be called AFTER View.onUpdate(dc);
+    // each alert rect covers the labels in its cell, so labels are re-drawn on top.
+    public function paintFieldBackgrounds(dc as Dc) as Void {
+        var screenW = dc.getWidth();
+        var screenH = dc.getHeight();
+        var isLayout16 = myFieldTolayoutMapping.hasKey("FIELD6");
+
+        var keys = myFieldToValueMapping.keys();
+        for (var i = 0; i < keys.size(); i++) {
+            var field = myFieldToValueMapping.get(keys[i]);
+            if (field == null || field.BackgroundColor == Graphics.COLOR_TRANSPARENT) {
+                continue;
+            }
+
+            var rect = getFieldRect(keys[i], isLayout16, screenW, screenH);
+            if (rect == null) {
+                continue;
+            }
+
+            dc.setColor(field.BackgroundColor, field.BackgroundColor);
+            dc.fillRectangle(rect[0], rect[1], rect[2], rect[3]);
+
+            // Re-draw the field's labels on top of the alert bg fill.
+            redrawFieldDrawables(keys[i], dc);
+        }
+    }
+
+    // Returns [x, y, width, height] in pixels for a field, or null if the field is not part of the active layout.
+    hidden function getFieldRect(fieldKey as String, isLayout16 as Boolean, screenW as Numeric, screenH as Numeric) as Array? {
+        var percentages = isLayout16 ? {
+            "FIELD1" => [0.0, 0.0, 1.0, 0.4],
+            "FIELD2" => [0.0, 0.4, 0.5, 0.2],
+            "FIELD3" => [0.5, 0.4, 0.5, 0.2],
+            "FIELD4" => [0.0, 0.6, 0.5, 0.2],
+            "FIELD5" => [0.5, 0.6, 0.5, 0.2],
+            "FIELD6" => [0.0, 0.8, 0.5, 0.2],
+            "FIELD7" => [0.5, 0.8, 0.5, 0.2],
+        } as Dictionary : {
+            "FIELD1" => [0.0, 0.0, 1.0, 0.5],
+            "FIELD2" => [0.0, 0.5, 0.5, 0.25],
+            "FIELD3" => [0.5, 0.5, 0.5, 0.25],
+            "FIELD4" => [0.0, 0.75, 0.5, 0.25],
+            "FIELD5" => [0.5, 0.75, 0.5, 0.25],
+        } as Dictionary;
+
+        if (!percentages.hasKey(fieldKey)) {
+            return null;
+        }
+
+        var p = percentages.get(fieldKey);
+        return [(p[0] * screenW).toNumber(), (p[1] * screenH).toNumber(), (p[2] * screenW).toNumber(), (p[3] * screenH).toNumber()];
+    }
+
+    hidden function redrawFieldDrawables(fieldKey as String, dc as Dc) as Void {
+        var field = myFieldToValueMapping.get(fieldKey);
+        var labelColor = field != null ? field.LabelColor : Graphics.COLOR_LT_GRAY;
+        var valueColor = field != null ? field.TextColor : Graphics.COLOR_TRANSPARENT;
+
+        // All three labels (title / value / decimal) are drawn manually with dc.drawText because
+        // Text drawable's setColor() isn't reliably honored by draw() across all targets / the simulator.
+        var fieldType = myFieldTolayoutMapping.get(fieldKey);
+        var labelText = FieldTypes.getFieldByType(fieldType);
+        var labelDrawable = myDataField.findDrawableById(fieldKey);
+        if (labelDrawable != null) {
+            // Font matches the layout XML: Bebas_60 for FIELD1, Bebas_40 for others.
+            var labelFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_60 : Rez.Fonts.Bebas_40;
+            var labelFont = WatchUi.loadResource(labelFontResource);
+            dc.setColor(labelColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(labelDrawable.locX, labelDrawable.locY, labelFont, labelText, Graphics.TEXT_JUSTIFY_RIGHT);
+        }
+
+        var valueLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX)) as Text;
+        if (valueLabel != null) {
+            // Font matches the layout XML: Bebas_300 for FIELD1, Bebas_100 for others.
+            var valueFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
+            var valueFont = WatchUi.loadResource(valueFontResource);
+            //System.println("redrawFieldDrawables: " + fieldKey + " valueColor=" + valueColor + " value=\"" + field.Value + "\" font=" + valueFont + " locX=" + valueLabel.locX + " locY=" + valueLabel.locY);
+            dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(valueLabel.locX, valueLabel.locY, valueFont, field.Value, Graphics.TEXT_JUSTIFY_RIGHT);
+        }
+
+        var decimalLabel = myDataField.findDrawableById(fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)) as Text;
+        if (decimalLabel != null) {
+            // Font matches the layout XML: Bebas_100 for FIELD1, Bebas_40 for others.
+            var decimalFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_100 : Rez.Fonts.Bebas_40;
+            var decimalFont = WatchUi.loadResource(decimalFontResource);
+            dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(decimalLabel.locX, decimalLabel.locY, decimalFont, field.Decimal, Graphics.TEXT_JUSTIFY_RIGHT);
         }
     }
 
@@ -107,8 +206,10 @@ class FieldsController {
         }
     }
 
-    hidden function redrawField(resource as Text, value as String) as Void {
-        if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
+    hidden function redrawField(resource as Text, value as String, textColor as ColorType) as Void {
+        if (textColor != null && textColor != Graphics.COLOR_TRANSPARENT) {
+            resource.setColor(textColor);
+        } else if (myDataField.getBackgroundColor() == Graphics.COLOR_BLACK) {
             resource.setColor(Graphics.COLOR_WHITE);
         } else {
             resource.setColor(Graphics.COLOR_BLACK);
@@ -129,10 +230,15 @@ class FieldsController {
             var strategy = fieldStrategyMap.get(assignedFieldType);
 
             var fieldToStore;
-            if (strategy != null) {
-                fieldToStore = strategy.computeField(info, layoutKey, myDataField);
-            } else {
-                fieldToStore = new Field(layoutKey, "0", "0"); // Default fallback
+            try {
+                if (strategy != null) {
+                    fieldToStore = strategy.computeField(info, layoutKey, myDataField);
+                } else {
+                    fieldToStore = new Field(layoutKey, "0", "0"); // Default fallback
+                }
+            } catch (ex) {
+                System.println("Field '" + layoutKey + "' computeField failed: " + ex.getErrorMessage());
+                fieldToStore = new Field(layoutKey, "0", "");
             }
 
             storeFieldValue(layoutKey, fieldToStore);

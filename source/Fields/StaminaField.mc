@@ -38,7 +38,7 @@ class StaminaFieldValue extends Field {
 class StaminaField extends BaseField {
     hidden var myStamina = 100.0;
     hidden var myLastStamina = 100.0;
-    hidden var myLastUpdate = 0.0;
+    hidden var myLastUpdateMs = 0;
     hidden var myEwmaRatio = 1.0;
     hidden var myHasHistory = false;
 
@@ -48,6 +48,8 @@ class StaminaField extends BaseField {
     hidden const RECOVER_RATE = 4.0;
     hidden const EWMA_ALPHA = 0.2;
     hidden const TREND_THRESHOLD = 0.5;
+    // Cap dt so missed field-update ticks don't compound into a single huge drain/recovery.
+    hidden const MAX_DT_SECONDS = 1.0;
 
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         // Resolve the effort signal: power first, fall back to HR. Either returns null if unavailable.
@@ -56,10 +58,16 @@ class StaminaField extends BaseField {
             return new Field(layoutKey, "-", "");
         }
 
-        // Time delta since the previous tick.
-        var now = (info.elapsedTime != null) ? info.elapsedTime.toFloat() : 0.0;
-        var dt = myHasHistory ? (now - myLastUpdate) : 1.0;
-        if (dt <= 0.0) { dt = 1.0; }
+        // Use System.getTimer() (monotonic, in milliseconds) for stable dt; clamp to avoid explosions.
+        var nowMs = System.getTimer();
+        var dt;
+        if (myHasHistory) {
+            dt = (nowMs - myLastUpdateMs).toFloat() / 1000.0;
+        } else {
+            dt = MAX_DT_SECONDS;
+        }
+        if (dt <= 0.0) { dt = MAX_DT_SECONDS; }
+        if (dt > MAX_DT_SECONDS) { dt = MAX_DT_SECONDS; }
 
         // Update the EWMA-smoothed effort/threshold ratio so short spikes don't drain stamina instantly.
         myEwmaRatio = myEwmaRatio * (1.0 - EWMA_ALPHA) + signal[0].toFloat() / signal[1].toFloat() * EWMA_ALPHA;
@@ -79,7 +87,7 @@ class StaminaField extends BaseField {
         else if (myStamina < myLastStamina - TREND_THRESHOLD) { trend = -1; }
 
         myLastStamina = myStamina;
-        myLastUpdate = now;
+        myLastUpdateMs = nowMs;
         myHasHistory = true;
 
         var field = new StaminaFieldValue(layoutKey, myStamina.format("%d"), "");

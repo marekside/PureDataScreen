@@ -35,30 +35,45 @@ class StaminaFieldValue extends Field {
     }
 }
 
+// W'bal-lite stamina model.
+//
+// Threshold model:
+//   - AeT = top of zone 1 (maxZ1). Below AeT: stamina recovers.
+//   - AnT = top of zone 4 (maxZ4). Above AnT: stamina drains at full rate.
+//   - Zone 1..Zone 4: linearly ramps from 0 to full drain intensity.
+//     Zone 2 (aerobic base) sits comfortably in the low-drain half of this ramp.
+//   - Zone 5: clamped at full drain.
+//
+// Effort signal:
+//   - Power preferred; falls back to HR. Each signal carries its own threshold.
+//   - For HR: AeT = zones[1] (maxZ1), AnT = zones[4] (maxZ4).
+//   - For power: AeT ≈ 0.55 * FTP (zone 1 equivalent), AnT = FTP.
 class StaminaField extends BaseField {
     hidden var myStamina = 100.0;
     hidden var myLastStamina = 100.0;
     hidden var myLastUpdateMs = 0;
-    hidden var myEwmaRatio = 1.0;
     hidden var myHasHistory = false;
+    hidden var myAet = 0.0;
+    hidden var myAnt = 0.0;
+    hidden var myHaveThresholds = false;
 
-    // Drain: at ratio 1.0, 0%/s; at ratio 1.5, 1.5%/s (depletes 100% in ~67s).
-    // Recover: at ratio 0.0, 4%/s (recovers 100% in 25s). Below ratio 0.7 there's no recovery.
+    // %/s at 1.0 normalised excess above the threshold. With DRAIN_RATE=3 and excess=1.0
+    // (effort = 2x threshold) we drain 3%/s. At excess=0.2 we drain 0.6%/s.
     hidden const DRAIN_RATE = 3.0;
+    // %/s recovery at 1.0 normalised deficit below the threshold (effort=0).
     hidden const RECOVER_RATE = 4.0;
-    hidden const EWMA_ALPHA = 0.2;
     hidden const TREND_THRESHOLD = 0.5;
-    // Cap dt so missed field-update ticks don't compound into a single huge drain/recovery.
     hidden const MAX_DT_SECONDS = 1.0;
 
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
-        // Resolve the effort signal: power first, fall back to HR. Either returns null if unavailable.
         var signal = resolveSignal(info);
         if (signal == null) {
             return new Field(layoutKey, "-", "");
         }
+        var effort = signal[0].toFloat();
+        var aet = myAet;
+        var ant = myAnt;
 
-        // Use System.getTimer() (monotonic, in milliseconds) for stable dt; clamp to avoid explosions.
         var nowMs = System.getTimer();
         var dt;
         if (myHasHistory) {
@@ -69,19 +84,32 @@ class StaminaField extends BaseField {
         if (dt <= 0.0) { dt = MAX_DT_SECONDS; }
         if (dt > MAX_DT_SECONDS) { dt = MAX_DT_SECONDS; }
 
-        // Update the EWMA-smoothed effort/threshold ratio so short spikes don't drain stamina instantly.
-        myEwmaRatio = myEwmaRatio * (1.0 - EWMA_ALPHA) + signal[0].toFloat() / signal[1].toFloat() * EWMA_ALPHA;
-
-        // Apply drain or recovery based on the smoothed ratio.
-        if (myEwmaRatio > 1.0) {
-            myStamina -= (myEwmaRatio - 1.0) * DRAIN_RATE * dt;
+        // Map effort to a signed (-1..+1) intensity:
+        //   effort == aet -> 0  (baseline, no change)
+        //   effort >= ant -> 1  (full drain rate)
+        //   effort <= aet -> negative, recovery proportional to how far below AeT
+        //   (aet..ant)    -> linearly interpolated 0..1
+        var intensity;
+        if (effort >= ant && ant > aet) {
+            intensity = 1.0;
+        } else if (effort >= aet) {
+            intensity = (effort - aet) / (ant - aet);
+        } else if (aet > 0.0) {
+            intensity = (effort - aet) / aet; // negative when below AeT
         } else {
-            myStamina += (1.0 - myEwmaRatio) * RECOVER_RATE * dt;
+            intensity = 0.0;
+        }
+
+        if (intensity > 0.0) {
+            myStamina -= intensity * DRAIN_RATE * dt;
+        } else if (intensity < 0.0) {
+            myStamina += -intensity * RECOVER_RATE * dt;
         }
         if (myStamina < 0.0) { myStamina = 0.0; }
         if (myStamina > 100.0) { myStamina = 100.0; }
 
-        // Determine the trend direction by comparing the latest sample to the previous one.
+        //System.println("StaminaField: effort=" + effort + " aet=" + aet + " ant=" + ant + " intensity=" + intensity + " stamina=" + myStamina);
+
         var trend = 0;
         if (myStamina > myLastStamina + TREND_THRESHOLD) { trend = 1; }
         else if (myStamina < myLastStamina - TREND_THRESHOLD) { trend = -1; }
@@ -108,20 +136,37 @@ class StaminaField extends BaseField {
         return field;
     }
 
-    // Returns [effort, threshold] (both as Numbers) or null when neither power nor HR is available.
-    // Power takes precedence; HR is the fallback when no power meter is paired.
+    // Returns [effort] (Number) or null when neither power nor HR is available.
+    // Thresholds are resolved lazily and cached on the instance.
     hidden function resolveSignal(info as Activity.Info) as Array? {
-        if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
-            var ftp = getFtp();
-            if (ftp > 0) {
-                return [info.currentPower, ftp];
+        if (!myHaveThresholds) {
+            if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
+                var ftp = getFtp();
+                if (ftp > 0) {
+                    myAnt = ftp.toFloat();
+                    myAet = ftp.toFloat() * 0.55;
+                    myHaveThresholds = true;
+                }
+            }
+            if (!myHaveThresholds && info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
+                var zones = getHrZones();
+                if (zones != null && zones.size() >= 5 && zones[1] != null && zones[4] != null
+                    && zones[1] > 0 && zones[4] > zones[1]) {
+                    myAet = zones[1].toFloat();
+                    myAnt = zones[4].toFloat();
+                    myHaveThresholds = true;
+                }
+            }
+            if (!myHaveThresholds) {
+                return null;
             }
         }
+
+        if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
+            return [info.currentPower];
+        }
         if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
-            var lthr = getLthr();
-            if (lthr > 0) {
-                return [info.currentHeartRate, lthr];
-            }
+            return [info.currentHeartRate];
         }
         return null;
     }
@@ -136,25 +181,21 @@ class StaminaField extends BaseField {
             }
         } catch (ex) {
         }
-        return 150;
+        return 200;
     }
 
-    // LTHR ≈ top of HR zone 4 (the maxZ4 threshold in the [minZ1, maxZ1..maxZ5] array).
-    // Falls back to a sensible default if zones are unavailable.
-    hidden function getLthr() as Number {
+    // Returns the [minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5] array, or null.
+    hidden function getHrZones() as Array? {
         try {
             if (UserProfile has :getHeartRateZones) {
                 var sport = null;
                 if (UserProfile has :getCurrentSport) {
                     sport = UserProfile.getCurrentSport();
                 }
-                var zones = UserProfile.getHeartRateZones(sport);
-                if (zones != null && zones.size() >= 5 && zones[4] != null && zones[4] > 0) {
-                    return zones[4];
-                }
+                return UserProfile.getHeartRateZones(sport);
             }
         } catch (ex) {
         }
-        return 170;
+        return null;
     }
 }

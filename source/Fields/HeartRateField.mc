@@ -33,7 +33,7 @@ class HeartRateField extends BaseField {
 
             var hr = info.currentHeartRate;
             var colors = getColorsForHr(hr);
-            System.println("HeartRateField hr=" + hr + " colors=[" + colors[0] + "," + colors[1] + "," + colors[2] + "] zones=" + (myZones != null));
+            //System.println("HeartRateField hr=" + hr + " colors=[" + colors[0] + "," + colors[1] + "," + colors[2] + "] zones=" + (myZones != null));
             var field = new Field(layoutKey, hr.toString(), "");
             field.setBackgroundColor(colors[0]);
             field.setTextColor(colors[1]);
@@ -92,7 +92,7 @@ class HeartRateField extends BaseField {
             Graphics.COLOR_ORANGE,
             Graphics.COLOR_RED,
         ];
-        System.println("zoneColor: BLUE=" + Graphics.COLOR_BLUE + " GREEN=" + Graphics.COLOR_GREEN + " YELLOW=" + Graphics.COLOR_YELLOW + " ORANGE=" + Graphics.COLOR_ORANGE + " RED=" + Graphics.COLOR_RED + " WHITE=" + Graphics.COLOR_WHITE);
+        //System.println("zoneColor: BLUE=" + Graphics.COLOR_BLUE + " GREEN=" + Graphics.COLOR_GREEN + " YELLOW=" + Graphics.COLOR_YELLOW + " ORANGE=" + Graphics.COLOR_ORANGE + " RED=" + Graphics.COLOR_RED + " WHITE=" + Graphics.COLOR_WHITE);
         if (zoneIndex < 0 || zoneIndex >= palette.size()) {
             return Graphics.COLOR_GREEN;
         }

@@ -167,7 +167,7 @@ class FieldsController {
             // Font matches the layout XML: Bebas_300 for FIELD1, Bebas_100 for others.
             var valueFontResource = fieldKey.equals("FIELD1") ? Rez.Fonts.Bebas_300 : Rez.Fonts.Bebas_100;
             var valueFont = WatchUi.loadResource(valueFontResource);
-            System.println("redrawFieldDrawables: " + fieldKey + " valueColor=" + valueColor + " value=\"" + field.Value + "\" font=" + valueFont + " locX=" + valueLabel.locX + " locY=" + valueLabel.locY);
+            //System.println("redrawFieldDrawables: " + fieldKey + " valueColor=" + valueColor + " value=\"" + field.Value + "\" font=" + valueFont + " locX=" + valueLabel.locX + " locY=" + valueLabel.locY);
             dc.setColor(valueColor, Graphics.COLOR_TRANSPARENT);
             dc.drawText(valueLabel.locX, valueLabel.locY, valueFont, field.Value, Graphics.TEXT_JUSTIFY_RIGHT);
         }

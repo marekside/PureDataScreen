@@ -32,8 +32,10 @@ class PowerField extends BaseField {
             }
 
             var power = info.currentPower;
-            var colors = getColorsForPower(power);
-            var field = new Field(layoutKey, power.toString(), "");
+            var zoneIndex = getZoneIndexForPower(power);
+            var colors = (zoneIndex <= 0) ? fallbackColors(power) : zoneColors(zoneIndex - 1);
+            var zoneLabel = (zoneIndex > 0) ? zoneIndex.toString() : "";
+            var field = new Field(layoutKey, power.toString(), zoneLabel);
             field.setBackgroundColor(colors[0]);
             field.setTextColor(colors[1]);
             field.setLabelColor(colors[2]);
@@ -42,32 +44,43 @@ class PowerField extends BaseField {
         return new Field(layoutKey, "0", "");
     }
 
-    // Returns [bgColor, textColor, labelColor] for the given power value based on the user's
-    // configured power zones. Zones are loaded from UserProfile on first call.
+    // Returns the 1-based power zone index for the given power value.
+    // 0 when power is below the user's configured Zone 1 minimum.
+    // Zones are loaded from UserProfile on first call and cached in myZones.
     // Array layout: [minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5]
     // Zone N covers [maxZ(N-1), maxZN), with zone 1 starting at minZ1.
-    hidden function getColorsForPower(power as Number) as Array {
+    hidden function getZoneIndexForPower(power as Number) as Number {
         if (myZones == null) {
             myZones = loadZones();
         }
 
         if (myZones == null || myZones.size() < 6) {
-            return fallbackColors(power);
+            return fallbackZoneIndex(power);
         }
 
-        if (power >= myZones[0] && power < myZones[1]) {
-            return zoneColors(0);
-        } else if (power >= myZones[1] && power < myZones[2]) {
-            return zoneColors(1);
-        } else if (power >= myZones[2] && power < myZones[3]) {
-            return zoneColors(2);
-        } else if (power >= myZones[3] && power < myZones[4]) {
-            return zoneColors(3);
-        } else if (power >= myZones[4]) {
-            return zoneColors(4);
+        if (power < myZones[0]) {
+            return 0;
+        } else if (power < myZones[1]) {
+            return 1;
+        } else if (power < myZones[2]) {
+            return 2;
+        } else if (power < myZones[3]) {
+            return 3;
+        } else if (power < myZones[4]) {
+            return 4;
         }
+        return 5;
+    }
 
-        return fallbackColors(power);
+    // Approximate zone mapping when configured zones are unavailable.
+    // Matches the 200/300 W thresholds used by fallbackColors().
+    hidden function fallbackZoneIndex(power as Number) as Number {
+        if (power > 300) {
+            return 5;
+        } else if (power > 200) {
+            return 3;
+        }
+        return 1;
     }
 
     // Returns [bg, text, label] colors for a zone index (0-based).

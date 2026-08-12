@@ -41,6 +41,9 @@ class StaminaField extends BaseField {
     // Null when no configured zones are available (FTP fallback for power, or no HR zones).
     hidden var myZones = null;
     hidden var myHaveThresholds = false;
+    // Active signal source: "power" or "hr". Set by resolveSignal and matches
+    // the threshold scheme so the per-tick log reports the same signal.
+    hidden var mySignal = "?";
 
     // W'bal tank: %/s at intensity = 1.0. At FTP (intensity 2/3), depletes
     // 100% -> 0% in 20 minutes: 100 / (0.125 * 2/3) = 1200 s.
@@ -124,8 +127,8 @@ class StaminaField extends BaseField {
             staminaText = "-" + staminaText;
         }
 
-        // logTick(effort, signalLabel(info), intensity,
-        //         myStamina, myEnergy, displayStamina);
+        logTick(effort, signalLabel(info), intensity,
+                myStamina, myEnergy, displayStamina);
 
         var field = new Field(layoutKey, staminaText, "");
         if (displayStamina > 50.0) {
@@ -146,70 +149,95 @@ class StaminaField extends BaseField {
 
     // Returns "power" or "hr" for the active effort signal, or "?" when none.
     hidden function signalLabel(info as Activity.Info) as String {
-        if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
-            return "power";
-        }
-        if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
-            return "hr";
-        }
-        return "?";
+        return mySignal;
     }
 
-    // Returns [effort] (Number) or null when neither power nor HR is available.
-    // Thresholds are resolved lazily and cached on the instance.
+    // Returns [effort] (Number) or null when no usable signal is available.
+    // Thresholds are resolved lazily and cached on the instance. The priority chain:
+    //   1. Power + configured power zones (best path: signal + thresholds match).
+    //   2. HR + configured HR zones. Preferred over FTP fallback when power zones
+    //      are missing because Garmin's Firstbeat auto-populates HR zones from real
+    //      training data, while FTP is a single user-entered number that's often stale.
+    //   3. Power + FTP fallback (0.75 × FTP, 1.20 × FTP) — best-effort last resort.
+    //      If FTP is also unset, falls back to hardcoded 200 W defaults.
     hidden function resolveSignal(info as Activity.Info) as Array? {
         if (!myHaveThresholds) {
             var havePower = info has :currentPower && info.currentPower != null && info.currentPower > 0;
             var haveHr = info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0;
 
-            if (havePower) {
-                var pZones = getPowerZones();
-                if (pZones != null && pZones.size() >= 6 && pZones[2] != null && pZones[5] != null
-                    && pZones[2] > 0 && pZones[5] > pZones[2]) {
-                    myAet = pZones[2].toFloat();
-                    myAnt = pZones[5].toFloat();
-                    myZones = pZones;
-                    // logInit("power", "powerZones", myAet, myAnt, myZones);
-                } else {
-                    var ftp = getFtp();
-                    if (ftp > 0) {
-                        myAet = ftp.toFloat() * 0.75;
-                        myAnt = ftp.toFloat() * 1.20;
-                        myZones = null;
-                        // logInit("power", "ftpFallback", myAet, myAnt, null);
-                    } else {
-                        havePower = false;
-                    }
-                }
-                if (havePower) {
-                    myHaveThresholds = true;
-                }
-            }
+            var pZones = havePower ? getPowerZones() : null;
+            var hrZones = haveHr ? getHrZones() : null;
+            var pZonesValid = isValidZoneArray(pZones);
+            var hrZonesValid = isValidZoneArray(hrZones);
 
-            if (!myHaveThresholds && haveHr) {
-                var zones = getHrZones();
-                if (zones != null && zones.size() >= 6 && zones[2] != null && zones[5] != null
-                    && zones[2] > 0 && zones[5] > zones[2]) {
-                    myAet = zones[2].toFloat();
-                    myAnt = zones[5].toFloat();
-                    myZones = zones;
-                    // logInit("hr", "hrZones", myAet, myAnt, myZones);
-                    myHaveThresholds = true;
-                }
-            }
-
-            if (!myHaveThresholds) {
+            if (havePower && pZonesValid) {
+                applyPowerZones(pZones);
+                logInit("power", "powerZones", myAet, myAnt, myZones);
+            } else if (haveHr && hrZonesValid) {
+                applyHrZones(hrZones);
+                // Distinguish the fallback path (power meter present but no zones) so the
+                // log makes it clear which priority level activated.
+                var source = (havePower && !pZonesValid) ? "hrZonesFallback" : "hrZones";
+                logInit("hr", source, myAet, myAnt, myZones);
+            } else if (havePower) {
+                applyFtpOrHardcoded();
+                logInit("power", "ftpFallback", myAet, myAnt, null);
+            } else {
                 return null;
             }
+            myHaveThresholds = true;
         }
 
-        if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
-            return [info.currentPower];
-        }
-        if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
-            return [info.currentHeartRate];
+        // Return the signal the thresholds were computed for. If the preferred signal
+        // has a transient dropout (e.g. power meter paused), fall back to the other.
+        if (mySignal.equals("power")) {
+            if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
+                return [info.currentPower];
+            }
+            if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
+                return [info.currentHeartRate];
+            }
+        } else {
+            if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
+                return [info.currentHeartRate];
+            }
+            if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
+                return [info.currentPower];
+            }
         }
         return null;
+    }
+
+    hidden function isValidZoneArray(zones as Array?) as Boolean {
+        return zones != null && zones.size() >= 6 && zones[2] != null && zones[5] != null
+               && zones[2] > 0 && zones[5] > zones[2];
+    }
+
+    hidden function applyPowerZones(pZones as Array) as Void {
+        myAet = pZones[2].toFloat();
+        myAnt = pZones[5].toFloat();
+        myZones = pZones;
+        mySignal = "power";
+    }
+
+    hidden function applyHrZones(hrZones as Array) as Void {
+        myAet = hrZones[2].toFloat();
+        myAnt = hrZones[5].toFloat();
+        myZones = hrZones;
+        mySignal = "hr";
+    }
+
+    hidden function applyFtpOrHardcoded() as Void {
+        var ftp = getFtp();
+        if (ftp > 0) {
+            myAet = ftp.toFloat() * 0.75;
+            myAnt = ftp.toFloat() * 1.20;
+        } else {
+            myAet = 150.0;
+            myAnt = 240.0;
+        }
+        myZones = null;
+        mySignal = "power";
     }
 
     hidden function getFtp() as Number {

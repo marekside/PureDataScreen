@@ -127,8 +127,8 @@ class StaminaField extends BaseField {
             staminaText = "-" + staminaText;
         }
 
-        logTick(effort, signalLabel(info), intensity,
-                myStamina, myEnergy, displayStamina);
+        // logTick(effort, signalLabel(info), intensity,
+        //         myStamina, myEnergy, displayStamina);
 
         var field = new Field(layoutKey, staminaText, "");
         if (displayStamina > 50.0) {
@@ -172,16 +172,16 @@ class StaminaField extends BaseField {
 
             if (havePower && pZonesValid) {
                 applyPowerZones(pZones);
-                logInit("power", "powerZones", myAet, myAnt, myZones);
+                // logInit("power", "powerZones", myAet, myAnt, myZones);
             } else if (haveHr && hrZonesValid) {
                 applyHrZones(hrZones);
                 // Distinguish the fallback path (power meter present but no zones) so the
                 // log makes it clear which priority level activated.
                 var source = (havePower && !pZonesValid) ? "hrZonesFallback" : "hrZones";
-                logInit("hr", source, myAet, myAnt, myZones);
+                // logInit("hr", source, myAet, myAnt, myZones);
             } else if (havePower) {
                 applyFtpOrHardcoded();
-                logInit("power", "ftpFallback", myAet, myAnt, null);
+                // logInit("power", "ftpFallback", myAet, myAnt, null);
             } else {
                 return null;
             }

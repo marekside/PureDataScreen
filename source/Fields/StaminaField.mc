@@ -55,10 +55,6 @@ class StaminaField extends BaseField {
     hidden const ENERGY_DRAIN_RATE = 0.028;
     // Energy recovery: %/s at intensity = -1.0. 0% -> 100% in ~83 min.
     hidden const ENERGY_RECOVER_RATE = 0.02;
-    // Per-update delta (in % points) needed to show a trend arrow.
-    // Tuned for the new slower drain rates: max per-second delta is ~0.125%,
-    // so a threshold of 0.05 catches meaningful changes without flickering.
-    hidden const TREND_THRESHOLD = 0.05;
     hidden const MAX_DT_SECONDS = 1.0;
 
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
@@ -111,16 +107,21 @@ class StaminaField extends BaseField {
         // Display stamina is the bottleneck: whichever tank is lower.
         var displayStamina = myStamina < myEnergy ? myStamina : myEnergy;
 
+        // Float-based trend, with a threshold tuned to the two-tank model's per-second
+        // drain rate (~0.02%/s at Z3, ~0.13%/s at top-of-Z5). 0.005 catches any meaningful
+        // change while still ignoring sub-tick floating-point noise from accumulated drains.
         var trend = 0;
-        if (displayStamina > myLastStamina + TREND_THRESHOLD) { trend = 1; }
-        else if (displayStamina < myLastStamina - TREND_THRESHOLD) { trend = -1; }
+        if (myHasHistory) {
+            if (displayStamina > myLastStamina + 0.005) { trend = 1; }
+            else if (displayStamina < myLastStamina - 0.005) { trend = -1; }
+        }
 
         myLastStamina = displayStamina;
         myLastUpdateMs = nowMs;
         myHasHistory = true;
 
-        // Trend sign baked into the value string so the layout font renders it (Bebas ships ASCII).
         var staminaText = displayStamina.format("%d");
+        // Trend sign baked into the value string so the layout font renders it (Bebas ships ASCII).
         if (trend > 0) {
             staminaText = "+" + staminaText;
         } else if (trend < 0) {
@@ -177,7 +178,7 @@ class StaminaField extends BaseField {
                 applyHrZones(hrZones);
                 // Distinguish the fallback path (power meter present but no zones) so the
                 // log makes it clear which priority level activated.
-                var source = (havePower && !pZonesValid) ? "hrZonesFallback" : "hrZones";
+                // var source = (havePower && !pZonesValid) ? "hrZonesFallback" : "hrZones";
                 // logInit("hr", source, myAet, myAnt, myZones);
             } else if (havePower) {
                 applyFtpOrHardcoded();

@@ -49,7 +49,7 @@ class PureDataScreenView extends WatchUi.DataField {
     function onUpdate(dc as Dc) as Void {
         handleLayoutChange(dc);
         (View.findDrawableById("Background") as Text).setColor(getBackgroundColor());
-        myFieldController.redrawFieldValue();
+        myFieldController.redrawFieldValue(null);
 
         // Call parent's onUpdate(dc) to redraw the layout (Background + grid + labels).
         View.onUpdate(dc);

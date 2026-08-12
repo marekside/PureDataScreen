@@ -7,10 +7,16 @@ using Toybox.System;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
 
-class FieldsController { 
+class FieldsController {
     var myFieldTolayoutMapping = {} as Dictionary;
     var myFieldToValueMapping = {} as Dictionary;
     var myDataField = null as DataField;
+
+    // Captured at initializeField() time: the layout XML's originally-declared locX for each
+    // FIELDn_value drawable. Needed because redrawFieldValue() shifts value.locX to align
+    // fields with no decimal to the grid's right edge, and we have to restore the layout
+    // value once a field gains a decimal (e.g. HR after the zone-digit change).
+    hidden var myLayoutValueLocX = {} as Dictionary;
 
     hidden var fieldStrategyMap = {
         FieldTypes.FIELD_TYPE_SPEED => new SpeedField(),
@@ -39,6 +45,7 @@ class FieldsController {
         myDataField = dataField;
         myFieldTolayoutMapping = {};
         myFieldToValueMapping = {};
+        myLayoutValueLocX = {};
     }
 
     public function initializeField(layoutResourceName as String, fieldType as String) as Void {
@@ -52,8 +59,9 @@ class FieldsController {
         var valueViewText;
         if (valueView != null) {
             valueViewText = valueView as Text;
+            myLayoutValueLocX.put(layoutResourceName, valueViewText.locX);
             valueViewText.locY = valueViewText.locY - 5;
-            valueViewText.setText("0"); 
+            valueViewText.setText("0");
         }
 
         var decimalLayoutResourceName = layoutResourceName + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX);
@@ -66,7 +74,11 @@ class FieldsController {
         }
     }
 
-    public function redrawFieldValue() as Void {
+    // Pushes the latest field values/colors (and optionally locX) onto the layout's Text drawables,
+    // and — when dc is supplied — re-renders them. Called with dc=null once per tick before
+    // View.onUpdate(dc) so the framework's draw sees fresh state; called with dc=dc inside
+    // paintFieldBackgrounds() to bring the labels back on top of the alert bg fills.
+    public function redrawFieldValue(dc as Dc?) as Void {
         var keys = myFieldToValueMapping.keys();
         for (var i = 0; i < keys.size(); i++) {
             try {
@@ -78,6 +90,11 @@ class FieldsController {
                 if (field != null) {
                     if (field.Decimal.equals("")) {
                         layoutResourceValue.locX = layoutResourceDecimal.locX + 2;
+                    } else {
+                        var layoutLocX = myLayoutValueLocX.get(keys[i]);
+                        if (layoutLocX != null) {
+                            layoutResourceValue.locX = layoutLocX;
+                        }
                     }
 
                     if (layoutResourceLabel != null && field.LabelColor != null && field.LabelColor != Graphics.COLOR_TRANSPARENT) {
@@ -86,6 +103,14 @@ class FieldsController {
 
                     redrawField(layoutResourceValue, field.Value, field.TextColor, field.BackgroundColor);
                     redrawField(layoutResourceDecimal, field.Decimal, field.TextColor, field.BackgroundColor);
+
+                    if (dc != null) {
+                        if (layoutResourceLabel != null) {
+                            layoutResourceLabel.draw(dc);
+                        }
+                        layoutResourceValue.draw(dc);
+                        layoutResourceDecimal.draw(dc);
+                    }
                 }
             } catch (ex) {
                 System.println("redrawFieldValue failed for " + keys[i] + ": " + ex.getErrorMessage());
@@ -117,12 +142,12 @@ class FieldsController {
 
             dc.setColor(field.BackgroundColor, field.BackgroundColor);
             dc.fillRectangle(rect[0], rect[1], rect[2], rect[3]);
-
-            // Re-draw the field's labels on top of the alert bg fill. The layout's Text drawables
-            // already carry the correct fonts (Bebas_150, Bebas_60, Bebas_30, etc.) and positions,
-            // and redrawFieldValue() has already pushed the right text and color to each one.
-            redrawFieldDrawablesOnTop(keys[i], dc);
         }
+
+        // Re-draw all field labels on top of the alert bg fills above. The layout's Text
+        // drawables already carry the correct fonts (Bebas_150, Bebas_60, Bebas_30, etc.)
+        // and positions — we never pick a font here, so layout changes propagate automatically.
+        redrawFieldValue(dc);
     }
 
     // Returns [x, y, width, height] in pixels for a field, or null if the field is not part of the active layout.
@@ -149,19 +174,6 @@ class FieldsController {
 
         var p = percentages.get(fieldKey);
         return [(p[0] * screenW).toNumber(), (p[1] * screenH).toNumber(), (p[2] * screenW).toNumber(), (p[3] * screenH).toNumber()];
-    }
-
-    // Re-draws the layout's Text drawables for a single field on top of its alert background fill.
-    // The fonts and positions live in the layout XML — we never choose a font ourselves, so changes
-    // to the layout propagate automatically (no Bebas_* hardcoding here).
-    hidden function redrawFieldDrawablesOnTop(fieldKey as String, dc as Dc) as Void {
-        var labels = [fieldKey, fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_VALUE_POSTFIX), fieldKey + WatchUi.loadResource(Rez.Strings.FIELD_DECIMAL_POSTFIX)];
-        for (var j = 0; j < labels.size(); j++) {
-            var drawable = myDataField.findDrawableById(labels[j]);
-            if (drawable != null) {
-                drawable.draw(dc);
-            }
-        }
     }
 
     hidden function redrawField(resource as Text, value as String, textColor as ColorType, backgroundColor as ColorType) as Void {

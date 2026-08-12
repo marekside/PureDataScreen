@@ -3,6 +3,10 @@ import Toybox.Activity;
 import Toybox.WatchUi;
 
 class DistanceField extends BaseField {
+    function initialize() {
+        BaseField.initialize();
+    }
+
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         if(info has :elapsedDistance && info.elapsedDistance != null){
             var distanceKm = info.elapsedDistance / 1000; // Convert meters to kilometers

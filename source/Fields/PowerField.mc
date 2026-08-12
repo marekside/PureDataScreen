@@ -11,29 +11,25 @@ class PowerField extends BaseField {
     // fallback is used.
     hidden var myZones = null;
 
+    // Matches the fallback thresholds used when configured zones are unavailable.
+    hidden const FALLBACK_LOW = 200;
+    hidden const FALLBACK_HIGH = 300;
+
+    function initialize() {
+        BaseField.initialize();
+    }
+
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         if (info has :currentPower && info.currentPower != null) {
 
-            if (Application.Properties.getValue(WatchUi.loadResource(Rez.Strings.AVERAGE_INDICATOR_PROPERTY))
-                && layoutKey.equals(WatchUi.loadResource(Rez.Strings.FIELD1))
-                && info has :averagePower
-                && info.averagePower != null) {
-
-                if (info.averagePower >= info.currentPower) {
-                    dataField.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_UP_INDICATOR)).setVisible(false);
-                    dataField.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_DOWN_INDICATOR)).setVisible(true);
-                } else {
-                    dataField.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_UP_INDICATOR)).setVisible(true);
-                    dataField.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_DOWN_INDICATOR)).setVisible(false);
-                }
-            } else if (layoutKey.equals(WatchUi.loadResource(Rez.Strings.FIELD1))){
-                dataField.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_UP_INDICATOR)).setVisible(false);
-                dataField.findDrawableById(WatchUi.loadResource(Rez.Strings.AVERAGE_DOWN_INDICATOR)).setVisible(false);
-            }
+            var averagePower = (info has :averagePower && info.averagePower != null) ? info.averagePower : null;
+            updateAverageIndicator(dataField, layoutKey, info.currentPower, averagePower);
 
             var power = info.currentPower;
             var zoneIndex = getZoneIndexForPower(power);
-            var colors = (zoneIndex <= 0) ? fallbackColors(power) : zoneColors(zoneIndex - 1);
+            var colors = (zoneIndex <= 0)
+                ? ZoneColorHelper.fallbackColors(power, FALLBACK_LOW, FALLBACK_HIGH)
+                : ZoneColorHelper.colorsForZoneIndex(zoneIndex - 1);
             var zoneLabel = (zoneIndex > 0) ? zoneIndex.toString() : "";
             var field = new Field(layoutKey, power.toString(), zoneLabel);
             field.setBackgroundColor(colors[0]);
@@ -55,87 +51,10 @@ class PowerField extends BaseField {
         }
 
         if (myZones == null || myZones.size() < 6) {
-            return fallbackZoneIndex(power);
+            return ZoneColorHelper.fallbackZoneIndex(power, FALLBACK_LOW, FALLBACK_HIGH);
         }
 
-        if (power < myZones[0]) {
-            return 0;
-        } else if (power < myZones[1]) {
-            return 1;
-        } else if (power < myZones[2]) {
-            return 2;
-        } else if (power < myZones[3]) {
-            return 3;
-        } else if (power < myZones[4]) {
-            return 4;
-        }
-        return 5;
-    }
-
-    // Approximate zone mapping when configured zones are unavailable.
-    // Matches the 200/300 W thresholds used by fallbackColors().
-    hidden function fallbackZoneIndex(power as Number) as Number {
-        if (power > 300) {
-            return 5;
-        } else if (power > 200) {
-            return 3;
-        }
-        return 1;
-    }
-
-    // Returns [bg, text, label] colors for a zone index (0-based).
-    // Zone 1 (Active Recovery) -> Blue,   white text, white label
-    // Zone 2 (Endurance)       -> Green,  black text, gray  label
-    // Zone 3 (Tempo)           -> Yellow, black text, gray  label
-    // Zone 4 (Threshold)       -> Orange, white text, white label
-    // Zone 5 (VO2 Max)         -> Red,    white text, white label
-    hidden function zoneColors(zoneIndex as Number) as Array {
-        var bg = zoneColor(zoneIndex);
-        var fg = foregroundForBg(bg);
-        var label = labelColorFor(bg);
-        return [bg, fg, label];
-    }
-
-    hidden function zoneColor(zoneIndex as Number) as ColorType {
-        var palette = [
-            Graphics.COLOR_BLUE,
-            Graphics.COLOR_GREEN,
-            Graphics.COLOR_YELLOW,
-            Graphics.COLOR_ORANGE,
-            Graphics.COLOR_RED,
-        ];
-        if (zoneIndex < 0 || zoneIndex >= palette.size()) {
-            return Graphics.COLOR_GREEN;
-        }
-        return palette[zoneIndex];
-    }
-
-    hidden function foregroundForBg(bg as ColorType) as ColorType {
-        // White text on the dark alert bgs. COLOR_YELLOW (0xFFAA00) renders as a
-        // saturated orange-amber on Edge devices, so it needs the same white text.
-        if (bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_RED || bg == Graphics.COLOR_ORANGE || bg == Graphics.COLOR_YELLOW) {
-            return Graphics.COLOR_WHITE;
-        }
-        return Graphics.COLOR_BLACK;
-    }
-
-    // White title for dark bgs, LIGHT_GRAY otherwise. COLOR_YELLOW (0xFFAA00) renders
-    // as a saturated orange-amber on Edge devices, so it needs the same white label.
-    hidden function labelColorFor(bg as ColorType) as ColorType {
-        if (bg == Graphics.COLOR_RED || bg == Graphics.COLOR_ORANGE || bg == Graphics.COLOR_BLUE || bg == Graphics.COLOR_YELLOW || bg == Graphics.COLOR_BLACK) {
-            return Graphics.COLOR_WHITE;
-        }
-        return Graphics.COLOR_LT_GRAY;
-    }
-
-    // Used when zones are unavailable (older devices, missing permission).
-    hidden function fallbackColors(power as Number) as Array {
-        if (power > 300) {
-            return [Graphics.COLOR_RED, Graphics.COLOR_WHITE, Graphics.COLOR_WHITE];
-        } else if (power > 200) {
-            return [Graphics.COLOR_YELLOW, Graphics.COLOR_BLACK, Graphics.COLOR_LT_GRAY];
-        }
-        return [Graphics.COLOR_GREEN, Graphics.COLOR_BLACK, Graphics.COLOR_LT_GRAY];
+        return ZoneColorHelper.zoneIndexFromZones(power, myZones);
     }
 
     // Loads the 6 power zone thresholds from the user profile for cycling.

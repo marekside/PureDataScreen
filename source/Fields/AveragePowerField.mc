@@ -5,6 +5,10 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 
 class AveragePowerField extends BaseField {
+    function initialize() {
+        BaseField.initialize();
+    }
+
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         if(info has :averagePower && info.averagePower != null){
             var value = info.averagePower.toString();

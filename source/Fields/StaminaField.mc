@@ -39,7 +39,7 @@ class StaminaField extends BaseField {
     hidden var myAnt = 0.0;
     // Raw zone array returned by the device's UserProfile: [minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5].
     // Null when no configured zones are available (FTP fallback for power, or no HR zones).
-    hidden var myZones = null;
+    hidden var myZones as Array<Number>? = null;
     hidden var myHaveThresholds = false;
     // Active signal source: "power" or "hr". Set by resolveSignal and matches
     // the threshold scheme so the per-tick log reports the same signal.
@@ -56,6 +56,10 @@ class StaminaField extends BaseField {
     // Energy recovery: %/s at intensity = -1.0. 0% -> 100% in ~83 min.
     hidden const ENERGY_RECOVER_RATE = 0.02;
     hidden const MAX_DT_SECONDS = 1.0;
+
+    function initialize() {
+        BaseField.initialize();
+    }
 
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         var signal = resolveSignal(info);
@@ -189,39 +193,49 @@ class StaminaField extends BaseField {
             myHaveThresholds = true;
         }
 
-        // Return the signal the thresholds were computed for. If the preferred signal
-        // has a transient dropout (e.g. power meter paused), fall back to the other.
+        // Return the signal matching the thresholds. If the active signal drops out,
+        // switch thresholds before using the alternate signal.
         if (mySignal.equals("power")) {
             if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
                 return [info.currentPower];
             }
             if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
-                return [info.currentHeartRate];
+                var hrZones = getHrZones();
+                if (isValidZoneArray(hrZones)) {
+                    applyHrZones(hrZones);
+                    return [info.currentHeartRate];
+                }
             }
         } else {
             if (info has :currentHeartRate && info.currentHeartRate != null && info.currentHeartRate > 0) {
                 return [info.currentHeartRate];
             }
             if (info has :currentPower && info.currentPower != null && info.currentPower > 0) {
+                var pZones = getPowerZones();
+                if (isValidZoneArray(pZones)) {
+                    applyPowerZones(pZones);
+                    return [info.currentPower];
+                }
+                applyFtpOrHardcoded();
                 return [info.currentPower];
             }
         }
         return null;
     }
 
-    hidden function isValidZoneArray(zones as Array?) as Boolean {
+    hidden function isValidZoneArray(zones as Array<Number>?) as Boolean {
         return zones != null && zones.size() >= 6 && zones[2] != null && zones[5] != null
                && zones[2] > 0 && zones[5] > zones[2];
     }
 
-    hidden function applyPowerZones(pZones as Array) as Void {
+    hidden function applyPowerZones(pZones as Array<Number>) as Void {
         myAet = pZones[2].toFloat();
         myAnt = pZones[5].toFloat();
         myZones = pZones;
         mySignal = "power";
     }
 
-    hidden function applyHrZones(hrZones as Array) as Void {
+    hidden function applyHrZones(hrZones as Array<Number>) as Void {
         myAet = hrZones[2].toFloat();
         myAnt = hrZones[5].toFloat();
         myZones = hrZones;
@@ -256,7 +270,7 @@ class StaminaField extends BaseField {
 
     // Returns the power zone thresholds [minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5],
     // or null when the device/profile does not expose them.
-    hidden function getPowerZones() as Array? {
+    hidden function getPowerZones() as Array<Number>? {
         try {
             if (UserProfile has :getPowerZones) {
                 return UserProfile.getPowerZones(Activity.SPORT_CYCLING);
@@ -268,7 +282,7 @@ class StaminaField extends BaseField {
 
     // Returns the HR zone thresholds [minZ1, maxZ1, maxZ2, maxZ3, maxZ4, maxZ5],
     // or null when the device/profile does not expose them.
-    hidden function getHrZones() as Array? {
+    hidden function getHrZones() as Array<Number>? {
         try {
             if (UserProfile has :getHeartRateZones) {
                 var sport = null;

@@ -124,8 +124,8 @@ class StaminaField extends BaseField {
             staminaText = "-" + staminaText;
         }
 
-        logTick(effort, signalLabel(info), intensity,
-                myStamina, myEnergy, displayStamina);
+        // logTick(effort, signalLabel(info), intensity,
+        //         myStamina, myEnergy, displayStamina);
 
         var field = new Field(layoutKey, staminaText, "");
         if (displayStamina > 50.0) {
@@ -169,14 +169,14 @@ class StaminaField extends BaseField {
                     myAet = pZones[2].toFloat();
                     myAnt = pZones[5].toFloat();
                     myZones = pZones;
-                    logInit("power", "powerZones", myAet, myAnt, myZones);
+                    // logInit("power", "powerZones", myAet, myAnt, myZones);
                 } else {
                     var ftp = getFtp();
                     if (ftp > 0) {
                         myAet = ftp.toFloat() * 0.75;
                         myAnt = ftp.toFloat() * 1.20;
                         myZones = null;
-                        logInit("power", "ftpFallback", myAet, myAnt, null);
+                        // logInit("power", "ftpFallback", myAet, myAnt, null);
                     } else {
                         havePower = false;
                     }
@@ -193,7 +193,7 @@ class StaminaField extends BaseField {
                     myAet = zones[2].toFloat();
                     myAnt = zones[5].toFloat();
                     myZones = zones;
-                    logInit("hr", "hrZones", myAet, myAnt, myZones);
+                    // logInit("hr", "hrZones", myAet, myAnt, myZones);
                     myHaveThresholds = true;
                 }
             }

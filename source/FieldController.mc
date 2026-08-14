@@ -80,7 +80,7 @@ class FieldsController {
     // View.onUpdate(dc) so the framework's draw sees fresh state; called with dc=dc inside
     // paintFieldBackgrounds() to bring the labels back on top of the alert bg fills.
     public function redrawFieldValue(dc as Dc?) as Void {
-        var keys = myFieldToValueMapping.keys();
+        var keys = myFieldToValueMapping.keys() as Array<String>;
         for (var i = 0; i < keys.size(); i++) {
             try {
                 var layoutResourceLabel = myDataField.findDrawableById(keys[i]) as Text;
@@ -129,7 +129,7 @@ class FieldsController {
         var screenH = dc.getHeight();
         var isLayout16 = myFieldTolayoutMapping.hasKey("FIELD6");
 
-        var keys = myFieldToValueMapping.keys();
+        var keys = myFieldToValueMapping.keys() as Array<String>;
         for (var i = 0; i < keys.size(); i++) {
             var field = myFieldToValueMapping.get(keys[i]);
             if (field == null || field.BackgroundColor == Graphics.COLOR_TRANSPARENT) {
@@ -158,30 +158,44 @@ class FieldsController {
         redrawFieldValue(dc);
     }
 
+    // Row boundaries (fraction of screen height) for each layout's grid rows: FIELD1's
+    // row spans index 0..1, and each subsequent pair of small fields spans one more row.
+    // These values are the single source of truth and MUST match the horizontal divider
+    // lines drawn in resources/drawables/drawables.xml: Grid16 at 40%/60%/80%, Grid14 at 50%/75%.
+    hidden const LAYOUT16_ROW_BOUNDARIES = [0.0, 0.4, 0.6, 0.8, 1.0] as Array<Float>;
+    hidden const LAYOUT14_ROW_BOUNDARIES = [0.0, 0.5, 0.75, 1.0] as Array<Float>;
+
+    // [row, col] position within the grid below FIELD1's row, col 0 = left half, col 1 = right half.
+    hidden const LAYOUT16_FIELD_GRID = {
+        "FIELD2" => [1, 0], "FIELD3" => [1, 1],
+        "FIELD4" => [2, 0], "FIELD5" => [2, 1],
+        "FIELD6" => [3, 0], "FIELD7" => [3, 1],
+    } as Dictionary<String, Array<Number> >;
+    hidden const LAYOUT14_FIELD_GRID = {
+        "FIELD2" => [1, 0], "FIELD3" => [1, 1],
+        "FIELD4" => [2, 0], "FIELD5" => [2, 1],
+    } as Dictionary<String, Array<Number> >;
+
     // Returns [x, y, width, height] in pixels for a field, or null if the field is not part of the active layout.
     hidden function getFieldRect(fieldKey as String, isLayout16 as Boolean, screenW as Numeric, screenH as Numeric) as Array? {
-        var percentages = isLayout16 ? {
-            "FIELD1" => [0.0, 0.0, 1.0, 0.4],
-            "FIELD2" => [0.0, 0.4, 0.5, 0.2],
-            "FIELD3" => [0.5, 0.4, 0.5, 0.2],
-            "FIELD4" => [0.0, 0.6, 0.5, 0.2],
-            "FIELD5" => [0.5, 0.6, 0.5, 0.2],
-            "FIELD6" => [0.0, 0.8, 0.5, 0.2],
-            "FIELD7" => [0.5, 0.8, 0.5, 0.2],
-        } as Dictionary : {
-            "FIELD1" => [0.0, 0.0, 1.0, 0.5],
-            "FIELD2" => [0.0, 0.5, 0.5, 0.25],
-            "FIELD3" => [0.5, 0.5, 0.5, 0.25],
-            "FIELD4" => [0.0, 0.75, 0.5, 0.25],
-            "FIELD5" => [0.5, 0.75, 0.5, 0.25],
-        } as Dictionary;
+        var rowBoundaries = isLayout16 ? LAYOUT16_ROW_BOUNDARIES : LAYOUT14_ROW_BOUNDARIES;
 
-        if (!percentages.hasKey(fieldKey)) {
+        if (fieldKey.equals("FIELD1")) {
+            return [0, 0, screenW.toNumber(), (rowBoundaries[1] * screenH).toNumber()];
+        }
+
+        var fieldGrid = isLayout16 ? LAYOUT16_FIELD_GRID : LAYOUT14_FIELD_GRID;
+        var position = fieldGrid.get(fieldKey);
+        if (position == null) {
             return null;
         }
 
-        var p = percentages.get(fieldKey);
-        return [(p[0] * screenW).toNumber(), (p[1] * screenH).toNumber(), (p[2] * screenW).toNumber(), (p[3] * screenH).toNumber()];
+        var row = position[0];
+        var xStart = position[1] * 0.5;
+        var yStart = rowBoundaries[row];
+        var height = rowBoundaries[row + 1] - yStart;
+
+        return [(xStart * screenW).toNumber(), (yStart * screenH).toNumber(), (0.5 * screenW).toNumber(), (height * screenH).toNumber()];
     }
 
     hidden function redrawField(resource as Text, value as String, textColor as ColorType, backgroundColor as ColorType) as Void {
@@ -212,7 +226,7 @@ class FieldsController {
     }
 
     public function compute(info as Activity.Info) as Void {
-        var layoutKeys = myFieldTolayoutMapping.keys();
+        var layoutKeys = myFieldTolayoutMapping.keys() as Array<String>;
         for (var i = 0; i < layoutKeys.size(); i++) {
             var layoutKey = layoutKeys[i];
             var assignedFieldType = myFieldTolayoutMapping.get(layoutKey);
@@ -227,7 +241,7 @@ class FieldsController {
                 }
             } catch (ex) {
                 System.println("Field '" + layoutKey + "' computeField failed: " + ex.getErrorMessage());
-                fieldToStore = new Field(layoutKey, "0", "");
+                fieldToStore = new Field(layoutKey, "FAIL", "");
             }
 
             storeFieldValue(layoutKey, fieldToStore);

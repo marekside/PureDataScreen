@@ -3,6 +3,10 @@ import Toybox.Activity;
 import Toybox.WatchUi;
 
 class AverageSpeedField extends BaseField {
+    function initialize() {
+        BaseField.initialize();
+    }
+
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         if (info has :averageSpeed && info.averageSpeed != null) {
             var averageSpeedKmh = info.averageSpeed * 3.6; // Convert m/s to km/h

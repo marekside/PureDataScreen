@@ -7,6 +7,10 @@ class GradeField extends BaseField {
     hidden var myPreviousDistance = null;
     hidden var myLastGrade = 0.0;
 
+    function initialize() {
+        BaseField.initialize();
+    }
+
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         if (info has :altitude && info.altitude != null &&
             info has :elapsedDistance && info.elapsedDistance != null) {

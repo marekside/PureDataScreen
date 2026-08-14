@@ -3,6 +3,10 @@ import Toybox.Activity;
 import Toybox.WatchUi;
 
 class GearsSizeField extends BaseField {
+    function initialize() {
+        BaseField.initialize();
+    }
+
     public function computeField(info as Activity.Info, layoutKey as String, dataField as DataField) as Field {
         var frontDerailleurSize = "";
         var rearDerailleurSize = "";

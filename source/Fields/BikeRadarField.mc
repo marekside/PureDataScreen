@@ -38,9 +38,9 @@ class BikeRadarField extends BaseField {
                 field.setTextColor(Graphics.COLOR_WHITE);
                 field.setLabelColor(Graphics.COLOR_WHITE);
             } else {
-                field.setBackgroundColor(Graphics.COLOR_YELLOW);
-                field.setTextColor(Graphics.COLOR_BLACK);
-                field.setLabelColor(Graphics.COLOR_LT_GRAY);
+                field.setBackgroundColor(Graphics.COLOR_BLUE);
+                field.setTextColor(Graphics.COLOR_WHITE);
+                field.setLabelColor(Graphics.COLOR_WHITE);
             }
 
             bikeRadar = null;

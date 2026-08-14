@@ -38,6 +38,7 @@ class FieldsController {
         FieldTypes.FIELD_TYPE_NAVIGATION => new NavigationField(),
         FieldTypes.FIELD_TYPE_GRADE => new GradeField(),
         FieldTypes.FIELD_TYPE_STAMINA => new StaminaField(),
+        FieldTypes.FIELD_TYPE_WIND => new WindField(),
         // Add other field types and their strategies here...
     } as Dictionary;
 
@@ -142,6 +143,13 @@ class FieldsController {
 
             dc.setColor(field.BackgroundColor, field.BackgroundColor);
             dc.fillRectangle(rect[0], rect[1], rect[2], rect[3]);
+
+            if (field.CustomDrawable != null) {
+                var custom = field.CustomDrawable as WatchUi.Drawable;
+                custom.setLocation(rect[0], rect[1]);
+                custom.setSize(rect[2], rect[3]);
+                custom.draw(dc);
+            }
         }
 
         // Re-draw all field labels on top of the alert bg fills above. The layout's Text

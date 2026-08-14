@@ -19,6 +19,7 @@
     <string id="NAV">NAV</string>
     <string id="GRADE">GRADE(%)</string>
     <string id="STAMINA">STAMINA</string>
+    <string id="WIND">WIND</string>
 
     <string id="LAYOUT_SELECTOR">Layout selector</string>
     <string id="LAYOUT_SELECTOR_PROPERTY">layoutSelector</string>

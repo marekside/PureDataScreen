@@ -10,6 +10,7 @@ class Field {
     public var TextColor = Graphics.COLOR_BLACK;
     public var BackgroundColor = Graphics.COLOR_TRANSPARENT;
     public var LabelColor = Graphics.COLOR_LT_GRAY;
+    public var CustomDrawable = null as WatchUi.Drawable?;
 
     public function initialize(name as String, value as String, decimal as String) {
         Name = name;
@@ -27,6 +28,10 @@ class Field {
 
     public function setLabelColor(color) as Void {
         LabelColor = color;
+    }
+
+    public function setCustomDrawable(d as WatchUi.Drawable?) as Void {
+        CustomDrawable = d;
     }
 
     public function hasCustomBackground() as Boolean {

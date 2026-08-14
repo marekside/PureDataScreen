@@ -43,11 +43,12 @@ Without `monkeydo`, the simulator window stays blank even though the .prg is loa
   `source/FieldController.mc` (`fieldStrategyMap`). Add a label to
   `resources/strings/strings.xml` and a `<listEntry>` to each of the 7 `field1`…`field7`
   blocks in `resources/settings/settings.xml`.
-- Custom drawing: NOT supported. Render into `Value`/`Decimal` strings (using ASCII glyphs only,
-  since Bebas_* fonts ship no Unicode). The controller never `dc.drawText`s for fields — labels
-  are repainted by re-using the layout's existing Text drawables
-  (`redrawFieldDrawablesOnTop` in `source/FieldController.mc`). Do not add hardcoded font names
-  or pixel sizes in `source/FieldController.mc` or `source/Fields/*Field.mc`.
+- Custom drawing: NOT supported for text labels (use Value/Decimal strings with ASCII only).
+  Custom graphics ARE supported via the optional `Field.CustomDrawable` (`WatchUi.Drawable`).
+  The controller calls `setLocation`/`setSize` on the field rect before `draw(dc)`, then
+  `redrawFieldValue(dc)` overlays labels on top — paint into the LEFT portion of the rect so
+  the right-aligned value/label stays uncovered. See `source/Drawables/WindArrowDrawable.mc`
+  for the canonical example.
 - State across `computeField` calls is preserved on the strategy instance (used by
   `GradeField`'s rolling alt/distance buffer). It resets on layout/setting change.
 

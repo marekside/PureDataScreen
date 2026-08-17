@@ -173,6 +173,7 @@
             <listEntry value="17">@Strings.NAV</listEntry>
             <listEntry value="18">@Strings.GRADE</listEntry>
             <listEntry value="19">@Strings.STAMINA</listEntry>
+            <listEntry value="20">@Strings.WIND</listEntry>
         </settingConfig>    
     </setting>
 </settings>

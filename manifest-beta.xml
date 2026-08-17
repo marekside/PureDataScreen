@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
+    <iq:application id="7028a897-4b01-43aa-8be7-290c36c7e221" type="datafield" name="@Strings.AppNameBeta" entry="PureDataScreenApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="5.2.0" version="0.1.0.beta">
+        <iq:products>
+            <iq:product id="edge1040"/>
+            <iq:product id="edge1050"/>
+            <iq:product id="edge540"/>
+            <iq:product id="edge550"/>
+            <iq:product id="edge840"/>
+            <iq:product id="edge850"/>
+        </iq:products>
+        <iq:permissions>
+            <iq:uses-permission id="Ant"/>
+            <iq:uses-permission id="BluetoothLowEnergy"/>
+            <iq:uses-permission id="Sensor"/>
+            <iq:uses-permission id="UserProfile"/>
+            <iq:uses-permission id="Positioning"/>
+        </iq:permissions>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>

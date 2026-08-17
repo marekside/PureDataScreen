@@ -66,7 +66,7 @@ class WindField extends BaseField {
         var arrow = new WindArrowDrawable();
         arrow.setBlowAngle(blowAngle);
 
-        var field = new Field(layoutKey, "", speedLabel);
+        var field = new Field(layoutKey, speedLabel, "");
         field.setCustomDrawable(arrow);
 
         if (alongKmh > 1.0) {
